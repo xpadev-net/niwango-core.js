@@ -18,7 +18,7 @@ export default {
     input: 'src/main.ts',
     output: {
         file: 'dist/niwango-core.js',
-        format: 'es',
+        format: 'umd',
         name: 'NiwangoCore',
         banner
     },
