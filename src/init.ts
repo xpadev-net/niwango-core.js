@@ -1,11 +1,10 @@
 import { initConfig } from "@/config";
-import { initDefinedFunctions, initPrototypeScope } from "@/context";
+import { execute, initDefinedFunctions, initPrototypeScope } from "@/context";
 import { initExecute } from "@/executor";
 import { initResolvePrototype } from "@/prototype/resolve";
 import { initArgumentParser, initAssign, initGetName } from "@/utils";
 
 const initCore = () => {
-  initExecute();
   initResolvePrototype();
   initPrototypeScope();
   initDefinedFunctions();
@@ -13,6 +12,8 @@ const initCore = () => {
   initArgumentParser();
   initAssign();
   initConfig();
+  initExecute();
+  console.log(execute);
 };
 
 export { initCore };

@@ -17,7 +17,6 @@ const execute: Execute = (script: unknown, scopes: T_scope[]): unknown => {
     if (processor) {
       return processor(script, scopes);
     }
-    console.log(script);
   } catch (e) {
     const n = e as NotImplementedError;
     console.log(n, n.ast, n.scopes);
@@ -26,6 +25,7 @@ const execute: Execute = (script: unknown, scopes: T_scope[]): unknown => {
 };
 
 const initExecute = () => {
+  console.log(execute);
   setExecute(execute);
 };
 

@@ -7,7 +7,7 @@ import pkg from "./package.json" assert {type: 'json'};
 import * as path from "path";
 import {fileURLToPath} from "url";
 const banner = `/*!
-  niwango.js v${pkg.version}
+  niwango-core.js v${pkg.version}
   (c) 2023 xpadev-net https://xpadev.net
   Released under the ${pkg.license} License.
 */`;
@@ -17,9 +17,9 @@ const __dirname = path.dirname(__filename);
 export default {
     input: 'src/main.ts',
     output: {
-        file: 'dist/bundle.js',
-        format: 'umd',
-        name: 'Niwango',
+        file: 'dist/niwango-core.js',
+        format: 'es',
+        name: 'NiwangoCore',
         banner
     },
     plugins: [
