@@ -34,3 +34,5 @@ class NiwangoCore {
 }
 
 export default NiwangoCore;
+
+export type * from "@/@types";
