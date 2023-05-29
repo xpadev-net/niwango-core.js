@@ -25,7 +25,6 @@ const execute: Execute = (script: unknown, scopes: T_scope[]): unknown => {
 };
 
 const initExecute = () => {
-  console.log(execute);
   setExecute(execute);
 };
 
