@@ -228,6 +228,10 @@ const Compare = (left: unknown, right: unknown) => {
   return 0;
 };
 
+const Equality = (left: unknown, right: unknown) => {
+  return left == right;
+};
+
 export {
   Addition,
   BitwiseAND,
@@ -236,6 +240,7 @@ export {
   BitwiseXOR,
   Compare,
   Division,
+  Equality,
   Exponentiation,
   GreaterThan,
   GreaterThanOrEqual,

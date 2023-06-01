@@ -1,16 +1,20 @@
 import { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
 import { processIndex } from "@/prototype/Value/_index";
+import { processAdd } from "@/prototype/Value/add";
 import { processAlternative } from "@/prototype/Value/alternative";
 import { processCall } from "@/prototype/Value/call";
 import { processCompare } from "@/prototype/Value/compare";
+import { processDivide } from "@/prototype/Value/divide";
 import { processForEachSlot } from "@/prototype/Value/forEachSlot";
 import { processHashCode } from "@/prototype/Value/hashCode";
 import { processHasSlot } from "@/prototype/Value/hasSlot";
 import { processMinus } from "@/prototype/Value/minus";
+import { processModulo } from "@/prototype/Value/modulo";
 import { processMultiply } from "@/prototype/Value/multiply";
 import { processPlus } from "@/prototype/Value/plus";
 import { processEquals } from "@/prototype/Value/qeuals";
 import { processRaw } from "@/prototype/Value/raw";
+import { processSubtract } from "@/prototype/Value/subtract";
 import { processToASBoolean } from "@/prototype/Value/toASBoolean";
 import { processToASNumber } from "@/prototype/Value/toASNumber";
 import { processToASString } from "@/prototype/Value/toASString";
@@ -33,6 +37,10 @@ const prototypeValueFunctions: PrototypeFunctions<unknown> = {
   plus: processPlus,
   minus: processMinus,
   multiply: processMultiply,
+  divide: processDivide,
+  modulo: processModulo,
+  add: processAdd,
+  subtract: processSubtract,
   alt: processAlternative,
   alternative: processAlternative,
 };
