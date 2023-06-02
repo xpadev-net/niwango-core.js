@@ -1,6 +1,6 @@
 {
   "name": "@xpadev-net/niwango-core",
-  "version": "0.0.2-canary.20230602-1",
+  "version": "0.0.2-canary.20230603-1",
   "description": "parse and execute niwango",
   "main": "dist/niwango-core.js",
   "types": "dist/niwango-core.d.ts",
