@@ -6,7 +6,7 @@ const processJoin: PrototypeArrayFunction = (script, scopes, object) => {
   if (typeof separator !== "undefined") {
     return object.join(`${separator}`);
   }
-  return object.join();
+  return object.join("");
 };
 
 export { processJoin };
