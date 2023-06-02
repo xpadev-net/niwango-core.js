@@ -11,7 +11,7 @@ import { NotImplementedError } from "@/errors/NotImplementedError";
 import { functions } from "@/functions";
 import { getType } from "@/prototype/getType";
 import typeGuard from "@/typeGuard";
-import { getGlobalScope } from "@/utils";
+import { getGlobalScope, resolve } from "@/utils";
 
 const processCallExpression = (script: A_CallExpression, scopes: T_scope[]) => {
   const isMemberExpression = typeGuard.MemberExpression(script.callee);
@@ -65,7 +65,7 @@ const processCallExpression = (script: A_CallExpression, scopes: T_scope[]) => {
       ]);
     }
   }
-  const self = execute({ type: "Identifier", name: "self" }, scopes) as {
+  const self = resolve({ type: "Identifier", name: "self" }, scopes) as {
     [key: string]: unknown;
   };
   if (

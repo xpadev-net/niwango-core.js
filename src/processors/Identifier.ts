@@ -1,5 +1,6 @@
 import { A_Identifier, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
+import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";
 import { resolve } from "@/utils";
 
@@ -14,10 +15,20 @@ const processIdentifier = (
 ): unknown => {
   const value = resolve(script, scopes);
   if (typeGuard.definedFunction(value)) {
-    if (value.isKari) {
-      return execute(value.script.arguments[1], [{}, ...scopes]);
-    } else {
-      return execute(value.script.arguments[1], [{}, ...scopes]);
+    return execute(value.script.arguments[1], [{}, ...scopes]);
+  }
+  if (value === undefined) {
+    try {
+      return processCallExpression(
+        {
+          type: "CallExpression",
+          callee: script,
+          arguments: [],
+        },
+        scopes
+      );
+    } catch (_) {
+      //ignore
     }
   }
   return value;
