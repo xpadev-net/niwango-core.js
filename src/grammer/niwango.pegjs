@@ -183,7 +183,6 @@ Keyword
   / ForToken
   / FunctionToken
   / InstanceofToken
-  / InToken
   / NewToken
   / ReturnToken
   / SwitchToken
@@ -193,7 +192,6 @@ Keyword
   / TypeofToken
   / VarToken
   / VoidToken
-  / WhileToken
   / WithToken
 
 FutureReservedWord
@@ -447,7 +445,6 @@ ContinueToken   = "continue"   !IdentifierPart
 DebuggerToken   = "debugger"   !IdentifierPart
 DefaultToken    = "default"    !IdentifierPart
 DeleteToken     = "delete"     !IdentifierPart
-DoToken         = "do"         !IdentifierPart
 EnumToken       = "enum"       !IdentifierPart
 ExportToken     = "export"     !IdentifierPart
 ExtendsToken    = "extends"    !IdentifierPart
@@ -460,7 +457,6 @@ LambdaToken2    = "\\"
 GetToken        = "get"        !IdentifierPart
 ImportToken     = "import"     !IdentifierPart
 InstanceofToken = "instanceof" !IdentifierPart
-InToken         = "in"         !IdentifierPart
 NewToken        = "new"        !IdentifierPart
 NullToken       = "null"       !IdentifierPart
 ReturnToken     = "return"     !IdentifierPart
@@ -474,7 +470,6 @@ TryToken        = "try"        !IdentifierPart
 TypeofToken     = "typeof"     !IdentifierPart
 VarToken        = "var"        !IdentifierPart
 VoidToken       = "void"       !IdentifierPart
-WhileToken      = "while"      !IdentifierPart
 WithToken       = "with"       !IdentifierPart
 
 // Skipped
@@ -796,7 +791,6 @@ RelationalOperator
   / $("<" !"<")
   / $(">" !">")
   / $InstanceofToken
-  / $InToken
 
 RelationalExpressionNoIn
   = head:ShiftExpression
@@ -933,15 +927,17 @@ AssignmentExpression
         right: right
       };
     }
-  / id:Identifier __ init:initializer
+  / left:LeftHandSideExpression __
+    ":=" !"=" __
+    right:AssignmentExpression?
     {
       return {
         type: "VariableDeclaration",
         declarations: [
           {
             type: "VariableDeclarator",
-            id: id,
-            init: init
+            id: left,
+            init: right
           }
         ],
         kind: "var"
@@ -1020,7 +1016,6 @@ Statement
   / VariableStatement
   / EmptyStatement
   / ExpressionStatement
-  / IterationStatement
   / ContinueStatement
   / BreakStatement
   / ReturnStatement
@@ -1102,85 +1097,6 @@ ExpressionStatement
       };
     }
 
-
-IterationStatement
-  = DoToken __
-    body:Statement __
-    WhileToken __ "(" __ test:Expression __ ")" EOS
-    { return { type: "DoWhileStatement", body: body, test: test }; }
-  / WhileToken __ "(" __ test:Expression __ ")" __
-    body:Statement
-    { return { type: "WhileStatement", test: test, body: body }; }
-  / ForToken __
-    "(" __
-    init:(ExpressionNoIn __)? ";" __
-    test:(Expression __)? ";" __
-    update:(Expression __)?
-    ")" __
-    body:Statement
-    {
-      return {
-        type: "ForStatement",
-        init: extractOptional(init, 0),
-        test: extractOptional(test, 0),
-        update: extractOptional(update, 0),
-        body: body
-      };
-    }
-  / ForToken __
-    "(" __
-    VarToken __ declarations:VariableDeclarationListNoIn __ ";" __
-    test:(Expression __)? ";" __
-    update:(Expression __)?
-    ")" __
-    body:Statement
-    {
-      return {
-        type: "ForStatement",
-        init: {
-          type: "VariableDeclaration",
-          declarations: declarations,
-          kind: "var"
-        },
-        test: extractOptional(test, 0),
-        update: extractOptional(update, 0),
-        body: body
-      };
-    }
-  / ForToken __
-    "(" __
-    left:LeftHandSideExpression __
-    InToken __
-    right:Expression __
-    ")" __
-    body:Statement
-    {
-      return {
-        type: "ForInStatement",
-        left: left,
-        right: right,
-        body: body
-      };
-    }
-  / ForToken __
-    "(" __
-    VarToken __ declarations:VariableDeclarationListNoIn __
-    InToken __
-    right:Expression __
-    ")" __
-    body:Statement
-    {
-      return {
-        type: "ForInStatement",
-        left: {
-          type: "VariableDeclaration",
-          declarations: declarations,
-          kind: "var"
-        },
-        right: right,
-        body: body
-      };
-    }
 
 ContinueStatement
   = ContinueToken EOS {
