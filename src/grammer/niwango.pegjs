@@ -1029,7 +1029,13 @@ Statement
   / DebuggerStatement
 
 Block
-  = "{" __ body:(StatementList __)? "}" {
+  = "(" __ body:(StatementList __)? ")" {
+      return {
+        type: "BlockStatement",
+        body: optionalList(extractOptional(body, 0))
+      };
+    }
+  / "{" __ body:(StatementList __)? "}" {
       return {
         type: "BlockStatement",
         body: optionalList(extractOptional(body, 0))
