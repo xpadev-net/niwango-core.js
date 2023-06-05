@@ -694,6 +694,7 @@ function peg$parse(input, options) {
     if(list.length>1){
         return {
         type: "BlockStatement",
+        __type: "AssignmentExpressions",
         body: list
       };
     }
@@ -813,12 +814,14 @@ function peg$parse(input, options) {
   var peg$f94 = function(body) {
       return {
         type: "BlockStatement",
+        __type: "Block1",
         body: optionalList(extractOptional(body, 0))
       };
     };
   var peg$f95 = function(body) {
       return {
         type: "BlockStatement",
+        __type: "Block2",
         body: optionalList(extractOptional(body, 0))
       };
     };
@@ -1024,6 +1027,7 @@ function peg$parse(input, options) {
   var peg$f138 = function(body) {
       return {
         type: "BlockStatement",
+        __type: "FunctionBody",
         body: optionalList(body)
       };
     };
@@ -10333,6 +10337,9 @@ function peg$parse(input, options) {
         }
         if (s0 === peg$FAILED) {
           s0 = peg$parseConditionalExpression();
+          if (s0 === peg$FAILED) {
+            s0 = peg$parseBlock();
+          }
         }
       }
     }

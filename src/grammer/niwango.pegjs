@@ -698,6 +698,7 @@ AssignmentExpressions
     if(list.length>1){
         return {
         type: "BlockStatement",
+        __type: "AssignmentExpressions",
         body: list
       };
     }
@@ -958,6 +959,7 @@ AssignmentExpression
       };
     }
   / ConditionalExpression
+  / Block
 
 AssignmentExpressionNoIn
   = left:LeftHandSideExpression __
@@ -1032,12 +1034,14 @@ Block
   = "(" __ body:(StatementList __)? ")" {
       return {
         type: "BlockStatement",
+        __type: "Block1",
         body: optionalList(extractOptional(body, 0))
       };
     }
   / "{" __ body:(StatementList __)? "}" {
       return {
         type: "BlockStatement",
+        __type: "Block2",
         body: optionalList(extractOptional(body, 0))
       };
     }
@@ -1361,6 +1365,7 @@ FunctionBody
   = body:SourceElements? {
       return {
         type: "BlockStatement",
+        __type: "FunctionBody",
         body: optionalList(body)
       };
     }
