@@ -8,7 +8,7 @@ const parseScript = (content: string, name: string): A_ANY => {
     script = script.slice(1);
   }
   let firstError = undefined;
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 1000; i++) {
     try {
       return parse(script, { grammarSource: name });
     } catch (e) {
@@ -22,7 +22,9 @@ const parseScript = (content: string, name: string): A_ANY => {
         script.slice(0, e.location.start.offset) === script
       )
         throw firstError;
-      script = script.slice(0, e.location.start.offset);
+      script =
+        script.slice(0, e.location.start.offset) +
+        script.slice(e.location.start.offset + 1);
     }
   }
   throw firstError;
