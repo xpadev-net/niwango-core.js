@@ -22,7 +22,8 @@ export type A_ANY =
   | A_UpdateExpression
   | A_VariableDeclarator
   | A_VariableDeclaration
-  | A_EmptyStatement;
+  | A_EmptyStatement
+  | A_Raw;
 export type A_Identifier = {
   type: "Identifier";
   name: string;
@@ -175,6 +176,12 @@ export type A_VariableDeclarator = {
 export type A_EmptyStatement = {
   type: "EmptyStatement";
 };
+
+export type A_Raw = {
+  type: "Raw";
+  value: unknown;
+};
+
 export type T_scope = {
   [key: string]: unknown;
 };

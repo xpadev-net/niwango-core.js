@@ -13,6 +13,7 @@ import { processLogicalExpression } from "@/processors/LogicalExpression";
 import { processMemberExpression } from "@/processors/MemberExpression";
 import { processObjectExpression } from "@/processors/ObjectExpression";
 import { processProgram } from "@/processors/Program";
+import { processRaw } from "@/processors/Raw";
 import { processReturnStatement } from "@/processors/ReturnStatement";
 import { processSequenceExpression } from "@/processors/SequenceExpression";
 import { processUnaryExpression } from "@/processors/UnaryExpression";
@@ -43,4 +44,5 @@ export const processors: {
   UnaryExpression: processUnaryExpression,
   UpdateExpression: processUpdateExpression,
   VariableDeclaration: processVariableDeclaration,
+  Raw: processRaw,
 };

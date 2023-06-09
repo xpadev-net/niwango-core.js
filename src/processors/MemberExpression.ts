@@ -43,7 +43,18 @@ const processMemberExpression = (
     return processCallExpression(
       {
         type: "CallExpression",
-        callee: script,
+        callee: {
+          type: "MemberExpression",
+          object: {
+            type: "Raw",
+            value: left,
+          },
+          property: {
+            type: "Raw",
+            value: right,
+          },
+          computed: false,
+        },
         arguments: [],
       },
       scopes
