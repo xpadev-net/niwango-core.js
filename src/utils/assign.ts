@@ -8,7 +8,12 @@ import typeGuard from "@/typeGuard";
  * @param value
  * @param scopes
  */
-const assign = (target: A_ANY, value: unknown, scopes: T_scope[]) => {
+const assign = (
+  target: A_ANY,
+  value: unknown,
+  scopes: T_scope[],
+  trace: A_ANY[]
+) => {
   if (scopes.length < 1) {
     return;
   }
@@ -24,15 +29,15 @@ const assign = (target: A_ANY, value: unknown, scopes: T_scope[]) => {
         scopes[0][target.name] = value;
       }
     } else if (typeGuard.MemberExpression(target)) {
-      const left = execute(target.object, scopes);
+      const left = execute(target.object, scopes, trace);
       if (!typeGuard.object(left)) {
         console.error("[assign] left is not object", target, value, scopes);
         return;
       }
       const key = (
         target.computed
-          ? execute(target.property, scopes)
-          : getName(target.property, scopes)
+          ? execute(target.property, scopes, trace)
+          : getName(target.property, scopes, trace)
       ) as string;
       left[key] = value;
     }

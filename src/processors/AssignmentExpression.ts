@@ -1,4 +1,4 @@
-import { A_AssignmentExpression, T_scope } from "@/@types/ast";
+import { A_ANY, A_AssignmentExpression, T_scope } from "@/@types/ast";
 import { assign } from "@/context";
 import { execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
@@ -46,14 +46,15 @@ const processors = {
  */
 const processAssignmentExpression = (
   script: A_AssignmentExpression,
-  scopes: T_scope[]
+  scopes: T_scope[],
+  trace: A_ANY[]
 ): unknown => {
-  const left = execute(script.left, scopes);
-  const right = execute(script.right, scopes);
+  const left = execute(script.left, scopes, trace);
+  const right = execute(script.right, scopes, trace);
   const processor = processors[script.operator];
   if (!processor) throw new NotImplementedError(script, scopes);
   const result = processor(left, right);
-  assign(script.left, result, scopes);
+  assign(script.left, result, scopes, trace);
   return result;
 };
 

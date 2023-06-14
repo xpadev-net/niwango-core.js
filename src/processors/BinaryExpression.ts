@@ -1,4 +1,4 @@
-import { A_BinaryExpression, T_scope } from "@/@types/ast";
+import { A_ANY, A_BinaryExpression, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import {
@@ -55,10 +55,11 @@ const processors = {
  */
 const processBinaryExpression = (
   script: A_BinaryExpression,
-  scopes: T_scope[]
+  scopes: T_scope[],
+  trace: A_ANY[]
 ) => {
-  const left = execute(script.left, scopes);
-  const right = execute(script.right, scopes);
+  const left = execute(script.left, scopes, trace);
+  const right = execute(script.right, scopes, trace);
   const processor = processors[script.operator];
   if (!processor) throw new NotImplementedError(script, scopes);
   return processor(left, right);

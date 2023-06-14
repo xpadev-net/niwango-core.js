@@ -13,15 +13,16 @@ const argumentParser: ArgumentParser = (
   inputs: Argument<A_ANY>[],
   scopes: T_scope[],
   keys: string[],
+  trace: A_ANY[],
   compute = true
 ): { [key: string]: unknown } => {
   const result: { [key: string]: unknown } = {};
   const nonKeyValues: Argument<A_ANY>[] = [];
   for (const item of inputs) {
     if (item.NIWANGO_Identifier) {
-      const key = getName(item.NIWANGO_Identifier, scopes) as string;
+      const key = getName(item.NIWANGO_Identifier, scopes, trace) as string;
       if (keys.includes(key)) {
-        result[key] = compute ? execute(item, scopes) : item;
+        result[key] = compute ? execute(item, scopes, trace) : item;
         continue;
       }
     }
@@ -31,7 +32,7 @@ const argumentParser: ArgumentParser = (
   for (const key of keys) {
     const value = nonKeyValues[i];
     if (!result[key] && value) {
-      result[key] = compute ? execute(value, scopes) : value;
+      result[key] = compute ? execute(value, scopes, trace) : value;
       i++;
     }
   }

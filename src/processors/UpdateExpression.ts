@@ -1,4 +1,4 @@
-import { A_UpdateExpression, T_scope } from "@/@types/ast";
+import { A_ANY, A_UpdateExpression, T_scope } from "@/@types/ast";
 import { assign, execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import { Addition, Subtraction } from "@/operators";
@@ -10,12 +10,13 @@ import { Addition, Subtraction } from "@/operators";
  */
 const processUpdateExpression = (
   script: A_UpdateExpression,
-  scopes: T_scope[]
+  scopes: T_scope[],
+  trace: A_ANY[]
 ) => {
-  const value = execute(script.argument, scopes);
+  const value = execute(script.argument, scopes, trace);
   if (script.operator === "--") {
     const result = Subtraction(value, 1);
-    assign(script.argument, result, scopes);
+    assign(script.argument, result, scopes, trace);
     if (script.prefix) {
       return result;
     } else {
@@ -23,7 +24,7 @@ const processUpdateExpression = (
     }
   } else if (script.operator === "++") {
     const result = Addition(value, 1);
-    assign(script.argument, result, scopes);
+    assign(script.argument, result, scopes, trace);
     if (script.prefix) {
       return result;
     } else {

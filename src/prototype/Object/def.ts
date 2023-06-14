@@ -4,6 +4,7 @@ import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import typeGuard from "@/typeGuard";
 
 import { PrototypeObjectFunction } from "./index";
+import { A_ANY } from "@/@types";
 
 /**
  * @関数
@@ -12,13 +13,18 @@ import { PrototypeObjectFunction } from "./index";
  * @param scopes
  * @param object
  */
-const processDef: PrototypeObjectFunction = (script, scopes, object) => {
+const processDef: PrototypeObjectFunction = (
+  script,
+  scopes,
+  object,
+  trace: A_ANY[]
+) => {
   const functionName = (() => {
     if (typeGuard.Identifier(script.arguments[0])) {
-      return getName(script.arguments[0], scopes);
+      return getName(script.arguments[0], scopes, trace);
     }
     if (typeGuard.CallExpression(script.arguments[0])) {
-      return getName(script.arguments[0].callee, scopes);
+      return getName(script.arguments[0].callee, scopes, trace);
     }
     throw new InvalidTypeError(
       "function name must be CallExpression or Identifier",

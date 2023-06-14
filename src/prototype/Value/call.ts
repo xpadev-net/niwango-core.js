@@ -1,13 +1,18 @@
-import { A_CallExpression } from "@/@types/ast";
+import { A_ANY, A_CallExpression } from "@/@types/ast";
 import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import { PrototypeValueFunction } from "@/prototype/Value/index";
 
-const processCall: PrototypeValueFunction = (script, scopes) => {
+const processCall: PrototypeValueFunction = (
+  script,
+  scopes,
+  _,
+  trace: A_ANY[]
+) => {
   const functionNameAst = script.arguments[0];
   if (!functionNameAst)
     throw new InvalidTypeError("function name must be exist", script, scopes);
-  const functionName = execute(script.arguments[0], scopes);
+  const functionName = execute(script.arguments[0], scopes, trace);
   if (typeof functionName !== "string")
     throw new InvalidTypeError(
       "typeof function name must be string",
@@ -19,7 +24,7 @@ const processCall: PrototypeValueFunction = (script, scopes) => {
     callee: functionNameAst,
     arguments: script.arguments[1] ? [script.arguments[1]] : [],
   };
-  return execute(newScript, scopes);
+  return execute(newScript, scopes, trace);
 };
 
 export { processCall };

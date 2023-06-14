@@ -1,9 +1,10 @@
-import { A_CallExpression, T_scope } from "@/@types/ast";
+import { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
 
 export type PrototypeFunction<T> = (
   script: A_CallExpression,
   scopes: T_scope[],
-  object: T
+  object: T,
+  trace: A_ANY[]
 ) => unknown;
 
 export type PrototypeFunctions<T> = {

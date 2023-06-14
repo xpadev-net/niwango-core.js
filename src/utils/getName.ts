@@ -7,11 +7,11 @@ import typeGuard from "@/typeGuard";
  * @param target
  * @param scopes
  */
-const getName = (target: A_ANY, scopes: T_scope[]) => {
+const getName = (target: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
   if (typeGuard.Identifier(target)) {
     return target.name;
   } else {
-    return execute(target, scopes);
+    return execute(target, scopes, trace);
   }
 };
 

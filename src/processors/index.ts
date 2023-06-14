@@ -1,4 +1,4 @@
-import { T_scope } from "@/@types/ast";
+import { A_ANY, T_scope } from "@/@types/ast";
 import { processArrayExpression } from "@/processors/ArrayExpression";
 import { processArrowFunctionExpression } from "@/processors/ArrowFunctionExpression";
 import { processAssignmentExpression } from "@/processors/AssignmentExpression";
@@ -22,7 +22,7 @@ import { processVariableDeclaration } from "@/processors/VariableDeclaration";
 
 export const processors: {
   /* eslint @typescript-eslint/no-explicit-any: 0 */
-  [key: string]: (script: any, scopes: T_scope[]) => unknown;
+  [key: string]: (script: any, scopes: T_scope[], trace: A_ANY[]) => unknown;
 } = {
   AssignmentExpression: processAssignmentExpression,
   ArrayExpression: processArrayExpression,

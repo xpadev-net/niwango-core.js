@@ -1,4 +1,4 @@
-import { A_SequenceExpression, T_scope } from "@/@types/ast";
+import { A_ANY, A_SequenceExpression, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
 
 /**
@@ -8,10 +8,11 @@ import { execute } from "@/context";
  */
 const processSequenceExpression = (
   script: A_SequenceExpression,
-  scopes: T_scope[]
+  scopes: T_scope[],
+  trace: A_ANY[]
 ) => {
   return script.expressions.reduce(
-    (_, arg) => execute(arg, scopes),
+    (_, arg) => execute(arg, scopes, trace),
     undefined as unknown
   );
 };

@@ -31,6 +31,6 @@ const run = (niwango: string) => {
     lastVideo: "sm1", //sm1
   };
   const ast = parseScript(niwango, "jest");
-  return execute(ast, [globalScope, environmentScope, prototypeScope]);
+  return execute(ast, [globalScope, environmentScope, prototypeScope], [ast]);
 };
 export { run };

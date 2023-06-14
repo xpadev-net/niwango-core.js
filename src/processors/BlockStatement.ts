@@ -1,4 +1,4 @@
-import { A_BlockStatement, T_scope } from "@/@types/ast";
+import { A_ANY, A_BlockStatement, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
 
 /**
@@ -7,9 +7,13 @@ import { execute } from "@/context";
  * @param script
  * @param scopes
  */
-const processBlockStatement = (script: A_BlockStatement, scopes: T_scope[]) => {
+const processBlockStatement = (
+  script: A_BlockStatement,
+  scopes: T_scope[],
+  trace: A_ANY[]
+) => {
   return script.body.reduce(
-    (_, item) => execute(item, scopes),
+    (_, item) => execute(item, scopes, trace),
     undefined as unknown
   );
 };

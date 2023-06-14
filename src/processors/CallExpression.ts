@@ -1,4 +1,9 @@
-import { A_CallExpression, A_MemberExpression, T_scope } from "@/@types/ast";
+import {
+  A_ANY,
+  A_CallExpression,
+  A_MemberExpression,
+  T_scope,
+} from "@/@types/ast";
 import { definedFunction } from "@/@types/function";
 import {
   argumentParser,
@@ -13,26 +18,31 @@ import { getType } from "@/prototype/getType";
 import typeGuard from "@/typeGuard";
 import { getGlobalScope, resolve } from "@/utils";
 
-const processCallExpression = (script: A_CallExpression, scopes: T_scope[]) => {
+const processCallExpression = (
+  script: A_CallExpression,
+  scopes: T_scope[],
+  trace: A_ANY[]
+) => {
   const isMemberExpression = typeGuard.MemberExpression(script.callee);
   const callee = getName(
     isMemberExpression
       ? (script.callee as A_MemberExpression).property
       : script.callee,
-    scopes
+    scopes,
+    trace
   ) as string;
-  const object = getThis(script, scopes);
+  const object = getThis(script, scopes, trace);
   const prototype = resolvePrototype(getType(object), callee);
   if (prototype) {
-    return prototype(script, scopes, object);
+    return prototype(script, scopes, object, trace);
   }
   const func = functions[callee];
   if (func) {
-    return func(script, scopes, object);
+    return func(script, scopes, object, trace);
   }
   const definedFunc = definedFunctions[callee];
   if (definedFunc) {
-    return definedFunc(script, scopes, object);
+    return definedFunc(script, scopes, object, trace);
   }
   if (
     object?.[callee] &&
@@ -44,25 +54,23 @@ const processCallExpression = (script: A_CallExpression, scopes: T_scope[]) => {
       let count = 1;
       script.arguments.forEach((val) => {
         if (val?.NIWANGO_Identifier) {
-          args[getName(val.NIWANGO_Identifier, scopes) as string] = execute(
-            val,
-            scopes
-          );
+          args[getName(val.NIWANGO_Identifier, scopes, trace) as string] =
+            execute(val, scopes, trace);
         } else {
-          args[`$${count++}`] = execute(val, scopes);
+          args[`$${count++}`] = execute(val, scopes, trace);
         }
       });
-      return execute(func.script.arguments[1], [args, ...scopes]);
+      return execute(func.script.arguments[1], [args, ...scopes], trace);
     } else {
       const argNames = func.script.arguments[0].arguments.map(
-        (arg) => getName(arg, scopes) as string
+        (arg) => getName(arg, scopes, trace) as string
       );
-      const args = argumentParser(script.arguments, scopes, argNames);
-      return execute(func.script.arguments[1], [
-        { ...args, self: object },
-        object,
-        ...scopes,
-      ]);
+      const args = argumentParser(script.arguments, scopes, argNames, trace);
+      return execute(
+        func.script.arguments[1],
+        [{ ...args, self: object }, object, ...scopes],
+        trace
+      );
     }
   }
   const self = resolve({ type: "Identifier", name: "self" }, scopes) as {
@@ -78,21 +86,19 @@ const processCallExpression = (script: A_CallExpression, scopes: T_scope[]) => {
       let count = 1;
       script.arguments.forEach((val) => {
         if (val?.NIWANGO_Identifier) {
-          args[getName(val.NIWANGO_Identifier, scopes) as string] = execute(
-            val,
-            scopes
-          );
+          args[getName(val.NIWANGO_Identifier, scopes, trace) as string] =
+            execute(val, scopes, trace);
         } else {
-          args[`$${count++}`] = execute(val, scopes);
+          args[`$${count++}`] = execute(val, scopes, trace);
         }
       });
-      return execute(func.script.arguments[1], [args, ...scopes]);
+      return execute(func.script.arguments[1], [args, ...scopes], trace);
     } else {
       const argNames = func.script.arguments[0].arguments.map(
-        (arg) => getName(arg, scopes) as string
+        (arg) => getName(arg, scopes, trace) as string
       );
-      const args = argumentParser(script.arguments, scopes, argNames);
-      return execute(func.script.arguments[1], [{ ...args }, ...scopes]);
+      const args = argumentParser(script.arguments, scopes, argNames, trace);
+      return execute(func.script.arguments[1], [{ ...args }, ...scopes], trace);
     }
   }
   throw new NotImplementedError(script, scopes);
@@ -102,13 +108,17 @@ const processCallExpression = (script: A_CallExpression, scopes: T_scope[]) => {
  * 参照を取るための関数
  * @param script
  * @param scopes
+ * @param trace
  */
 const getThis = (
   script: A_CallExpression,
-  scopes: T_scope[]
+  scopes: T_scope[],
+  trace: A_ANY[]
 ): { [key: string]: unknown } => {
   if (typeGuard.MemberExpression(script.callee))
-    return execute(script.callee.object, scopes) as { [key: string]: unknown };
+    return execute(script.callee.object, scopes, trace) as {
+      [key: string]: unknown;
+    };
   return getGlobalScope(scopes) as { [key: string]: unknown };
 };
 
