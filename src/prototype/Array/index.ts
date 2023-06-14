@@ -1,15 +1,16 @@
 import { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
-import { processJoin } from "@/prototype/Array/join";
-import { processPop } from "@/prototype/Array/pop";
-import { processProduct } from "@/prototype/Array/product";
-import { processPush } from "@/prototype/Array/push";
-import { processShift } from "@/prototype/Array/shift";
-import { processSort } from "@/prototype/Array/sort";
-import { processSum } from "@/prototype/Array/sum";
+import { processJoin } from "./join";
+import { processPop } from "./pop";
+import { processProduct } from "./product";
+import { processPush } from "./push";
+import { processShift } from "./shift";
+import { processSort } from "./sort";
+import { processSum } from "./sum";
 
 import { processIndex } from "./_index";
 import { processSize } from "./size";
 import { processUnshift } from "./unshift";
+import { processWalk } from "./walk";
 
 export type PrototypeArrayFunction = PrototypeFunction<Array<unknown>>;
 
@@ -24,6 +25,7 @@ const prototypeArrayFunctions: PrototypeFunctions<Array<unknown>> = {
   sort: processSort,
   sum: processSum,
   product: processProduct,
+  walk: processWalk,
 };
 
 export { prototypeArrayFunctions };
