@@ -17,7 +17,7 @@ const execute: Execute = (
   trace: A_ANY[]
 ): unknown => {
   if (!script || !typeGuard.AST(script)) return;
-  trace.push(script);
+  trace = [...trace, script];
   try {
     const processor = processors[script.type];
     if (processor) {
