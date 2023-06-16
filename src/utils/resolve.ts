@@ -5,8 +5,9 @@ import typeGuard from "@/typeGuard";
  * 変数の参照を取得する関数
  * @param script
  * @param scopes
+ * @param trace
  */
-const resolve = (script: A_ANY, scopes: T_scope[]) => {
+const resolve = (script: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
   try {
     if (typeGuard.Identifier(script)) {
       for (const scope of scopes) {
@@ -18,7 +19,7 @@ const resolve = (script: A_ANY, scopes: T_scope[]) => {
     return undefined;
   } catch (e) {
     if (e instanceof Error) {
-      console.error(`[resolve] ${e.name}: ${e.message}`, script, scopes);
+      console.error(`[resolve] ${e.name}: ${e.message}`, script, scopes, trace);
     }
   }
 };

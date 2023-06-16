@@ -14,7 +14,7 @@ const processIdentifier = (
   scopes: T_scope[],
   trace: A_ANY[]
 ): unknown => {
-  const value = resolve(script, scopes);
+  const value = resolve(script, scopes, trace);
   if (typeGuard.definedFunction(value)) {
     return execute(value.script.arguments[1], [{}, ...scopes], trace);
   }

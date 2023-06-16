@@ -17,7 +17,12 @@ const processMemberExpression = (
 ) => {
   const left = execute(script.object, scopes, trace);
   if (left === undefined) {
-    console.error("[member expression] left is undefined", script, scopes);
+    console.error(
+      "[member expression] left is undefined",
+      script,
+      scopes,
+      trace
+    );
     return;
   }
   const right = (

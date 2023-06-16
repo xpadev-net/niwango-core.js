@@ -21,7 +21,8 @@ const processDump: IrFunction = (
     console.debug(
       "%cdump",
       "background:green;",
-      execute(argument, scopes, trace)
+      execute(argument, scopes, trace),
+      trace
     );
   }
 };

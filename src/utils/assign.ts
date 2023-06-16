@@ -31,7 +31,13 @@ const assign = (
     } else if (typeGuard.MemberExpression(target)) {
       const left = execute(target.object, scopes, trace);
       if (!typeGuard.object(left)) {
-        console.error("[assign] left is not object", target, value, scopes);
+        console.error(
+          "[assign] left is not object",
+          target,
+          value,
+          scopes,
+          trace
+        );
         return;
       }
       const key = (
@@ -43,7 +49,13 @@ const assign = (
     }
   } catch (e) {
     if (e instanceof Error) {
-      console.error(`[assign] ${e.name}: ${e.message}`, target, value, scopes);
+      console.error(
+        `[assign] ${e.name}: ${e.message}`,
+        target,
+        value,
+        scopes,
+        trace
+      );
     }
   }
 };

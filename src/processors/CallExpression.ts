@@ -73,7 +73,7 @@ const processCallExpression = (
       );
     }
   }
-  const self = resolve({ type: "Identifier", name: "self" }, scopes) as {
+  const self = resolve({ type: "Identifier", name: "self" }, scopes, trace) as {
     [key: string]: unknown;
   };
   if (
