@@ -6,6 +6,10 @@ import { processFloor } from "./floor";
 import { processPow } from "./pow";
 import { processSin } from "./sin";
 import { processTimes } from "./times";
+import { processRaw } from "./raw";
+import { processToASString } from "./toASString";
+import { processIncrease } from "./increase";
+import { processDecrease } from "./decrease";
 
 export type PrototypeNumberFunction = PrototypeFunction<number>;
 
@@ -16,6 +20,12 @@ const prototypeNumberFunctions: PrototypeFunctions<number> = {
   pow: processPow,
   abs: processAbs,
   times: processTimes,
+  raw: processRaw,
+  hashCode: processRaw,
+  toASNumber: processRaw,
+  toASString: processToASString,
+  increase: processIncrease,
+  decrease: processDecrease,
 };
 
 export { prototypeNumberFunctions };
