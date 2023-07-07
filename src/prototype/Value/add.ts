@@ -1,8 +1,8 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import { Addition } from "@/operators";
 import { PrototypeValueFunction } from "@/prototype/Value/index";
-import { A_ANY } from "@/@types";
 
 const processAdd: PrototypeValueFunction = (
   script,

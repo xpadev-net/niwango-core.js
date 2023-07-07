@@ -1,7 +1,7 @@
+import { A_ANY } from "@/@types";
 import { definedFunction } from "@/@types/function";
 import { execute } from "@/context";
 import { PrototypeObjectFunction } from "@/prototype/Object/index";
-import { A_ANY } from "@/@types";
 
 /**
  * @関数

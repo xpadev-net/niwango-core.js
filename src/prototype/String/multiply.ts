@@ -1,7 +1,7 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { Multiplication } from "@/operators";
 import { PrototypeStringFunction } from "@/prototype/String/index";
-import { A_ANY } from "@/@types";
 
 const processMultiply: PrototypeStringFunction = (
   script,

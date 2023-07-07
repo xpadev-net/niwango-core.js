@@ -1,7 +1,7 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { LessThan } from "@/operators";
 import { PrototypeValueFunction } from "@/prototype/Value/index";
-import { A_ANY } from "@/@types";
 
 const processCompare: PrototypeValueFunction = (
   script,

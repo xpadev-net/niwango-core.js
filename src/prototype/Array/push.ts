@@ -1,6 +1,6 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { PrototypeArrayFunction } from "@/prototype/Array/index";
-import { A_ANY } from "@/@types";
 
 const processPush: PrototypeArrayFunction = (
   script,

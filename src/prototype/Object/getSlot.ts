@@ -1,8 +1,8 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
 
 import { PrototypeObjectFunction } from "./index";
-import { A_ANY } from "@/@types";
 
 /**
  * @関数

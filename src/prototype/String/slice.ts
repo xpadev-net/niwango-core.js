@@ -1,6 +1,6 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { PrototypeStringFunction } from "@/prototype/String/index";
-import { A_ANY } from "@/@types";
 
 const processSlice: PrototypeStringFunction = (
   script,

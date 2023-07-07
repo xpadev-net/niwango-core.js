@@ -1,8 +1,8 @@
+import { A_ANY } from "@/@types";
 import { resolvePrototype } from "@/context";
 import { UnaryNegation } from "@/operators";
 import { getType } from "@/prototype/getType";
 import { PrototypeValueFunction } from "@/prototype/Value/index";
-import { A_ANY } from "@/@types";
 
 const processMinus: PrototypeValueFunction = (
   script,

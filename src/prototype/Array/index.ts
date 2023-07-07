@@ -1,14 +1,14 @@
 import { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
+
+import { processIndex } from "./_index";
 import { processJoin } from "./join";
 import { processPop } from "./pop";
 import { processProduct } from "./product";
 import { processPush } from "./push";
 import { processShift } from "./shift";
+import { processSize } from "./size";
 import { processSort } from "./sort";
 import { processSum } from "./sum";
-
-import { processIndex } from "./_index";
-import { processSize } from "./size";
 import { processUnshift } from "./unshift";
 import { processWalk } from "./walk";
 

@@ -1,6 +1,6 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { PrototypeNumberFunction } from "@/prototype/Number/index";
-import { A_ANY } from "@/@types";
 
 const processPow: PrototypeNumberFunction = (
   script,

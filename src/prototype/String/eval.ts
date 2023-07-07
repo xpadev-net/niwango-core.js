@@ -1,7 +1,7 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { parseScript } from "@/parser/parse";
 import { PrototypeStringFunction } from "@/prototype/String/index";
-import { A_ANY } from "@/@types";
 
 const processEval: PrototypeStringFunction = (
   _script,

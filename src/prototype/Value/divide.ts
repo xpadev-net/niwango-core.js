@@ -1,8 +1,8 @@
+import { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import { Division } from "@/operators";
 import { PrototypeValueFunction } from "@/prototype/Value/index";
-import { A_ANY } from "@/@types";
 
 const processDivide: PrototypeValueFunction = (
   script,
