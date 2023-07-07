@@ -3,6 +3,7 @@ import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import { PrototypeValueFunction } from "@/prototype/Value/index";
 
+//todo: これであっているか調査
 const processCall: PrototypeValueFunction = (
   script,
   scopes,
@@ -21,7 +22,10 @@ const processCall: PrototypeValueFunction = (
     );
   const newScript: A_CallExpression = {
     type: "CallExpression",
-    callee: functionNameAst,
+    callee: {
+      type: "Raw",
+      value: functionName,
+    },
     arguments: script.arguments[1] ? [script.arguments[1]] : [],
   };
   return execute(newScript, scopes, trace);
