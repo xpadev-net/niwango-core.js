@@ -68,3 +68,6 @@ test("product", () => {
 test("join", () => {
   expect(run(`array=['A','B','C'];return array.join('-')`)).toBe("A-B-C");
 });
+test("walk", () => {
+  expect(run(`i=0;test=[0,1,2,3];test.walk(\\(i+=@0));return i`)).toBe(6);
+});
