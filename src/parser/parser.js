@@ -2544,7 +2544,7 @@
       return { type: "Literal", value: null };
     };
     var peg$f5 = function () {
-      return { type: "Literal", value: null };
+      return { type: "Literal", value: undefined };
     };
     var peg$f6 = function () {
       return { type: "Literal", value: true };
@@ -3321,7 +3321,7 @@
     function peg$parseStart() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 0;
+      var key = peg$currPos * 198 + 0;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3345,7 +3345,7 @@
     function peg$parseSourceCharacter() {
       var s0;
 
-      var key = peg$currPos * 197 + 1;
+      var key = peg$currPos * 198 + 1;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3372,7 +3372,7 @@
     function peg$parseWhiteSpace() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 2;
+      var key = peg$currPos * 198 + 2;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3465,7 +3465,7 @@
     function peg$parseLineTerminator() {
       var s0;
 
-      var key = peg$currPos * 197 + 3;
+      var key = peg$currPos * 198 + 3;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3492,7 +3492,7 @@
     function peg$parseLineTerminatorSequence() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 4;
+      var key = peg$currPos * 198 + 4;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3571,7 +3571,7 @@
     function peg$parseComment() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 5;
+      var key = peg$currPos * 198 + 5;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3598,7 +3598,7 @@
     function peg$parseSingleLineComment() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 6;
+      var key = peg$currPos * 198 + 6;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3685,7 +3685,7 @@
     function peg$parseIdentifier() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 7;
+      var key = peg$currPos * 198 + 7;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3735,7 +3735,7 @@
     function peg$parseIdentifierName() {
       var s0, s1, s2, s3, s4, s5, s6;
 
-      var key = peg$currPos * 197 + 8;
+      var key = peg$currPos * 198 + 8;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3790,7 +3790,7 @@
     function peg$parseIdentifierStart() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 9;
+      var key = peg$currPos * 198 + 9;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3867,7 +3867,7 @@
     function peg$parseIdentifierPart() {
       var s0;
 
-      var key = peg$currPos * 197 + 10;
+      var key = peg$currPos * 198 + 10;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3928,7 +3928,7 @@
     function peg$parseUnicodeLetter() {
       var s0;
 
-      var key = peg$currPos * 197 + 11;
+      var key = peg$currPos * 198 + 11;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3962,7 +3962,7 @@
     function peg$parseUnicodeCombiningMark() {
       var s0;
 
-      var key = peg$currPos * 197 + 12;
+      var key = peg$currPos * 198 + 12;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -3984,7 +3984,7 @@
     function peg$parseUnicodeDigit() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 13;
+      var key = peg$currPos * 198 + 13;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4011,7 +4011,7 @@
     function peg$parseReservedWord() {
       var s0;
 
-      var key = peg$currPos * 197 + 14;
+      var key = peg$currPos * 198 + 14;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4039,7 +4039,7 @@
     function peg$parseKeyword() {
       var s0;
 
-      var key = peg$currPos * 197 + 15;
+      var key = peg$currPos * 198 + 15;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4118,7 +4118,7 @@
     function peg$parseFutureReservedWord() {
       var s0;
 
-      var key = peg$currPos * 197 + 16;
+      var key = peg$currPos * 198 + 16;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4155,7 +4155,7 @@
     function peg$parseLiteral() {
       var s0;
 
-      var key = peg$currPos * 197 + 17;
+      var key = peg$currPos * 198 + 17;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4166,13 +4166,16 @@
 
       s0 = peg$parseNullLiteral();
       if (s0 === peg$FAILED) {
-        s0 = peg$parseBooleanLiteral();
+        s0 = peg$parseNilLiteral();
         if (s0 === peg$FAILED) {
-          s0 = peg$parseNumericLiteral();
+          s0 = peg$parseBooleanLiteral();
           if (s0 === peg$FAILED) {
-            s0 = peg$parseStringLiteral();
+            s0 = peg$parseNumericLiteral();
             if (s0 === peg$FAILED) {
-              s0 = peg$parseRegularExpressionLiteral();
+              s0 = peg$parseStringLiteral();
+              if (s0 === peg$FAILED) {
+                s0 = peg$parseRegularExpressionLiteral();
+              }
             }
           }
         }
@@ -4186,7 +4189,7 @@
     function peg$parseNullLiteral() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 18;
+      var key = peg$currPos * 198 + 18;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4202,15 +4205,31 @@
         s1 = peg$f4();
       }
       s0 = s1;
-      if (s0 === peg$FAILED) {
-        s0 = peg$currPos;
-        s1 = peg$parseNullToken2();
-        if (s1 !== peg$FAILED) {
-          peg$savedPos = s0;
-          s1 = peg$f5();
-        }
-        s0 = s1;
+
+      peg$resultsCache[key] = { nextPos: peg$currPos, result: s0 };
+
+      return s0;
+    }
+
+    function peg$parseNilLiteral() {
+      var s0, s1;
+
+      var key = peg$currPos * 198 + 19;
+      var cached = peg$resultsCache[key];
+
+      if (cached) {
+        peg$currPos = cached.nextPos;
+
+        return cached.result;
       }
+
+      s0 = peg$currPos;
+      s1 = peg$parseNilToken();
+      if (s1 !== peg$FAILED) {
+        peg$savedPos = s0;
+        s1 = peg$f5();
+      }
+      s0 = s1;
 
       peg$resultsCache[key] = { nextPos: peg$currPos, result: s0 };
 
@@ -4220,7 +4239,7 @@
     function peg$parseBooleanLiteral() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 19;
+      var key = peg$currPos * 198 + 20;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4254,7 +4273,7 @@
     function peg$parseNumericLiteral() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 20;
+      var key = peg$currPos * 198 + 21;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4365,7 +4384,7 @@
     function peg$parseDecimalLiteral() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 21;
+      var key = peg$currPos * 198 + 22;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4469,7 +4488,7 @@
     function peg$parseDecimalIntegerLiteral() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 22;
+      var key = peg$currPos * 198 + 23;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4513,7 +4532,7 @@
     function peg$parseDecimalDigit() {
       var s0;
 
-      var key = peg$currPos * 197 + 23;
+      var key = peg$currPos * 198 + 24;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4540,7 +4559,7 @@
     function peg$parseNonZeroDigit() {
       var s0;
 
-      var key = peg$currPos * 197 + 24;
+      var key = peg$currPos * 198 + 25;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4567,7 +4586,7 @@
     function peg$parseExponentPart() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 25;
+      var key = peg$currPos * 198 + 26;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4600,7 +4619,7 @@
     function peg$parseExponentIndicator() {
       var s0;
 
-      var key = peg$currPos * 197 + 26;
+      var key = peg$currPos * 198 + 27;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4627,7 +4646,7 @@
     function peg$parseSignedInteger() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 27;
+      var key = peg$currPos * 198 + 28;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4675,7 +4694,7 @@
     function peg$parseHexIntegerLiteral() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 28;
+      var key = peg$currPos * 198 + 29;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4731,7 +4750,7 @@
     function peg$parseOctalIntegerLiteral() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 29;
+      var key = peg$currPos * 198 + 30;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4787,7 +4806,7 @@
     function peg$parseHexDigit() {
       var s0;
 
-      var key = peg$currPos * 197 + 30;
+      var key = peg$currPos * 198 + 31;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4814,7 +4833,7 @@
     function peg$parseOctalDigit() {
       var s0;
 
-      var key = peg$currPos * 197 + 31;
+      var key = peg$currPos * 198 + 32;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4841,7 +4860,7 @@
     function peg$parseStringLiteral() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 32;
+      var key = peg$currPos * 198 + 33;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -4943,7 +4962,7 @@
     function peg$parseDoubleStringCharacter() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 33;
+      var key = peg$currPos * 198 + 34;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5035,7 +5054,7 @@
     function peg$parseSingleStringCharacter() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 34;
+      var key = peg$currPos * 198 + 35;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5127,7 +5146,7 @@
     function peg$parseLineContinuation() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 35;
+      var key = peg$currPos * 198 + 36;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5168,7 +5187,7 @@
     function peg$parseEscapeSequence() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 36;
+      var key = peg$currPos * 198 + 37;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5227,7 +5246,7 @@
     function peg$parseCharacterEscapeSequence() {
       var s0;
 
-      var key = peg$currPos * 197 + 37;
+      var key = peg$currPos * 198 + 38;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5249,7 +5268,7 @@
     function peg$parseSingleEscapeCharacter() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 38;
+      var key = peg$currPos * 198 + 39;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5400,7 +5419,7 @@
     function peg$parseNonEscapeCharacter() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 39;
+      var key = peg$currPos * 198 + 40;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5445,7 +5464,7 @@
     function peg$parseEscapeCharacter() {
       var s0;
 
-      var key = peg$currPos * 197 + 40;
+      var key = peg$currPos * 198 + 41;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5489,7 +5508,7 @@
     function peg$parseHexEscapeSequence() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 41;
+      var key = peg$currPos * 198 + 42;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5550,7 +5569,7 @@
     function peg$parseUnicodeEscapeSequence() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 42;
+      var key = peg$currPos * 198 + 43;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5623,7 +5642,7 @@
     function peg$parseRegularExpressionLiteral() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 43;
+      var key = peg$currPos * 198 + 44;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5695,7 +5714,7 @@
     function peg$parseRegularExpressionBody() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 44;
+      var key = peg$currPos * 198 + 45;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5728,7 +5747,7 @@
     function peg$parseRegularExpressionFirstChar() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 45;
+      var key = peg$currPos * 198 + 46;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5784,7 +5803,7 @@
     function peg$parseRegularExpressionChar() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 46;
+      var key = peg$currPos * 198 + 47;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5840,7 +5859,7 @@
     function peg$parseRegularExpressionBackslashSequence() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 47;
+      var key = peg$currPos * 198 + 48;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5881,7 +5900,7 @@
     function peg$parseRegularExpressionNonTerminator() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 48;
+      var key = peg$currPos * 198 + 49;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5923,7 +5942,7 @@
     function peg$parseRegularExpressionClass() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 49;
+      var key = peg$currPos * 198 + 50;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -5978,7 +5997,7 @@
     function peg$parseRegularExpressionClassChar() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 50;
+      var key = peg$currPos * 198 + 51;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6031,7 +6050,7 @@
     function peg$parseRegularExpressionFlags() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 51;
+      var key = peg$currPos * 198 + 52;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6055,7 +6074,7 @@
     function peg$parseLl() {
       var s0;
 
-      var key = peg$currPos * 197 + 52;
+      var key = peg$currPos * 198 + 53;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6082,7 +6101,7 @@
     function peg$parseLm() {
       var s0;
 
-      var key = peg$currPos * 197 + 53;
+      var key = peg$currPos * 198 + 54;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6109,7 +6128,7 @@
     function peg$parseLo() {
       var s0;
 
-      var key = peg$currPos * 197 + 54;
+      var key = peg$currPos * 198 + 55;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6136,7 +6155,7 @@
     function peg$parseLt() {
       var s0;
 
-      var key = peg$currPos * 197 + 55;
+      var key = peg$currPos * 198 + 56;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6163,7 +6182,7 @@
     function peg$parseLu() {
       var s0;
 
-      var key = peg$currPos * 197 + 56;
+      var key = peg$currPos * 198 + 57;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6190,7 +6209,7 @@
     function peg$parseMc() {
       var s0;
 
-      var key = peg$currPos * 197 + 57;
+      var key = peg$currPos * 198 + 58;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6217,7 +6236,7 @@
     function peg$parseMn() {
       var s0;
 
-      var key = peg$currPos * 197 + 58;
+      var key = peg$currPos * 198 + 59;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6244,7 +6263,7 @@
     function peg$parseNd() {
       var s0;
 
-      var key = peg$currPos * 197 + 59;
+      var key = peg$currPos * 198 + 60;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6271,7 +6290,7 @@
     function peg$parseNl() {
       var s0;
 
-      var key = peg$currPos * 197 + 60;
+      var key = peg$currPos * 198 + 61;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6298,7 +6317,7 @@
     function peg$parsePc() {
       var s0;
 
-      var key = peg$currPos * 197 + 61;
+      var key = peg$currPos * 198 + 62;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6325,7 +6344,7 @@
     function peg$parseZs() {
       var s0;
 
-      var key = peg$currPos * 197 + 62;
+      var key = peg$currPos * 198 + 63;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6352,7 +6371,7 @@
     function peg$parseBreakToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 63;
+      var key = peg$currPos * 198 + 64;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6402,7 +6421,7 @@
     function peg$parseCaseToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 64;
+      var key = peg$currPos * 198 + 65;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6452,7 +6471,7 @@
     function peg$parseCatchToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 65;
+      var key = peg$currPos * 198 + 66;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6502,7 +6521,7 @@
     function peg$parseClassToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 66;
+      var key = peg$currPos * 198 + 67;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6552,7 +6571,7 @@
     function peg$parseConstToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 67;
+      var key = peg$currPos * 198 + 68;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6602,7 +6621,7 @@
     function peg$parseContinueToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 68;
+      var key = peg$currPos * 198 + 69;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6652,7 +6671,7 @@
     function peg$parseDebuggerToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 69;
+      var key = peg$currPos * 198 + 70;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6702,7 +6721,7 @@
     function peg$parseDefaultToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 70;
+      var key = peg$currPos * 198 + 71;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6752,7 +6771,7 @@
     function peg$parseDeleteToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 71;
+      var key = peg$currPos * 198 + 72;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6802,7 +6821,7 @@
     function peg$parseEnumToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 72;
+      var key = peg$currPos * 198 + 73;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6852,7 +6871,7 @@
     function peg$parseExportToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 73;
+      var key = peg$currPos * 198 + 74;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6902,7 +6921,7 @@
     function peg$parseExtendsToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 74;
+      var key = peg$currPos * 198 + 75;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -6952,7 +6971,7 @@
     function peg$parseFalseToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 75;
+      var key = peg$currPos * 198 + 76;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7002,7 +7021,7 @@
     function peg$parseFinallyToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 76;
+      var key = peg$currPos * 198 + 77;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7052,7 +7071,7 @@
     function peg$parseForToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 77;
+      var key = peg$currPos * 198 + 78;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7102,7 +7121,7 @@
     function peg$parseFunctionToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 78;
+      var key = peg$currPos * 198 + 79;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7152,7 +7171,7 @@
     function peg$parseLambdaToken1() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 79;
+      var key = peg$currPos * 198 + 80;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7202,7 +7221,7 @@
     function peg$parseLambdaToken2() {
       var s0;
 
-      var key = peg$currPos * 197 + 80;
+      var key = peg$currPos * 198 + 81;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7229,7 +7248,7 @@
     function peg$parseGetToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 81;
+      var key = peg$currPos * 198 + 82;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7279,7 +7298,7 @@
     function peg$parseImportToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 82;
+      var key = peg$currPos * 198 + 83;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7329,7 +7348,7 @@
     function peg$parseInstanceofToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 83;
+      var key = peg$currPos * 198 + 84;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7379,7 +7398,7 @@
     function peg$parseNewToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 84;
+      var key = peg$currPos * 198 + 85;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7429,7 +7448,7 @@
     function peg$parseNullToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 85;
+      var key = peg$currPos * 198 + 86;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7476,10 +7495,10 @@
       return s0;
     }
 
-    function peg$parseNullToken2() {
+    function peg$parseNilToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 86;
+      var key = peg$currPos * 198 + 87;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7529,7 +7548,7 @@
     function peg$parseReturnToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 87;
+      var key = peg$currPos * 198 + 88;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7579,7 +7598,7 @@
     function peg$parseSetToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 88;
+      var key = peg$currPos * 198 + 89;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7629,7 +7648,7 @@
     function peg$parseSuperToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 89;
+      var key = peg$currPos * 198 + 90;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7679,7 +7698,7 @@
     function peg$parseSwitchToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 90;
+      var key = peg$currPos * 198 + 91;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7729,7 +7748,7 @@
     function peg$parseThisToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 91;
+      var key = peg$currPos * 198 + 92;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7779,7 +7798,7 @@
     function peg$parseThrowToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 92;
+      var key = peg$currPos * 198 + 93;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7829,7 +7848,7 @@
     function peg$parseTrueToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 93;
+      var key = peg$currPos * 198 + 94;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7879,7 +7898,7 @@
     function peg$parseTryToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 94;
+      var key = peg$currPos * 198 + 95;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7929,7 +7948,7 @@
     function peg$parseTypeofToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 95;
+      var key = peg$currPos * 198 + 96;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -7979,7 +7998,7 @@
     function peg$parseVarToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 96;
+      var key = peg$currPos * 198 + 97;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8029,7 +8048,7 @@
     function peg$parseVoidToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 97;
+      var key = peg$currPos * 198 + 98;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8079,7 +8098,7 @@
     function peg$parseWithToken() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 98;
+      var key = peg$currPos * 198 + 99;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8129,7 +8148,7 @@
     function peg$parse__() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 99;
+      var key = peg$currPos * 198 + 100;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8165,7 +8184,7 @@
     function peg$parse_() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 100;
+      var key = peg$currPos * 198 + 101;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8189,7 +8208,7 @@
     function peg$parseEOS() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 101;
+      var key = peg$currPos * 198 + 102;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8320,7 +8339,7 @@
     function peg$parseEOF() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 102;
+      var key = peg$currPos * 198 + 103;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8356,7 +8375,7 @@
     function peg$parsePrimaryExpression() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 103;
+      var key = peg$currPos * 198 + 104;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8434,7 +8453,7 @@
     function peg$parseArrayLiteral() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 104;
+      var key = peg$currPos * 198 + 105;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8607,7 +8626,7 @@
     function peg$parseElementList() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 105;
+      var key = peg$currPos * 198 + 106;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8735,7 +8754,7 @@
     function peg$parseElision() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 106;
+      var key = peg$currPos * 198 + 107;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8810,7 +8829,7 @@
     function peg$parseObjectLiteral() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 107;
+      var key = peg$currPos * 198 + 108;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -8957,7 +8976,7 @@
     function peg$parsePropertyNameAndValueList() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 108;
+      var key = peg$currPos * 198 + 109;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9038,7 +9057,7 @@
     function peg$parsePropertyAssignment() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15;
 
-      var key = peg$currPos * 197 + 109;
+      var key = peg$currPos * 198 + 110;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9254,7 +9273,7 @@
     function peg$parsePropertyName() {
       var s0;
 
-      var key = peg$currPos * 197 + 110;
+      var key = peg$currPos * 198 + 111;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9279,7 +9298,7 @@
     function peg$parsePropertySetParameterList() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 111;
+      var key = peg$currPos * 198 + 112;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9304,7 +9323,7 @@
     function peg$parseMemberExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 112;
+      var key = peg$currPos * 198 + 113;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9521,7 +9540,7 @@
     function peg$parseNewExpression() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 113;
+      var key = peg$currPos * 198 + 114;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9558,7 +9577,7 @@
     function peg$parseCallExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 114;
+      var key = peg$currPos * 198 + 115;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9762,7 +9781,7 @@
     function peg$parseArguments() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 115;
+      var key = peg$currPos * 198 + 116;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9825,7 +9844,7 @@
     function peg$parseArgumentList() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 116;
+      var key = peg$currPos * 198 + 117;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9902,7 +9921,7 @@
     function peg$parseArgumentWithName() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 117;
+      var key = peg$currPos * 198 + 118;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -9934,7 +9953,7 @@
     function peg$parseAssignmentExpressions() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 118;
+      var key = peg$currPos * 198 + 119;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10036,7 +10055,7 @@
     function peg$parseArgumentName() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 119;
+      var key = peg$currPos * 198 + 120;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10100,7 +10119,7 @@
     function peg$parseLeftHandSideExpression() {
       var s0;
 
-      var key = peg$currPos * 197 + 120;
+      var key = peg$currPos * 198 + 121;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10131,7 +10150,7 @@
     function peg$parsePostfixExpression() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 121;
+      var key = peg$currPos * 198 + 122;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10168,7 +10187,7 @@
     function peg$parsePostfixOperator() {
       var s0;
 
-      var key = peg$currPos * 197 + 122;
+      var key = peg$currPos * 198 + 123;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10206,7 +10225,7 @@
     function peg$parseUnaryExpression() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 123;
+      var key = peg$currPos * 198 + 124;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10243,7 +10262,7 @@
     function peg$parseUnaryOperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 124;
+      var key = peg$currPos * 198 + 125;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10426,7 +10445,7 @@
     function peg$parseMultiplicativeExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 125;
+      var key = peg$currPos * 198 + 126;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10491,7 +10510,7 @@
     function peg$parseMultiplicativeOperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 126;
+      var key = peg$currPos * 198 + 127;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10651,7 +10670,7 @@
     function peg$parseAdditiveExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 127;
+      var key = peg$currPos * 198 + 128;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10716,7 +10735,7 @@
     function peg$parseAdditiveOperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 128;
+      var key = peg$currPos * 198 + 129;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10828,7 +10847,7 @@
     function peg$parseShiftExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 129;
+      var key = peg$currPos * 198 + 130;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -10893,7 +10912,7 @@
     function peg$parseShiftOperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 130;
+      var key = peg$currPos * 198 + 131;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11053,7 +11072,7 @@
     function peg$parseRelationalExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 131;
+      var key = peg$currPos * 198 + 132;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11118,7 +11137,7 @@
     function peg$parseRelationalOperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 132;
+      var key = peg$currPos * 198 + 133;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11261,7 +11280,7 @@
     function peg$parseRelationalExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 133;
+      var key = peg$currPos * 198 + 134;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11326,7 +11345,7 @@
     function peg$parseRelationalOperatorNoIn() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 134;
+      var key = peg$currPos * 198 + 135;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11469,7 +11488,7 @@
     function peg$parseEqualityExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 135;
+      var key = peg$currPos * 198 + 136;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11534,7 +11553,7 @@
     function peg$parseEqualityExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 136;
+      var key = peg$currPos * 198 + 137;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11599,7 +11618,7 @@
     function peg$parseEqualityOperator() {
       var s0;
 
-      var key = peg$currPos * 197 + 137;
+      var key = peg$currPos * 198 + 138;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11670,7 +11689,7 @@
     function peg$parseBitwiseANDExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 138;
+      var key = peg$currPos * 198 + 139;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11735,7 +11754,7 @@
     function peg$parseBitwiseANDExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 139;
+      var key = peg$currPos * 198 + 140;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11800,7 +11819,7 @@
     function peg$parseBitwiseANDOperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 140;
+      var key = peg$currPos * 198 + 141;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11864,7 +11883,7 @@
     function peg$parseBitwiseXORExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 141;
+      var key = peg$currPos * 198 + 142;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11929,7 +11948,7 @@
     function peg$parseBitwiseXORExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 142;
+      var key = peg$currPos * 198 + 143;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -11994,7 +12013,7 @@
     function peg$parseBitwiseXOROperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 143;
+      var key = peg$currPos * 198 + 144;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12069,7 +12088,7 @@
     function peg$parseBitwiseORExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 144;
+      var key = peg$currPos * 198 + 145;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12134,7 +12153,7 @@
     function peg$parseBitwiseORExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 145;
+      var key = peg$currPos * 198 + 146;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12199,7 +12218,7 @@
     function peg$parseBitwiseOROperator() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 146;
+      var key = peg$currPos * 198 + 147;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12263,7 +12282,7 @@
     function peg$parseLogicalANDExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 147;
+      var key = peg$currPos * 198 + 148;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12328,7 +12347,7 @@
     function peg$parseLogicalANDExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 148;
+      var key = peg$currPos * 198 + 149;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12393,7 +12412,7 @@
     function peg$parseLogicalANDOperator() {
       var s0;
 
-      var key = peg$currPos * 197 + 149;
+      var key = peg$currPos * 198 + 150;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12420,7 +12439,7 @@
     function peg$parseLogicalORExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 150;
+      var key = peg$currPos * 198 + 151;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12485,7 +12504,7 @@
     function peg$parseLogicalORExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 151;
+      var key = peg$currPos * 198 + 152;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12550,7 +12569,7 @@
     function peg$parseLogicalOROperator() {
       var s0;
 
-      var key = peg$currPos * 197 + 152;
+      var key = peg$currPos * 198 + 153;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12577,7 +12596,7 @@
     function peg$parseConditionalExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 153;
+      var key = peg$currPos * 198 + 154;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12651,7 +12670,7 @@
     function peg$parseConditionalExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 154;
+      var key = peg$currPos * 198 + 155;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12725,7 +12744,7 @@
     function peg$parseAssignmentExpression() {
       var s0, s1, s2, s3, s4, s5, s6;
 
-      var key = peg$currPos * 197 + 155;
+      var key = peg$currPos * 198 + 156;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12878,7 +12897,7 @@
     function peg$parseAssignmentExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6;
 
-      var key = peg$currPos * 197 + 156;
+      var key = peg$currPos * 198 + 157;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -12978,7 +12997,7 @@
     function peg$parseAssignmentOperator() {
       var s0;
 
-      var key = peg$currPos * 197 + 157;
+      var key = peg$currPos * 198 + 158;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13115,7 +13134,7 @@
     function peg$parseExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 158;
+      var key = peg$currPos * 198 + 159;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13196,7 +13215,7 @@
     function peg$parseExpressionNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 159;
+      var key = peg$currPos * 198 + 160;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13277,7 +13296,7 @@
     function peg$parseStatement() {
       var s0;
 
-      var key = peg$currPos * 197 + 160;
+      var key = peg$currPos * 198 + 161;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13329,7 +13348,7 @@
     function peg$parseBlock() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 161;
+      var key = peg$currPos * 198 + 162;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13439,7 +13458,7 @@
     function peg$parseStatementList() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 162;
+      var key = peg$currPos * 198 + 163;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13490,7 +13509,7 @@
     function peg$parseVariableStatement() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 163;
+      var key = peg$currPos * 198 + 164;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13523,7 +13542,7 @@
     function peg$parseVariableDeclarationList() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 164;
+      var key = peg$currPos * 198 + 165;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13604,7 +13623,7 @@
     function peg$parseVariableDeclarationListNoIn() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 165;
+      var key = peg$currPos * 198 + 166;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13685,7 +13704,7 @@
     function peg$parseVariableDeclaration() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 166;
+      var key = peg$currPos * 198 + 167;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13725,7 +13744,7 @@
     function peg$parseVariableDeclarationNoIn() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 167;
+      var key = peg$currPos * 198 + 168;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13765,7 +13784,7 @@
     function peg$parseinitializer() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 168;
+      var key = peg$currPos * 198 + 169;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13807,7 +13826,7 @@
     function peg$parseinitializerNoIn() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 169;
+      var key = peg$currPos * 198 + 170;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13872,7 +13891,7 @@
     function peg$parseEmptyStatement() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 170;
+      var key = peg$currPos * 198 + 171;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13905,7 +13924,7 @@
     function peg$parseExpressionStatement() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 171;
+      var key = peg$currPos * 198 + 172;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -13964,7 +13983,7 @@
     function peg$parseContinueStatement() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 172;
+      var key = peg$currPos * 198 + 173;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14021,7 +14040,7 @@
     function peg$parseBreakStatement() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 173;
+      var key = peg$currPos * 198 + 174;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14078,7 +14097,7 @@
     function peg$parseReturnStatement() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 174;
+      var key = peg$currPos * 198 + 175;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14135,7 +14154,7 @@
     function peg$parseWithStatement() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 175;
+      var key = peg$currPos * 198 + 176;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14206,7 +14225,7 @@
     function peg$parseCaseBlock() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8;
 
-      var key = peg$currPos * 197 + 176;
+      var key = peg$currPos * 198 + 177;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14336,7 +14355,7 @@
     function peg$parseCaseClauses() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 177;
+      var key = peg$currPos * 198 + 178;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14387,7 +14406,7 @@
     function peg$parseCaseClause() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8;
 
-      var key = peg$currPos * 197 + 178;
+      var key = peg$currPos * 198 + 179;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14449,7 +14468,7 @@
     function peg$parseDefaultClause() {
       var s0, s1, s2, s3, s4, s5, s6;
 
-      var key = peg$currPos * 197 + 179;
+      var key = peg$currPos * 198 + 180;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14504,7 +14523,7 @@
     function peg$parseLabelledStatement() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 180;
+      var key = peg$currPos * 198 + 181;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14553,7 +14572,7 @@
     function peg$parseThrowStatement() {
       var s0, s1, s2, s3, s4;
 
-      var key = peg$currPos * 197 + 181;
+      var key = peg$currPos * 198 + 182;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14593,7 +14612,7 @@
     function peg$parseTryStatement() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 182;
+      var key = peg$currPos * 198 + 183;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14691,7 +14710,7 @@
     function peg$parseCatch() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
-      var key = peg$currPos * 197 + 183;
+      var key = peg$currPos * 198 + 184;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14762,7 +14781,7 @@
     function peg$parseFinally() {
       var s0, s1, s2, s3;
 
-      var key = peg$currPos * 197 + 184;
+      var key = peg$currPos * 198 + 185;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14796,7 +14815,7 @@
     function peg$parseDebuggerStatement() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 185;
+      var key = peg$currPos * 198 + 186;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14829,7 +14848,7 @@
     function peg$parseFunctionDeclaration() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14;
 
-      var key = peg$currPos * 197 + 186;
+      var key = peg$currPos * 198 + 187;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -14938,7 +14957,7 @@
     function peg$parseFunctionExpression() {
       var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13;
 
-      var key = peg$currPos * 197 + 187;
+      var key = peg$currPos * 198 + 188;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15053,7 +15072,7 @@
     function peg$parseLambdaExpression() {
       var s0;
 
-      var key = peg$currPos * 197 + 188;
+      var key = peg$currPos * 198 + 189;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15078,7 +15097,7 @@
     function peg$parseLambdaExpression1() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 189;
+      var key = peg$currPos * 198 + 190;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15137,7 +15156,7 @@
     function peg$parseLambdaExpression2() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 190;
+      var key = peg$currPos * 198 + 191;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15196,7 +15215,7 @@
     function peg$parseLambdaExpression3() {
       var s0, s1, s2;
 
-      var key = peg$currPos * 197 + 191;
+      var key = peg$currPos * 198 + 192;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15229,7 +15248,7 @@
     function peg$parseFormalParameterList() {
       var s0, s1, s2, s3, s4, s5, s6, s7;
 
-      var key = peg$currPos * 197 + 192;
+      var key = peg$currPos * 198 + 193;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15310,7 +15329,7 @@
     function peg$parseFunctionBody() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 193;
+      var key = peg$currPos * 198 + 194;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15336,7 +15355,7 @@
     function peg$parseProgram() {
       var s0, s1;
 
-      var key = peg$currPos * 197 + 194;
+      var key = peg$currPos * 198 + 195;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15362,7 +15381,7 @@
     function peg$parseSourceElements() {
       var s0, s1, s2, s3, s4, s5;
 
-      var key = peg$currPos * 197 + 195;
+      var key = peg$currPos * 198 + 196;
       var cached = peg$resultsCache[key];
 
       if (cached) {
@@ -15413,7 +15432,7 @@
     function peg$parseSourceElement() {
       var s0;
 
-      var key = peg$currPos * 197 + 196;
+      var key = peg$currPos * 198 + 197;
       var cached = peg$resultsCache[key];
 
       if (cached) {

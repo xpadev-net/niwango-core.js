@@ -205,6 +205,7 @@ FutureReservedWord
 
 Literal
   = NullLiteral
+  / NilLiteral
   / BooleanLiteral
   / NumericLiteral
   / StringLiteral
@@ -212,7 +213,9 @@ Literal
 
 NullLiteral
   = NullToken { return { type: "Literal", value: null }; }
-  / NullToken2 { return { type: "Literal", value: null }; }
+
+NilLiteral
+  = NilToken { return { type: "Literal", value: undefined }; }
 
 BooleanLiteral
   = TrueToken  { return { type: "Literal", value: true  }; }
@@ -460,7 +463,7 @@ ImportToken     = "import"     !IdentifierPart
 InstanceofToken = "instanceof" !IdentifierPart
 NewToken        = "new"        !IdentifierPart
 NullToken       = "null"       !IdentifierPart
-NullToken2      = "nil"        !IdentifierPart
+NilToken        = "nil"        !IdentifierPart
 ReturnToken     = "return"     !IdentifierPart
 SetToken        = "set"        !IdentifierPart
 SuperToken      = "super"      !IdentifierPart
