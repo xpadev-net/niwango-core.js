@@ -6,8 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": ["src/parser/parser.js", "dist/**", "node_modules/**"]
+    "ignoreUnknown": false
   },
   "formatter": {
     "enabled": true,
@@ -25,11 +24,17 @@
       "quoteStyle": "double"
     }
   },
-  "typescript": {
-    "formatter": {
-      "quoteStyle": "double"
+  "overrides": [
+    {
+      "includes": ["src/parser/parser.js"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
     }
-  },
+  ],
   "assist": {
     "enabled": true,
     "actions": {
