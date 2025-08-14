@@ -1,4 +1,4 @@
-import { ResolvePrototype, ResolveResult } from "@/@types/prototype";
+import type { ResolvePrototype, ResolveResult } from "@/@types/prototype";
 import { prototypeScope, setResolvePrototype } from "@/context";
 import { prototypeArrayFunctions } from "@/prototype/Array";
 import { prototypeBoolFunctions } from "@/prototype/Bool";

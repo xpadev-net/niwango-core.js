@@ -1,4 +1,4 @@
-import { A_ANY, A_UnaryExpression, T_scope } from "@/@types/ast";
+import type { A_ANY, A_UnaryExpression, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import { BitwiseNOT, LogicalNot, UnaryNegation, UnaryPlus } from "@/operators";

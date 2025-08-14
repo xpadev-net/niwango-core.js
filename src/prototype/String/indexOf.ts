@@ -1,6 +1,6 @@
-import { A_ANY } from "@/@types";
+import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
-import { PrototypeStringFunction } from "@/prototype/String/index";
+import type { PrototypeStringFunction } from "@/prototype/String/index";
 import { format } from "@/utils/format";
 
 const processIndexOf: PrototypeStringFunction = (
@@ -11,7 +11,7 @@ const processIndexOf: PrototypeStringFunction = (
 ) => {
   const searchValue = execute(script.arguments[0], scopes, trace);
   const fromIndex = execute(script.arguments[1], scopes, trace);
-  if (typeof fromIndex !== undefined) {
+  if (typeof fromIndex !== "undefined") {
     return object.indexOf(`${searchValue}`, format(fromIndex, "number"));
   }
   return object.indexOf(`${searchValue}`);

@@ -7,6 +7,6 @@ export type IrFunction = (
   trace: A_ANY[],
 ) => unknown;
 
-type IrFunctions = {
+export type IrFunctions = {
   [key: string]: IrFunction;
 };

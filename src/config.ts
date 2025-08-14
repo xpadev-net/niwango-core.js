@@ -1,4 +1,4 @@
-import { baseConfig } from "@/@types/config";
+import type { baseConfig } from "@/@types/config";
 
 let config: baseConfig;
 const initConfig = () => {

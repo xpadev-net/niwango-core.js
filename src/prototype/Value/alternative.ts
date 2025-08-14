@@ -1,7 +1,6 @@
-import { A_ANY } from "@/@types";
-import { argumentParser } from "@/context";
-import { execute } from "@/context";
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { A_ANY } from "@/@types";
+import { argumentParser, execute } from "@/context";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 
 const processAlternative: PrototypeValueFunction = (
   script,

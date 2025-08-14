@@ -15,7 +15,7 @@ export function parse(
  * パースエラーが発生した際に投げられるエラー?
  * 多分型はあってるはず
  */
-export class SyntaxError extends Error {
+export class NiwangoSyntaxError extends Error {
   constructor(
     message: string,
     expected: string,

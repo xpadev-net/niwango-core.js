@@ -1,4 +1,4 @@
-import { A_ANY, T_scope } from "@/@types/ast";
+import type { A_ANY, T_scope } from "@/@types/ast";
 
 /**
  * 未実装の関数や機能を呼び出したときに発生するエラー

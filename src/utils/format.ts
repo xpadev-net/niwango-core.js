@@ -1,4 +1,4 @@
-import { A_CallExpression } from "@/@types";
+import type { A_CallExpression } from "@/@types";
 import { resolvePrototype } from "@/context";
 import { getType } from "@/prototype/getType";
 

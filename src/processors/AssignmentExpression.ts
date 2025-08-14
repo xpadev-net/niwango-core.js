@@ -1,6 +1,5 @@
-import { A_ANY, A_AssignmentExpression, T_scope } from "@/@types/ast";
-import { assign } from "@/context";
-import { execute } from "@/context";
+import type { A_ANY, A_AssignmentExpression, T_scope } from "@/@types/ast";
+import { assign, execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import {
   Addition,

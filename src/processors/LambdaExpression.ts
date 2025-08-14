@@ -1,4 +1,4 @@
-import { A_LambdaExpression, T_scope } from "@/@types/ast";
+import type { A_LambdaExpression, T_scope } from "@/@types/ast";
 
 const processLambdaExpression = (
   script: A_LambdaExpression,

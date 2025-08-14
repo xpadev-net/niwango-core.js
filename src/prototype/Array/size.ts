@@ -1,4 +1,4 @@
-import { PrototypeArrayFunction } from "@/prototype/Array/index";
+import type { PrototypeArrayFunction } from "@/prototype/Array/index";
 
 const processSize: PrototypeArrayFunction = (_script, _scopes, object) => {
   return object.length;
