@@ -1,4 +1,4 @@
-import { prototypeType } from "@/@types/prototype";
+import type { prototypeType } from "@/@types/prototype";
 
 const getType = (i: unknown): prototypeType => {
   const type = typeof i;

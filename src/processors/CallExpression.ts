@@ -1,10 +1,10 @@
-import {
+import type {
   A_ANY,
   A_CallExpression,
   A_MemberExpression,
   T_scope,
 } from "@/@types/ast";
-import {
+import type {
   definedFunction,
   definedKariFunction,
   definedNormalFunction,

@@ -1,4 +1,4 @@
-import { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
+import type { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
 import { processDefKari } from "@/prototype/Object/def_kari";
 import { processRaw } from "@/prototype/Object/raw";
 

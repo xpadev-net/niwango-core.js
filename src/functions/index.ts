@@ -1,4 +1,4 @@
-import { IrFunctions } from "@/@types/functions";
+import type { IrFunctions } from "@/@types/functions";
 
 import { processAt } from "./At";
 import { processDistance } from "./distance";

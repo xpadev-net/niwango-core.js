@@ -1,5 +1,5 @@
-import { A_ANY, Argument, T_scope } from "@/@types/ast";
-import { ArgumentParser } from "@/@types/execute";
+import type { A_ANY, Argument, T_scope } from "@/@types/ast";
+import type { ArgumentParser } from "@/@types/execute";
 import { execute, getName, setArgumentParser } from "@/context";
 
 /**

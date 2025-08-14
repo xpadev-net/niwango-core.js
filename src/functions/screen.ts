@@ -1,4 +1,4 @@
-import { IrFunction } from "@/@types/functions";
+import type { IrFunction } from "@/@types/functions";
 import { config } from "@/config";
 import { isWide } from "@/context";
 

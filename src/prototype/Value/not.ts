@@ -1,4 +1,4 @@
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 import { format } from "@/utils/format";
 
 const processNot: PrototypeValueFunction = (_script, _scopes, object) => {

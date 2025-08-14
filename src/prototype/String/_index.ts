@@ -1,6 +1,6 @@
-import { A_ANY } from "@/@types";
+import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
-import { PrototypeStringFunction } from "@/prototype/String/index";
+import type { PrototypeStringFunction } from "@/prototype/String/index";
 import { format } from "@/utils/format";
 
 const processIndex: PrototypeStringFunction = (

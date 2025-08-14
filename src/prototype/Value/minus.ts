@@ -1,5 +1,5 @@
 import { UnaryNegation } from "@/operators";
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 import { format } from "@/utils/format";
 
 const processMinus: PrototypeValueFunction = (_script, _scopes, object) => {

@@ -1,4 +1,4 @@
-import { PrototypeBoolFunction } from "@/prototype/Bool/index";
+import type { PrototypeBoolFunction } from "@/prototype/Bool/index";
 
 const processToASNumber: PrototypeBoolFunction = (_script, _scopes, object) => {
   return object ? 1 : 0;

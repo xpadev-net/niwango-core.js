@@ -1,7 +1,7 @@
-import { A_ANY, A_CallExpression } from "@/@types/ast";
+import type { A_ANY, A_CallExpression } from "@/@types/ast";
 import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 
 //todo: これであっているか調査
 const processCall: PrototypeValueFunction = (

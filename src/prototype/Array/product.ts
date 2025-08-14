@@ -1,4 +1,4 @@
-import { PrototypeArrayFunction } from "@/prototype/Array/index";
+import type { PrototypeArrayFunction } from "@/prototype/Array/index";
 import { format } from "@/utils/format";
 
 const processProduct: PrototypeArrayFunction = (_script, _scopes, object) => {

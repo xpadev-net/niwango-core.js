@@ -1,5 +1,5 @@
 import { UnaryPlus } from "@/operators";
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 import { format } from "@/utils/format";
 
 const processPlus: PrototypeValueFunction = (_script, _scopes, object) => {

@@ -1,7 +1,6 @@
-import { A_ANY, A_MemberExpression, T_scope } from "@/@types/ast";
-import { definedFunction } from "@/@types/function";
-import { getName } from "@/context";
-import { execute } from "@/context";
+import type { A_ANY, A_MemberExpression, T_scope } from "@/@types/ast";
+import type { definedFunction } from "@/@types/function";
+import { execute, getName } from "@/context";
 import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";
 
@@ -70,7 +69,7 @@ const processMemberExpression = (
       [{ self: left }, ...scopes],
       trace,
     );
-  } catch (e) {
+  } catch (_e) {
     return (left as { [key: string]: unknown })[right];
   }
 };

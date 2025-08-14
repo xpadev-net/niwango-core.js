@@ -183,5 +183,3 @@ export type T_scope = {
 export type Argument<T> = T & {
   NIWANGO_Identifier: null | A_ANY;
 };
-
-export {};

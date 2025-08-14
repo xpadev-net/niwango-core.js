@@ -1,4 +1,4 @@
-import { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
+import type { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
 import { processRaw } from "@/prototype/Bool/raw";
 import { processToASNumber } from "@/prototype/Bool/toASNumber";
 import { processToASString } from "@/prototype/Bool/toASString";

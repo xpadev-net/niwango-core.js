@@ -1,4 +1,4 @@
-import { T_scope } from "@/@types/ast";
+import type { T_scope } from "@/@types/ast";
 
 /**
  * 親変数の参照を取得する関数

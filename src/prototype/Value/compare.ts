@@ -1,7 +1,7 @@
-import { A_ANY } from "@/@types";
+import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { LessThan } from "@/operators";
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 
 const processCompare: PrototypeValueFunction = (
   script,
@@ -10,7 +10,7 @@ const processCompare: PrototypeValueFunction = (
   trace: A_ANY[],
 ) => {
   const value = execute(script.arguments[0], scopes, trace);
-  if (object == value) return 0;
+  if (object === value) return 0;
   if (LessThan(object, value)) return -1;
   return 1;
 };

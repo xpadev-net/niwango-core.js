@@ -1,4 +1,4 @@
-import { PrototypeNumberFunction } from "@/prototype/Number/index";
+import type { PrototypeNumberFunction } from "@/prototype/Number/index";
 
 const processSin: PrototypeNumberFunction = (_script, _scopes, object) => {
   return Math.sin(object);

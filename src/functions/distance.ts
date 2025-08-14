@@ -1,5 +1,5 @@
-import { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
-import { IrFunction } from "@/@types/functions";
+import type { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
+import type { IrFunction } from "@/@types/functions";
 import { argumentParser } from "@/context";
 import { format } from "@/utils/format";
 
@@ -16,8 +16,8 @@ const processDistance: IrFunction = (
     trace,
   );
   return Math.sqrt(
-    Math.pow(format(args.x2, "number") - format(args.x1, "number"), 2) +
-      Math.pow(format(args.y2, "number") - format(args.y1, "number"), 2),
+    (format(args.x2, "number") - format(args.x1, "number")) ** 2 +
+      (format(args.y2, "number") - format(args.y1, "number")) ** 2,
   );
 };
 

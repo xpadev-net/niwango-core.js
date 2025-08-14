@@ -1,10 +1,10 @@
-import { A_ANY } from "@/@types";
-import { definedFunction } from "@/@types/function";
+import type { A_ANY } from "@/@types";
+import type { definedFunction } from "@/@types/function";
 import { getName } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import typeGuard from "@/typeGuard";
 
-import { PrototypeObjectFunction } from "./index";
+import type { PrototypeObjectFunction } from "./index";
 
 /**
  * @関数

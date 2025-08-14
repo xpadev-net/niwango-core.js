@@ -36,5 +36,3 @@ test("sequence", () => {
   expect(run("0,12,5")).toBe(5);
   expect(run(`"hoge","fuga","piyo"`)).toBe("piyo");
 });
-
-export {};

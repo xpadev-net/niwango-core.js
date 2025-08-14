@@ -1,7 +1,7 @@
-import { A_ANY } from "@/@types";
+import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { Equality } from "@/operators";
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 
 const processEquals: PrototypeValueFunction = (
   script,

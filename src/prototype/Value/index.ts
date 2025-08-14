@@ -1,4 +1,4 @@
-import { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
+import type { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
 import { processIndex } from "@/prototype/Value/_index";
 import { processAdd } from "@/prototype/Value/add";
 import { processAlternative } from "@/prototype/Value/alternative";
