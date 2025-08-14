@@ -1,6 +1,7 @@
 pre-commit:
   commands:
     lint:
-      run: npx biome check --write --unsafe src
+      glob: "*.{js,ts,jsx,tsx,mjs,cjs}"
+      run: npx biome check --write --unsafe {staged_files}
     test:
       run: npm test
