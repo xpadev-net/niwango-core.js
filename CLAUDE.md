@@ -35,7 +35,7 @@ This is a TypeScript library that parses and executes "Niwango" (ニワン語) -
 
 ### Core Components
 
-1. **Parser Layer** (`src/parser/`, `src/grammer/`)
+1. **Parser Layer** (`src/parser/`, `src/grammar/`)
    - `niwango.pegjs` - PEG.js grammar file defining Niwango syntax (based on JavaScript grammar)
    - `parser.js` - Generated parser from grammar
    - `parse.ts` - Parser wrapper and entry point

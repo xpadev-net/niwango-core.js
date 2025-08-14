@@ -9,4 +9,4 @@
 
 # クレジット
 
-ニワン語の文法 ( [niwango.pegjs](https://github.com/xpadev-net/niwango-core.js/blob/master/src/grammer/niwango.pegjs) )は pegjs のサンプルに掲載されている [javascript.pegjs](https://github.com/pegjs/pegjs/blob/master/examples/javascript.pegjs) を改変して使用しています
+ニワン語の文法 ( [niwango.pegjs](https://github.com/xpadev-net/niwango-core.js/blob/master/src/grammar/niwango.pegjs) )は pegjs のサンプルに掲載されている [javascript.pegjs](https://github.com/pegjs/pegjs/blob/master/examples/javascript.pegjs) を改変して使用しています
