@@ -9,7 +9,7 @@
     "build": "npx rimraf dist&&npm run build:ts&&npm run build:dts",
     "build:ts": "rollup -c rollup.config.mjs",
     "build:dts": "npx copyfiles -u 2 src/@types/*.d.ts dist/dts/@types/&&npx copyfiles -u 2 src/parser/*.d.ts dist/dts/parser/&&node ./util/resolve-path-alias.js&&rollup -c rollup.config.dts.mjs",
-    "pegjs": "peggy --cache -o ./src/parser/parser.js --format umd --export-var parser ./src/grammer/niwango.pegjs",
+    "pegjs": "peggy --cache -o ./src/parser/parser.js --format umd --export-var parser ./src/grammar/niwango.pegjs",
     "watch": "rollup -c rollup.config.mjs -w",
     "typedoc": "typedoc --entryPointStrategy Expand --out ./docs/type/ ./src/",
     "prepublishOnly": "npm run build",
