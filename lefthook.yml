@@ -4,4 +4,8 @@ pre-commit:
       glob: "*.{js,ts,jsx,tsx,mjs,cjs}"
       run: npx biome check --write --unsafe {staged_files}
     test:
+      glob: "src/**/*.{js,ts,jsx,tsx,mjs,cjs}"
       run: npm test
+    typecheck:
+      glob: "src/**/*.{js,ts,jsx,tsx,mjs,cjs}"
+      run: npx tsc --noEmit --jsx react
