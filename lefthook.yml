@@ -6,7 +6,7 @@ pre-commit:
       stage_fixed: true
     test:
       glob: "src/**/*.{js,ts,jsx,tsx,mjs,cjs}"
-      run: npm test
+      run: pnpm test --run
     typecheck:
       glob: "src/**/*.{js,ts,jsx,tsx,mjs,cjs}"
       run: npx tsc --noEmit --jsx react

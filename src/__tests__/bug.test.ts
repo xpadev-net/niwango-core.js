@@ -1,3 +1,4 @@
+import { expect, test } from "vitest";
 import { run } from "@/testUtils";
 
 test("bug:sm13570088", () => {
