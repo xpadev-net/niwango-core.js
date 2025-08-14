@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    lint:
+      run: npx biome check --write --unsafe src
+    test:
+      run: npm test
