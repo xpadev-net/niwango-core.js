@@ -10,7 +10,7 @@ const processTimes: PrototypeNumberFunction = (
   trace: A_ANY[],
 ) => {
   const body = script.arguments[0] as Argument<A_ANY>;
-  let lastResult;
+  let lastResult: unknown;
   for (let i = 0; i < format(object, "number"); i++) {
     if (body.type === "LambdaExpression") {
       lastResult = execute(body.body, [{ "@0": i }, ...scopes], trace);

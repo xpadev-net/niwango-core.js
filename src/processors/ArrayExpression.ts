@@ -11,8 +11,8 @@ const processArrayExpression = (
   scopes: T_scope[],
   trace: A_ANY[],
 ) => {
-  return script.elements.reduce((result, element) => {
-    return [...result, execute(element, scopes, trace)];
-  }, [] as unknown[]);
+  return script.elements.flatMap((element) => [
+    execute(element, scopes, trace),
+  ]);
 };
 export { processArrayExpression };

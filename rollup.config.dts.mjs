@@ -1,9 +1,10 @@
-import pkg from "./package.json" with { type: "json" };
-import { fileURLToPath } from "url";
-import * as path from "path";
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 import dts from "rollup-plugin-dts";
 import { typescriptPaths } from "rollup-plugin-typescript-paths";
-const banner = `/*!
+import pkg from "./package.json" with { type: "json" };
+
+const _banner = `/*!
   niwango-core.js v${pkg.version}
   (c) 2023 xpadev-net https://xpadev.net
   Released under the ${pkg.license} License.

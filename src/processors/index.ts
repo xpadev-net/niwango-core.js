@@ -20,7 +20,7 @@ import { processUpdateExpression } from "@/processors/UpdateExpression";
 import { processVariableDeclaration } from "@/processors/VariableDeclaration";
 
 export const processors: {
-  /* eslint @typescript-eslint/no-explicit-any: 0 */
+  // biome-ignore lint/suspicious/noExplicitAny: This is a type definition for processor functions.
   [key: string]: (script: any, scopes: T_scope[], trace: A_ANY[]) => unknown;
 } = {
   AssignmentExpression: processAssignmentExpression,

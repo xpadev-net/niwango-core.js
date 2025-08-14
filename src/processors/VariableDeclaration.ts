@@ -12,7 +12,7 @@ const processVariableDeclaration = (
   scopes: T_scope[],
   trace: A_ANY[],
 ) => {
-  let lastItem;
+  let lastItem: unknown;
   for (const item of script.declarations) {
     if (item.init === null) {
       return execute(item.id, scopes, trace);
