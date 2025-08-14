@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { run } from "@/testUtils";
 
 describe("Object.prototype", () => {

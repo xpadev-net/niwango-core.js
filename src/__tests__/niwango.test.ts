@@ -1,3 +1,4 @@
+import { expect, test } from "vitest";
 import { run } from "@/testUtils";
 
 test("sample from wiki", () => {
