@@ -1,4 +1,4 @@
-import { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
+import type { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
 import { processIndex } from "@/prototype/String/_index";
 import { processEval } from "@/prototype/String/eval";
 import { processHashCode } from "@/prototype/String/hashCode";

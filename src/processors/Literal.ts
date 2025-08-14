@@ -1,4 +1,4 @@
-import { A_Literal } from "@/@types/ast";
+import type { A_Literal } from "@/@types/ast";
 
 const processLiteral = (script: A_Literal) => {
   return script.value;

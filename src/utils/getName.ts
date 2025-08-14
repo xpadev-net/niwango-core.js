@@ -1,4 +1,4 @@
-import { A_ANY, T_scope } from "@/@types/ast";
+import type { A_ANY, T_scope } from "@/@types/ast";
 import { execute, setGetName } from "@/context";
 import typeGuard from "@/typeGuard";
 

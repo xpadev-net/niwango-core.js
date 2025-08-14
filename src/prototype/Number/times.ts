@@ -1,6 +1,6 @@
-import { A_ANY, Argument } from "@/@types/ast";
+import type { A_ANY, Argument } from "@/@types/ast";
 import { execute } from "@/context";
-import { PrototypeNumberFunction } from "@/prototype/Number/index";
+import type { PrototypeNumberFunction } from "@/prototype/Number/index";
 import { format } from "@/utils/format";
 
 const processTimes: PrototypeNumberFunction = (

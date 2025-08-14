@@ -1,4 +1,4 @@
-import { PrototypeArrayFunction } from "@/prototype/Array";
+import type { PrototypeArrayFunction } from "@/prototype/Array";
 import { format } from "@/utils/format";
 
 const processToASString: PrototypeArrayFunction = (

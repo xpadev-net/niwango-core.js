@@ -13,5 +13,3 @@ test("bug:sm13570088", () => {
 test("bug:sm11605742", () => {
   expect(run(`return = "test";return`)).toBe("test");
 });
-
-export {};

@@ -1,7 +1,7 @@
-import { A_ANY } from "@/@types";
+import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { parseScript } from "@/parser/parse";
-import { PrototypeStringFunction } from "@/prototype/String/index";
+import type { PrototypeStringFunction } from "@/prototype/String/index";
 
 const processEval: PrototypeStringFunction = (
   _script,
@@ -12,7 +12,7 @@ const processEval: PrototypeStringFunction = (
   try {
     const script = parseScript(object, "[eval]");
     return execute(script, scopes, trace);
-  } catch (e) {
+  } catch (_e) {
     return undefined;
   }
 };

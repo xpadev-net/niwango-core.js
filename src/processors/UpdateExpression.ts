@@ -1,4 +1,4 @@
-import { A_ANY, A_UpdateExpression, T_scope } from "@/@types/ast";
+import type { A_ANY, A_UpdateExpression, T_scope } from "@/@types/ast";
 import { assign, execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import { Addition, Subtraction } from "@/operators";

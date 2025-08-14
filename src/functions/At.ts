@@ -1,5 +1,5 @@
-import { A_ANY } from "@/@types";
-import { IrFunction } from "@/@types/functions";
+import type { A_ANY } from "@/@types";
+import type { IrFunction } from "@/@types/functions";
 import { assign } from "@/context";
 import { resolve } from "@/utils";
 

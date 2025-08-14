@@ -1,6 +1,5 @@
-import { A_ANY, A_VariableDeclaration, T_scope } from "@/@types/ast";
-import { getName } from "@/context";
-import { execute } from "@/context";
+import type { A_ANY, A_VariableDeclaration, T_scope } from "@/@types/ast";
+import { execute, getName } from "@/context";
 
 /**
  * 変数宣言を実行する

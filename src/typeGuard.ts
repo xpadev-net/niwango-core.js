@@ -1,4 +1,4 @@
-import {
+import type {
   A_ANY,
   A_ArrayExpression,
   A_ArrowFunctionExpression,
@@ -21,7 +21,7 @@ import {
   A_UpdateExpression,
   A_VariableDeclaration,
 } from "@/@types/ast";
-import { definedFunction } from "@/@types/function";
+import type { definedFunction } from "@/@types/function";
 
 const typeGuard = {
   AST: (i: unknown): i is A_ANY =>

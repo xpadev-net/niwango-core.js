@@ -1,4 +1,4 @@
-import { PrototypeValueFunction } from "@/prototype/Value/index";
+import type { PrototypeValueFunction } from "@/prototype/Value/index";
 
 const processToASBoolean: PrototypeValueFunction = () => {
   return true;

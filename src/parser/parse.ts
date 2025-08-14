@@ -1,13 +1,13 @@
-import { A_ANY } from "@/@types/ast";
+import type { A_ANY } from "@/@types/ast";
 
-import { parse, SyntaxError as PeggySyntaxError } from "./parser";
+import { SyntaxError as PeggySyntaxError, parse } from "./parser";
 
 const parseScript = (content: string, name: string): A_ANY => {
   let script = content;
   if (script.startsWith("/")) {
     script = script.slice(1);
   }
-  let firstError = undefined;
+  let firstError;
   for (let i = 0; i < 1000; i++) {
     try {
       return parse(script, { grammarSource: name });

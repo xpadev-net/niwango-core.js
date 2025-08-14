@@ -239,7 +239,7 @@ const Compare = (left: unknown, right: unknown) => {
 };
 
 const Equality = (left: unknown, right: unknown) => {
-  return left == right;
+  return left === right;
 };
 
 export {

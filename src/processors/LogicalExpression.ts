@@ -1,4 +1,4 @@
-import { A_ANY, A_LogicalExpression, T_scope } from "@/@types/ast";
+import type { A_ANY, A_LogicalExpression, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 

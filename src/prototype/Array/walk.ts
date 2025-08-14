@@ -1,6 +1,6 @@
-import { A_ANY } from "@/@types";
+import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
-import { PrototypeArrayFunction } from "@/prototype/Array/index";
+import type { PrototypeArrayFunction } from "@/prototype/Array/index";
 import typeGuard from "@/typeGuard";
 
 const processWalk: PrototypeArrayFunction = (

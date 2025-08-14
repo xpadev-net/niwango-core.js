@@ -1,4 +1,4 @@
-import { A_ANY, A_Identifier, T_scope } from "@/@types/ast";
+import type { A_ANY, A_Identifier, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
 import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";

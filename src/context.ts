@@ -1,6 +1,11 @@
-import { ArgumentParser, Assign, Execute, GetName } from "@/@types/execute";
-import { IrFunction } from "@/@types/functions";
-import { ResolvePrototype } from "@/@types/prototype";
+import type {
+  ArgumentParser,
+  Assign,
+  Execute,
+  GetName,
+} from "@/@types/execute";
+import type { IrFunction } from "@/@types/functions";
+import type { ResolvePrototype } from "@/@types/prototype";
 
 let execute: Execute;
 

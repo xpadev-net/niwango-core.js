@@ -1,5 +1,5 @@
-import { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
-import { IrFunction } from "@/@types/functions";
+import type { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
+import type { IrFunction } from "@/@types/functions";
 import { execute } from "@/context";
 
 /**
