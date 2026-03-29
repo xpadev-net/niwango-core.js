@@ -1,6 +1,7 @@
 import type { A_ANY, A_MemberExpression, T_scope } from "@/@types/ast";
 import type { definedFunction } from "@/@types/function";
 import { execute, getName } from "@/context";
+import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";
@@ -17,13 +18,11 @@ const processMemberExpression = (
 ) => {
   const left = execute(script.object, scopes, trace);
   if (left === undefined) {
-    console.error(
-      "[member expression] left is undefined",
+    throw new InvalidTypeError(
+      "Cannot access property of undefined",
       script,
       scopes,
-      trace,
     );
-    return;
   }
   const right = (
     script.computed

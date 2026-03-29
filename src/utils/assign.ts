@@ -20,7 +20,7 @@ const assign = (
   try {
     if (typeGuard.Identifier(target)) {
       for (const scope of scopes) {
-        if (scope[target.name] !== undefined) {
+        if (Object.hasOwn(scope, target.name)) {
           scope[target.name] = value;
           return;
         }

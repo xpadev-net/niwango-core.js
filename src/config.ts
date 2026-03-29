@@ -10,6 +10,7 @@ const initConfig = () => {
     stageHeight: 384,
     canvasWidth: 672,
     canvasHeight: 384,
+    recursionLimit: 1000,
   };
 };
 

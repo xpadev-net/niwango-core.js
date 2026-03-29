@@ -1,5 +1,4 @@
 import type { A_ANY, T_scope } from "@/@types/ast";
-import { resultHook } from "@/context";
 import typeGuard from "@/typeGuard";
 
 /**
@@ -12,8 +11,8 @@ const resolve = (script: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
   try {
     if (typeGuard.Identifier(script)) {
       for (const scope of scopes) {
-        if (scope[script.name] !== undefined) {
-          return processResolveHook(scope, script.name);
+        if (Object.hasOwn(scope, script.name)) {
+          return scope[script.name];
         }
       }
     }
@@ -23,15 +22,6 @@ const resolve = (script: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
     }
   }
   return undefined;
-};
-
-const processResolveHook = (scope: T_scope, name: string) => {
-  let value = scope[name];
-  for (const hook of resultHook) {
-    value = hook(value);
-  }
-  scope[name] = value;
-  return value;
 };
 
 export { resolve };
