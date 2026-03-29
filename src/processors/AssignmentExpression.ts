@@ -51,27 +51,24 @@ const processAssignmentExpression = (
       return left;
     }
     const right = execute(script.right, scopes, trace);
-    const result = left && right;
-    assign(script.left, result, scopes, trace);
-    return result;
+    assign(script.left, right, scopes, trace);
+    return right;
   }
   if (script.operator === "||=") {
     if (left) {
       return left;
     }
     const right = execute(script.right, scopes, trace);
-    const result = left || right;
-    assign(script.left, result, scopes, trace);
-    return result;
+    assign(script.left, right, scopes, trace);
+    return right;
   }
   if (script.operator === "??=") {
     if (left !== null && left !== undefined) {
       return left;
     }
     const right = execute(script.right, scopes, trace);
-    const result = left ?? right;
-    assign(script.left, result, scopes, trace);
-    return result;
+    assign(script.left, right, scopes, trace);
+    return right;
   }
   const processor = processors[script.operator];
   if (!processor) {
