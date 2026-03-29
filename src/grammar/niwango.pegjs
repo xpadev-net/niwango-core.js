@@ -649,9 +649,17 @@ UnaryOperator
   / "~"
   / "!"
 
-MultiplicativeExpression
+ExponentiationExpression
   = head:UnaryExpression
-    tail:(__ MultiplicativeOperator __ UnaryExpression)*
+    tail:(__ ExponentiationOperator __ UnaryExpression)*
+    { return buildBinaryExpression(head, tail); }
+
+ExponentiationOperator
+  = "**"
+
+MultiplicativeExpression
+  = head:ExponentiationExpression
+    tail:(__ MultiplicativeOperator __ ExponentiationExpression)*
     { return buildBinaryExpression(head, tail); }
 
 MultiplicativeOperator
@@ -742,7 +750,6 @@ BitwiseXORExpressionNoIn
 
 BitwiseXOROperator
   = $("^" !"=")
-  / "**"
 
 BitwiseORExpression
   = head:BitwiseXORExpression
@@ -879,7 +886,11 @@ AssignmentExpressionNoIn
   / ConditionalExpressionNoIn
 
 AssignmentOperator
-  = "*="
+  = "**="
+  / "&&="
+  / "||="
+  / "??="
+  / "*="
   / "/="
   / "%="
   / "+="

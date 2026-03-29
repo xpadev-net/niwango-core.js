@@ -16,6 +16,9 @@ test("alternative", () => {
 test("if", () => {
   expect(run("if(when:true,then:i=0,else:i=1);i")).toBe(0);
   expect(run("if(when:false,then:i=0,else:i=1);i")).toBe(1);
+  expect(run("if(when:false,then:1,2)")).toBe(2);
+  expect(run("if(when:0,then:1,2)")).toBe(2);
+  expect(run(`if(when:"",then:1,2)`)).toBe(2);
   expect(run("if(true,i=0,i=1);i")).toBe(0);
   expect(run("if(false,else:i=1);i")).toBe(1);
   expect(run("if(true,i=0);i")).toBe(0);

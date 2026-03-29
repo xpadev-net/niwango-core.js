@@ -31,7 +31,7 @@ const argumentParser: ArgumentParser = (
   let i = 0;
   for (const key of keys) {
     const value = nonKeyValues[i];
-    if (!result[key] && value) {
+    if (!(key in result) && value) {
       result[key] = compute ? execute(value, scopes, trace) : value;
       i++;
     }

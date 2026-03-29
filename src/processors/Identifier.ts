@@ -1,5 +1,6 @@
 import type { A_ANY, A_Identifier, T_scope } from "@/@types/ast";
 import { execute } from "@/context";
+import { NotImplementedError } from "@/errors/NotImplementedError";
 import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";
 import { resolve } from "@/utils";
@@ -29,8 +30,11 @@ const processIdentifier = (
         scopes,
         trace,
       );
-    } catch (_) {
-      //ignore
+    } catch (e) {
+      if (e instanceof NotImplementedError) {
+        return value;
+      }
+      throw e;
     }
   }
   return value;
