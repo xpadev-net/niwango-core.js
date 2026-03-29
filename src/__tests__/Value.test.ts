@@ -31,6 +31,6 @@ describe("Value.prototype", () => {
   });
 
   test("while_kari has max loop guard", () => {
-    expect(run("i=0;true.while_kari(true,i++);i")).toBe(10001);
+    expect(run("i=0;true.while_kari(true,i++);i")).toBe(10000);
   });
 });

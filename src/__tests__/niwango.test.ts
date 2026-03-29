@@ -31,6 +31,9 @@ test("assignment operators", () => {
   expect(run("i=true;i&&=false;i")).toBe(false);
   expect(run("i=false;i||=true;i")).toBe(true);
   expect(run("i=nil;i??='fallback';i")).toBe("fallback");
+  expect(run("i=0;lhs=false;lhs&&=(i=1);i")).toBe(0);
+  expect(run("i=0;lhs=true;lhs||=(i=1);i")).toBe(0);
+  expect(run("i=0;lhs=1;lhs??=(i=1);i")).toBe(0);
 });
 
 test("logical short-circuit", () => {

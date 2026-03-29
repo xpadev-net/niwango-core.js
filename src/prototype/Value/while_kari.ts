@@ -12,7 +12,7 @@ const processWhileKari: PrototypeValueFunction = (
   let loopCount = 0;
   while (
     (execute(script.arguments[0], scopes, trace) as boolean) &&
-    loopCount++ <= 10000
+    loopCount++ < 10000
   ) {
     // eslint-disable-next-line prefer-const
     result = execute(script.arguments[1], scopes, trace);
