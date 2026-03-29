@@ -1,6 +1,7 @@
 import type { A_ANY, A_MemberExpression, T_scope } from "@/@types/ast";
 import type { definedFunction } from "@/@types/function";
 import { execute, getName } from "@/context";
+import { NotImplementedError } from "@/errors/NotImplementedError";
 import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";
 
@@ -69,8 +70,11 @@ const processMemberExpression = (
       [{ self: left }, ...scopes],
       trace,
     );
-  } catch (_e) {
-    return (left as { [key: string]: unknown })[right];
+  } catch (e) {
+    if (e instanceof NotImplementedError) {
+      return (left as { [key: string]: unknown })[right];
+    }
+    throw e;
   }
 };
 

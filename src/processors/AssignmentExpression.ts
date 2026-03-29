@@ -33,9 +33,6 @@ const processors = {
   "&=": BitwiseAND,
   "^=": BitwiseXOR,
   "|=": BitwiseOR,
-  "&&=": (left: unknown, right: unknown) => left && right,
-  "||=": (left: unknown, right: unknown) => left || right,
-  "??=": (left: unknown, right: unknown) => left ?? right,
 } as const;
 
 /**
@@ -49,9 +46,35 @@ const processAssignmentExpression = (
   trace: A_ANY[],
 ): unknown => {
   const left = execute(script.left, scopes, trace);
-  const right = execute(script.right, scopes, trace);
+  if (script.operator === "&&=") {
+    if (!left) {
+      return left;
+    }
+    const right = execute(script.right, scopes, trace);
+    assign(script.left, right, scopes, trace);
+    return right;
+  }
+  if (script.operator === "||=") {
+    if (left) {
+      return left;
+    }
+    const right = execute(script.right, scopes, trace);
+    assign(script.left, right, scopes, trace);
+    return right;
+  }
+  if (script.operator === "??=") {
+    if (left !== null && left !== undefined) {
+      return left;
+    }
+    const right = execute(script.right, scopes, trace);
+    assign(script.left, right, scopes, trace);
+    return right;
+  }
   const processor = processors[script.operator];
-  if (!processor) throw new NotImplementedError(script, scopes);
+  if (!processor) {
+    throw new NotImplementedError(script, scopes);
+  }
+  const right = execute(script.right, scopes, trace);
   const result = processor(left, right);
   assign(script.left, result, scopes, trace);
   return result;

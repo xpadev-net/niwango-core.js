@@ -15,11 +15,10 @@ const processLogicalExpression = (
   trace: A_ANY[],
 ): unknown => {
   const left = execute(script.left, scopes, trace);
-  const right = execute(script.right, scopes, trace);
   if (script.operator === "&&") {
-    return left && right;
+    return left ? execute(script.right, scopes, trace) : left;
   } else if (script.operator === "||") {
-    return left || right;
+    return left ? left : execute(script.right, scopes, trace);
   }
   throw new NotImplementedError(script, scopes);
 };

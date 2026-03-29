@@ -18,10 +18,31 @@ test("calculation declaration", () => {
   expect(run("1+1")).toBe(2);
   expect(run("1-1")).toBe(0);
   expect(run("2*2")).toBe(4);
+  expect(run("2**3")).toBe(8);
+  expect(run("2+3**2")).toBe(11);
   expect(run("8/2")).toBe(4);
   expect(run("2-4")).toBe(-2);
   expect(run("2*-4")).toBe(-8);
   expect(run("10/-4")).toBe(-2.5);
+});
+
+test("assignment operators", () => {
+  expect(run("i=2;i**=3;i")).toBe(8);
+  expect(run("i=true;i&&=false;i")).toBe(false);
+  expect(run("i=false;i||=true;i")).toBe(true);
+  expect(run("i=nil;i??='fallback';i")).toBe("fallback");
+  expect(run("i=0;lhs=false;lhs&&=(i=1);i")).toBe(0);
+  expect(run("i=0;lhs=true;lhs||=(i=1);i")).toBe(0);
+  expect(run("i=0;lhs=1;lhs??=(i=1);i")).toBe(0);
+});
+
+test("logical short-circuit", () => {
+  expect(run("i=0;false&&(i=1);i")).toBe(0);
+  expect(run("i=0;true||(i=1);i")).toBe(0);
+});
+
+test("multiple declarations", () => {
+  expect(run("a:=1,b,c:=3;c")).toBe(3);
 });
 test("times", () => {
   expect(run("i=0;10.times(i++);i")).toBe(10);

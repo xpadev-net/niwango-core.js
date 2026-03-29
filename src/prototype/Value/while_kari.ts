@@ -9,7 +9,11 @@ const processWhileKari: PrototypeValueFunction = (
   trace: A_ANY[],
 ) => {
   let result: unknown;
-  while (execute(script.arguments[0], scopes, trace) as boolean) {
+  let loopCount = 0;
+  while (
+    (execute(script.arguments[0], scopes, trace) as boolean) &&
+    loopCount++ < 10000
+  ) {
     // eslint-disable-next-line prefer-const
     result = execute(script.arguments[1], scopes, trace);
   }

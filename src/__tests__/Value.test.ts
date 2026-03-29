@@ -29,4 +29,8 @@ describe("Value.prototype", () => {
     expect(run(`10.minus`)).toBe(-10);
     expect(run(`-5.minus`)).toBe(5);
   });
+
+  test("while_kari has max loop guard", () => {
+    expect(run("i=0;true.while_kari(true,i++);i")).toBe(10000);
+  });
 });
