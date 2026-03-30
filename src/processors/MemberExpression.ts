@@ -22,6 +22,7 @@ const processMemberExpression = (
       "Cannot access property of undefined",
       script,
       scopes,
+      { trace },
     );
   }
   const right = (

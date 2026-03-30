@@ -20,7 +20,7 @@ const processWhileKari: IrFunction = (
     return;
   }
   let loopCount = 0;
-  while (execute(script.arguments[0], scopes, trace) && loopCount++ < 10000) {
+  while (loopCount++ < 10000 && execute(script.arguments[0], scopes, trace)) {
     execute(script.arguments[1], scopes, trace);
   }
 };

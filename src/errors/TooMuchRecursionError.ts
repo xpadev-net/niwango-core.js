@@ -10,9 +10,9 @@ class TooMuchRecursionError extends Error {
   constructor(
     ast: A_ANY,
     scopes: T_scope[],
-    options: { [key: string]: unknown } = {},
+    options: { cause?: unknown } = {},
   ) {
-    super("TooMuchRecursionError", options);
+    super("TooMuchRecursionError", { cause: options.cause });
     this.ASTName = ast.type;
     this.ast = ast;
     this.scopes = scopes;
