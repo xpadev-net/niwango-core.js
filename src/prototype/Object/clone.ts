@@ -33,7 +33,7 @@ const deepCloneObject = (
 /**
  * @関数
  * オブジェクトを再帰的にディープクローンする（WeakMapで循環参照対応）
- * 関数も含めてコピー可能
+ * 関数プロパティは参照共有（structuredCloneと異なりエラーにならない）
  */
 const processClone: PrototypeObjectFunction = (_script, _scope, object) => {
   return deepCloneObject(object, new WeakMap());
