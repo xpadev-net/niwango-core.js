@@ -70,5 +70,6 @@ describe("String.prototype", () => {
     expect(run(`'0xFF'.toInteger`)).toBe(255);
     expect(run(`'0'.toInteger`)).toBe(0);
     expect(run(`'08'.toInteger`)).toBe(8);
+    expect(run(`'0778'.toInteger`)).toBe(778);
   });
 });
