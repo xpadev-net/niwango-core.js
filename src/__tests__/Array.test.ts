@@ -78,9 +78,11 @@ describe("Array.prototype", () => {
         `array = ["A","B","C"];array.unshift("D");array.size + ":" + array[0]`,
       ),
     ).toBe("4:D");
+    expect(run(`a=["A"];a.unshift("B").size`)).toBe(2);
   });
 
   test("walk", () => {
     expect(run(`i=0;[0,1,2,3].walk(\\(i+=@0));i`)).toBe(6);
+    expect(run(`[1,2,3].walk(\\(@0)).size`)).toBe(3);
   });
 });

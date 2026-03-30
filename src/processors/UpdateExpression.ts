@@ -14,12 +14,11 @@ const processUpdateExpression = (
 ) => {
   const value = execute(script.argument, scopes, trace);
   if (script.operator === "++" || script.operator === "--") {
-    const result =
-      typeof value === "number"
-        ? script.operator === "++"
-          ? value + 1
-          : value - 1
-        : value;
+    const numeric = typeof value === "number" ? value : Number(value);
+    if (Number.isNaN(numeric)) {
+      return value;
+    }
+    const result = script.operator === "++" ? numeric + 1 : numeric - 1;
     assign(script.argument, result, scopes, trace);
     return script.prefix ? result : value;
   }

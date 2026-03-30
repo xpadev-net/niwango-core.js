@@ -10,8 +10,9 @@ const processIndex: PrototypeStringFunction = (
   trace: A_ANY[],
 ) => {
   const index = execute(script.arguments[0], scopes, trace);
-  let idx = format(index, "number");
-  while (idx < 0) idx += object.length;
+  const raw = format(index, "number");
+  if (object.length === 0) return raw === 0 ? "" : null;
+  const idx = ((raw % object.length) + object.length) % object.length;
   if (idx > object.length) return null;
   if (idx === object.length) return "";
   return object.charAt(idx);

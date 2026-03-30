@@ -13,7 +13,8 @@ const processIndexOf: PrototypeStringFunction = (
   const fromIndex = execute(script.arguments[1], scopes, trace);
   if (typeof fromIndex !== "undefined") {
     let fi = format(fromIndex, "number");
-    while (fi < 0) fi += object.length;
+    if (!Number.isFinite(fi)) fi = 0;
+    else if (fi < 0) fi = Math.max(0, object.length + fi);
     return object.indexOf(`${searchValue}`, fi);
   }
   return object.indexOf(`${searchValue}`);
