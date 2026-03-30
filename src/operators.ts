@@ -236,13 +236,18 @@ const Equality = (left: unknown, right: unknown) => {
   return left === right;
 };
 
-const LooseEquality = (left: unknown, right: unknown) => {
-  if (typeof left === typeof right) return left === right;
-  if (typeof left === "number" || typeof right === "number")
-    return format(left, "number") === format(right, "number");
-  if (typeof left === "string" || typeof right === "string")
-    return format(left, "string") === format(right, "string");
-  return left === right;
+const LooseEquality = (left: unknown, right: unknown): boolean => {
+  if (left == null || right == null) return left == null && right == null;
+  let l: unknown = left;
+  let r: unknown = right;
+  if (typeof l === "boolean") l = l ? 1 : 0;
+  if (typeof r === "boolean") r = r ? 1 : 0;
+  if (typeof l === typeof r) return l === r;
+  if (typeof l === "number" || typeof r === "number")
+    return format(l, "number") === format(r, "number");
+  if (typeof l === "string" || typeof r === "string")
+    return format(l, "string") === format(r, "string");
+  return l === r;
 };
 
 export {

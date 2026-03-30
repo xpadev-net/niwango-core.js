@@ -45,6 +45,11 @@ test("loose equality", () => {
   expect(run("'abc' != 'def'")).toBe(true);
   expect(run("1 === '1'")).toBe(false);
   expect(run("1 !== '1'")).toBe(true);
+  expect(run("0 == false")).toBe(true);
+  expect(run("1 == true")).toBe(true);
+  expect(run("nil == nil")).toBe(true);
+  expect(run("nil != 0")).toBe(true);
+  expect(run("nil != false")).toBe(true);
 });
 
 test("string repeat edge cases", () => {
