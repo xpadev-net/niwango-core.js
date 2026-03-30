@@ -6,17 +6,20 @@ const sprintf = (template: string, args: unknown[]): string => {
     if (specifier === "%") return "%";
     if (argIndex >= args.length) return match;
     const arg = args[argIndex++];
+    const num = format(arg, "number");
     switch (specifier) {
       case "s":
         return format(arg, "string");
       case "d":
-        return String(Math.floor(format(arg, "number")));
+        return Number.isFinite(num) ? String(Math.floor(num)) : "0";
       case "f":
-        return String(format(arg, "number"));
+        return Number.isFinite(num) ? String(num) : "0";
       case "x":
-        return Math.floor(format(arg, "number")).toString(16);
+        return Number.isFinite(num) ? Math.floor(num).toString(16) : "0";
       case "X":
-        return Math.floor(format(arg, "number")).toString(16).toUpperCase();
+        return Number.isFinite(num)
+          ? Math.floor(num).toString(16).toUpperCase()
+          : "0";
       default:
         return match;
     }
