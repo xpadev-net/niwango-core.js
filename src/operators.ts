@@ -9,7 +9,7 @@ import { format } from "@/utils/format";
 const Multiplication = (left: unknown, right: unknown) => {
   if (typeof left === "string") {
     const n = format(right, "number");
-    if (!n || n < 0) return "";
+    if (!n || n < 0 || !Number.isFinite(n)) return "";
     return left.repeat(Math.floor(n));
   }
   return format(left, "number") * format(right, "number");

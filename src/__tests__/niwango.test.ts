@@ -56,6 +56,7 @@ test("string repeat edge cases", () => {
   expect(run("'abc' * -1")).toBe("");
   expect(run("'abc' * 0")).toBe("");
   expect(run("'abc' * 2")).toBe("abcabc");
+  expect(run("'abc' * (1/0)")).toBe("");
 });
 
 test("logical short-circuit", () => {
