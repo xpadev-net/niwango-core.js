@@ -23,6 +23,7 @@ const processIf: IrFunction = (
     trace,
     false,
   ) as { [key in "when" | "then" | "else"]?: A_ANY };
+  if (!args.when) return undefined;
   const condition = execute(args.when, scopes, trace);
   if (condition) {
     return execute(args.then, scopes, trace);

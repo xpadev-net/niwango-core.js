@@ -45,8 +45,8 @@ describe("String.prototype", () => {
   });
 
   test("toASNumber", () => {
-    expect(run(`'0777'.toASNumber`)).toBe(0);
-    expect(run(`'0.777'.toASNumber`)).toBe(0);
+    expect(run(`'0777'.toASNumber`)).toBe(777);
+    expect(run(`'0.777'.toASNumber`)).toBe(0.777);
     expect(run(`'aiueo'.toASNumber`)).toBe(0);
   });
 

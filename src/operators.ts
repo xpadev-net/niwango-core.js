@@ -8,7 +8,9 @@ import { format } from "@/utils/format";
  */
 const Multiplication = (left: unknown, right: unknown) => {
   if (typeof left === "string") {
-    return left.repeat(format(right, "number"));
+    const n = format(right, "number");
+    if (!n || n < 0) return "";
+    return left.repeat(Math.floor(n));
   }
   return format(left, "number") * format(right, "number");
 };
@@ -19,15 +21,7 @@ const Multiplication = (left: unknown, right: unknown) => {
  * @param right
  */
 const Subtraction = (left: unknown, right: unknown) => {
-  const rightNum = format(right, "number");
-  if (
-    rightNum === 0 &&
-    typeof left === "string" &&
-    left.match(/^(0|0x)?[0-9]+(\.[0-9]+)?$/)
-  ) {
-    return Number(left);
-  }
-  return format(left, "number") - rightNum;
+  return format(left, "number") - format(right, "number");
 };
 
 /**
@@ -242,6 +236,15 @@ const Equality = (left: unknown, right: unknown) => {
   return left === right;
 };
 
+const LooseEquality = (left: unknown, right: unknown) => {
+  if (typeof left === typeof right) return left === right;
+  if (typeof left === "number" || typeof right === "number")
+    return format(left, "number") === format(right, "number");
+  if (typeof left === "string" || typeof right === "string")
+    return format(left, "string") === format(right, "string");
+  return left === right;
+};
+
 export {
   Addition,
   BitwiseAND,
@@ -258,6 +261,7 @@ export {
   LessThan,
   LessThanOrEqual,
   LogicalNot,
+  LooseEquality,
   Multiplication,
   Remainder,
   RightShift,

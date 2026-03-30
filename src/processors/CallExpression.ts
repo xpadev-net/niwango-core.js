@@ -103,6 +103,7 @@ const processDefinedKariFunction = (
       args[`$${count++}`] = execute(val, scopes, trace);
     }
   });
+  if (!func.script.arguments[1]) return undefined;
   return execute(func.script.arguments[1], [args, ...scopes], trace);
 };
 
