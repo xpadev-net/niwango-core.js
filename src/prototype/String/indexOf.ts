@@ -12,7 +12,11 @@ const processIndexOf: PrototypeStringFunction = (
   const searchValue = execute(script.arguments[0], scopes, trace);
   const fromIndex = execute(script.arguments[1], scopes, trace);
   if (typeof fromIndex !== "undefined") {
-    return object.indexOf(`${searchValue}`, format(fromIndex, "number"));
+    let fi = format(fromIndex, "number");
+    if (Number.isNaN(fi)) fi = 0;
+    else if (!Number.isFinite(fi)) fi = fi > 0 ? object.length : 0;
+    else if (fi < 0) fi = Math.max(0, object.length + fi);
+    return object.indexOf(`${searchValue}`, fi);
   }
   return object.indexOf(`${searchValue}`);
 };

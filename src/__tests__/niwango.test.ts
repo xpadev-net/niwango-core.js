@@ -82,3 +82,35 @@ test("sequence", () => {
   expect(run("0,12,5")).toBe(5);
   expect(run(`"hoge","fuga","piyo"`)).toBe("piyo");
 });
+
+test("niwango truthiness", () => {
+  expect(run("if(when:0,then:1,2)")).toBe(1); // 0 is truthy
+  expect(run(`if(when:"",then:1,2)`)).toBe(1); // "" is truthy
+  expect(run("!0")).toBe(false); // !truthy = false
+  expect(run(`!""`)).toBe(false);
+  expect(run("!false")).toBe(true);
+  expect(run("0 && 1")).toBe(1); // 0 is truthy → eval right
+  expect(run(`"" || 1`)).toBe(""); // "" is truthy → return it
+});
+
+test("push returns array", () => {
+  expect(run('a=["A"];a.push("B").size')).toBe(2);
+});
+
+test("Array.find", () => {
+  expect(run("[10,20,30].find(20)")).toBe(1);
+  expect(run("[10,20,30].find(99)")).toBe(-1);
+});
+
+test("String modulo (sprintf)", () => {
+  expect(run('"test %s" % ["ok"]')).toBe("test ok");
+  expect(run('"%d items" % [5]')).toBe("5 items");
+});
+
+test("Value.equals cross-type", () => {
+  expect(run('10.equals("10")')).toBe(true);
+});
+
+test("String.index negative", () => {
+  expect(run('"abcdef"[-1]')).toBe("f");
+});

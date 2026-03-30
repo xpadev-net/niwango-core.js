@@ -1,7 +1,6 @@
 import type { A_ANY, A_UpdateExpression, T_scope } from "@/@types/ast";
 import { assign, execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
-import { Addition, Subtraction } from "@/operators";
 
 /**
  * 更新式を実行する
@@ -14,22 +13,14 @@ const processUpdateExpression = (
   trace: A_ANY[],
 ) => {
   const value = execute(script.argument, scopes, trace);
-  if (script.operator === "--") {
-    const result = Subtraction(value, 1);
-    assign(script.argument, result, scopes, trace);
-    if (script.prefix) {
-      return result;
-    } else {
+  if (script.operator === "++" || script.operator === "--") {
+    const numeric = typeof value === "number" ? value : Number(value);
+    if (Number.isNaN(numeric)) {
       return value;
     }
-  } else if (script.operator === "++") {
-    const result = Addition(value, 1);
+    const result = script.operator === "++" ? numeric + 1 : numeric - 1;
     assign(script.argument, result, scopes, trace);
-    if (script.prefix) {
-      return result;
-    } else {
-      return value;
-    }
+    return script.prefix ? result : value;
   }
   throw new NotImplementedError(script, scopes);
 };

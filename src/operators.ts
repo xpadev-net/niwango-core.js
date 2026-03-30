@@ -1,4 +1,6 @@
 import { format } from "@/utils/format";
+import { isTruthy } from "@/utils/isTruthy";
+import { sprintf } from "@/utils/sprintf";
 
 /**
  * 掛け算処理
@@ -105,6 +107,9 @@ const Division = (left: unknown, right: unknown) => {
  * @constructor
  */
 const Remainder = (left: unknown, right: unknown) => {
+  if (typeof left === "string" && Array.isArray(right)) {
+    return sprintf(left, right);
+  }
   return format(left, "number") % format(right, "number");
 };
 
@@ -211,7 +216,7 @@ const UnaryPlus = (value: unknown) => {
  * @constructor
  */
 const LogicalNot = (value: unknown) => {
-  return !value;
+  return !isTruthy(value);
 };
 
 /**

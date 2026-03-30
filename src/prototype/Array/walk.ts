@@ -10,13 +10,12 @@ const processWalk: PrototypeArrayFunction = (
   trace: A_ANY[],
 ) => {
   const processor = script.arguments[0];
-  let result: unknown;
   if (typeGuard.LambdaExpression(processor)) {
     for (const item of object) {
-      result = execute(processor.body, [{ "@0": item }, ...scopes], trace);
+      execute(processor.body, [{ "@0": item }, ...scopes], trace);
     }
   }
-  return result;
+  return object;
 };
 
 export { processWalk };

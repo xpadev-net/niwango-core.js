@@ -5,6 +5,7 @@ import {
   initResultHook,
 } from "@/context";
 import { initExecute } from "@/executor";
+import { resetPlayStartTime } from "@/functions/playStartTime";
 import { initResolvePrototype } from "@/prototype/resolve";
 import { initArgumentParser, initAssign, initGetName } from "@/utils";
 
@@ -21,6 +22,7 @@ const resetCore = () => {
   initDefinedFunctions();
   initPrototypeScope();
   initResultHook();
+  resetPlayStartTime();
 };
 
 export { initCore, resetCore };

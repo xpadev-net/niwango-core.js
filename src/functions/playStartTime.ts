@@ -1,9 +1,14 @@
-const time = Date.now();
-
 import type { IrFunction } from "@/@types/functions";
 
+let time: number | null = null;
+
 const processPlayStartTime: IrFunction = () => {
+  if (time === null) time = Date.now();
   return time;
 };
 
-export { processPlayStartTime };
+const resetPlayStartTime = () => {
+  time = null;
+};
+
+export { processPlayStartTime, resetPlayStartTime };

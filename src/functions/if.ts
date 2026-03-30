@@ -1,6 +1,7 @@
 import type { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
 import type { IrFunction } from "@/@types/functions";
 import { argumentParser, execute } from "@/context";
+import { isTruthy } from "@/utils/isTruthy";
 
 /**
  * @関数
@@ -25,7 +26,7 @@ const processIf: IrFunction = (
   ) as { [key in "when" | "then" | "else"]?: A_ANY };
   if (args.when === undefined) return undefined;
   const condition = execute(args.when, scopes, trace);
-  if (condition) {
+  if (isTruthy(condition)) {
     return execute(args.then, scopes, trace);
   } else {
     return execute(args.else, scopes, trace);

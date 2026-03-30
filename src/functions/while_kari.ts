@@ -1,6 +1,7 @@
 import type { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
 import type { IrFunction } from "@/@types/functions";
 import { execute } from "@/context";
+import { isTruthy } from "@/utils/isTruthy";
 
 /**
  * @関数
@@ -19,10 +20,15 @@ const processWhileKari: IrFunction = (
   if (!(script.arguments[0] && script.arguments[1])) {
     return;
   }
+  let result: unknown;
   let loopCount = 0;
-  while (loopCount++ < 10000 && execute(script.arguments[0], scopes, trace)) {
-    execute(script.arguments[1], scopes, trace);
+  while (
+    loopCount++ < 10000 &&
+    isTruthy(execute(script.arguments[0], scopes, trace))
+  ) {
+    result = execute(script.arguments[1], scopes, trace);
   }
+  return result;
 };
 
 export { processWhileKari };

@@ -1,6 +1,7 @@
 import type { A_ANY } from "@/@types";
 import { argumentParser, execute } from "@/context";
 import type { PrototypeValueFunction } from "@/prototype/Value/index";
+import { isTruthy } from "@/utils/isTruthy";
 
 const processAlternative: PrototypeValueFunction = (
   script,
@@ -15,9 +16,9 @@ const processAlternative: PrototypeValueFunction = (
     trace,
     false,
   );
-  if (object && args.then) {
+  if (isTruthy(object) && args.then) {
     return execute(args.then, scopes, trace);
-  } else if (!object && args.else) {
+  } else if (!isTruthy(object) && args.else) {
     return execute(args.else, scopes, trace);
   }
   return;

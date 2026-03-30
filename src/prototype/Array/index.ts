@@ -2,6 +2,8 @@ import type { PrototypeFunction, PrototypeFunctions } from "@/@types/prototype";
 import { processToASString } from "@/prototype/Array/toASString";
 
 import { processIndex } from "./_index";
+import { processAdd } from "./add";
+import { processFind } from "./find";
 import { processJoin } from "./join";
 import { processPop } from "./pop";
 import { processProduct } from "./product";
@@ -27,6 +29,8 @@ const prototypeArrayFunctions: PrototypeFunctions<Array<unknown>> = {
   sum: processSum,
   product: processProduct,
   walk: processWalk,
+  add: processAdd,
+  find: processFind,
   toASString: processToASString,
 };
 
