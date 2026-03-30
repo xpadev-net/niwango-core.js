@@ -17,9 +17,9 @@ const processMemberExpression = (
   trace: A_ANY[],
 ) => {
   const left = execute(script.object, scopes, trace);
-  if (left === undefined) {
+  if (left == null) {
     throw new InvalidTypeError(
-      "Cannot access property of undefined",
+      `Cannot access property of ${left === null ? "null" : "undefined"}`,
       script,
       scopes,
       { trace },

@@ -14,8 +14,7 @@ class InvalidTypeError extends Error {
     scopes: T_scope[],
     options: { trace?: A_ANY[]; cause?: unknown } = {},
   ) {
-    super("InvalidTypeError", { cause: options.cause });
-    this.message = message;
+    super(message, { cause: options.cause });
     this.ASTName = ast.type;
     this.ast = ast;
     this.scopes = scopes;

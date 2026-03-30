@@ -1,7 +1,7 @@
 import type { A_ANY, T_scope } from "@/@types/ast";
 
 /**
- * 未実装の関数や機能を呼び出したときに発生するエラー
+ * 再帰の深さが許容される上限を超えた際に発生するエラー
  */
 class TooMuchRecursionError extends Error {
   ASTName: string;
