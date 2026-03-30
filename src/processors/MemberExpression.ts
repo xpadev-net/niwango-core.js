@@ -50,6 +50,13 @@ const processMemberExpression = (
     }
     return execute(left.body, [{ "@0": right }, ...left.scopes], trace);
   }
+  if (typeof left === "string" && typeof right === "number") {
+    let idx = right;
+    while (idx < 0) idx += left.length;
+    if (idx > left.length) return null;
+    if (idx === left.length) return "";
+    return left.charAt(idx);
+  }
   try {
     return processCallExpression(
       {

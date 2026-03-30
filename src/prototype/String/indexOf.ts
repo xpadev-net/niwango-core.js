@@ -12,7 +12,9 @@ const processIndexOf: PrototypeStringFunction = (
   const searchValue = execute(script.arguments[0], scopes, trace);
   const fromIndex = execute(script.arguments[1], scopes, trace);
   if (typeof fromIndex !== "undefined") {
-    return object.indexOf(`${searchValue}`, format(fromIndex, "number"));
+    let fi = format(fromIndex, "number");
+    while (fi < 0) fi += object.length;
+    return object.indexOf(`${searchValue}`, fi);
   }
   return object.indexOf(`${searchValue}`);
 };

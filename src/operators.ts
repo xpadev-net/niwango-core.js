@@ -1,4 +1,28 @@
 import { format } from "@/utils/format";
+import { isTruthy } from "@/utils/isTruthy";
+
+const sprintfFormat = (template: string, args: unknown[]): string => {
+  let argIndex = 0;
+  return template.replace(/%([%sdxXf])/g, (match, specifier: string) => {
+    if (specifier === "%") return "%";
+    if (argIndex >= args.length) return match;
+    const arg = args[argIndex++];
+    switch (specifier) {
+      case "s":
+        return format(arg, "string");
+      case "d":
+        return String(Math.floor(format(arg, "number")));
+      case "f":
+        return String(format(arg, "number"));
+      case "x":
+        return Math.floor(format(arg, "number")).toString(16);
+      case "X":
+        return Math.floor(format(arg, "number")).toString(16).toUpperCase();
+      default:
+        return match;
+    }
+  });
+};
 
 /**
  * 掛け算処理
@@ -46,7 +70,9 @@ const LessThan = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left < right;
   }
-  return format(left, "number") < format(right, "number");
+  const l = typeof left === "string" ? Number(left) : format(left, "number");
+  const r = typeof right === "string" ? Number(right) : format(right, "number");
+  return l < r;
 };
 
 /**
@@ -59,7 +85,9 @@ const GreaterThan = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left > right;
   }
-  return format(left, "number") > format(right, "number");
+  const l = typeof left === "string" ? Number(left) : format(left, "number");
+  const r = typeof right === "string" ? Number(right) : format(right, "number");
+  return l > r;
 };
 
 /**
@@ -72,7 +100,9 @@ const LessThanOrEqual = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left <= right;
   }
-  return format(left, "number") <= format(right, "number");
+  const l = typeof left === "string" ? Number(left) : format(left, "number");
+  const r = typeof right === "string" ? Number(right) : format(right, "number");
+  return l <= r;
 };
 
 /**
@@ -85,7 +115,9 @@ const GreaterThanOrEqual = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left >= right;
   }
-  return format(left, "number") >= format(right, "number");
+  const l = typeof left === "string" ? Number(left) : format(left, "number");
+  const r = typeof right === "string" ? Number(right) : format(right, "number");
+  return l >= r;
 };
 
 /**
@@ -105,6 +137,9 @@ const Division = (left: unknown, right: unknown) => {
  * @constructor
  */
 const Remainder = (left: unknown, right: unknown) => {
+  if (typeof left === "string" && Array.isArray(right)) {
+    return sprintfFormat(left, right);
+  }
   return format(left, "number") % format(right, "number");
 };
 
@@ -211,7 +246,7 @@ const UnaryPlus = (value: unknown) => {
  * @constructor
  */
 const LogicalNot = (value: unknown) => {
-  return !value;
+  return !isTruthy(value);
 };
 
 /**

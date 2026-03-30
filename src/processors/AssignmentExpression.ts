@@ -15,6 +15,7 @@ import {
   Subtraction,
   UnsignedRightShift,
 } from "@/operators";
+import { isTruthy } from "@/utils/isTruthy";
 
 /**
  * 演算子と処理の対応表
@@ -47,7 +48,7 @@ const processAssignmentExpression = (
 ): unknown => {
   const left = execute(script.left, scopes, trace);
   if (script.operator === "&&=") {
-    if (!left) {
+    if (!isTruthy(left)) {
       return left;
     }
     const right = execute(script.right, scopes, trace);
@@ -55,7 +56,7 @@ const processAssignmentExpression = (
     return right;
   }
   if (script.operator === "||=") {
-    if (left) {
+    if (isTruthy(left)) {
       return left;
     }
     const right = execute(script.right, scopes, trace);

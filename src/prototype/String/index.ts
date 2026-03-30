@@ -3,6 +3,7 @@ import { processIndex } from "@/prototype/String/_index";
 import { processEval } from "@/prototype/String/eval";
 import { processHashCode } from "@/prototype/String/hashCode";
 import { processIndexOf } from "@/prototype/String/indexOf";
+import { processModulo } from "@/prototype/String/modulo";
 import { processMultiply } from "@/prototype/String/multiply";
 import { processSize } from "@/prototype/String/size";
 import { processSlice } from "@/prototype/String/slice";
@@ -25,6 +26,7 @@ const prototypeStringFunctions: PrototypeFunctions<string> = {
   toASString: processToASString,
   raw: processToASString,
   multiply: processMultiply,
+  modulo: processModulo,
   hashCode: processHashCode,
 };
 

@@ -8,7 +8,7 @@ import type { PrototypeObjectFunction } from "./index";
  * @param object
  */
 const processClone: PrototypeObjectFunction = (_script, _scope, object) => {
-  return structuredClone(object);
+  return { ...object };
 };
 
 export { processClone };
