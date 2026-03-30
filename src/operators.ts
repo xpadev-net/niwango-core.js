@@ -48,9 +48,7 @@ const LessThan = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left < right;
   }
-  const l = typeof left === "string" ? Number(left) : format(left, "number");
-  const r = typeof right === "string" ? Number(right) : format(right, "number");
-  return l < r;
+  return format(left, "number") < format(right, "number");
 };
 
 /**
@@ -63,9 +61,7 @@ const GreaterThan = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left > right;
   }
-  const l = typeof left === "string" ? Number(left) : format(left, "number");
-  const r = typeof right === "string" ? Number(right) : format(right, "number");
-  return l > r;
+  return format(left, "number") > format(right, "number");
 };
 
 /**
@@ -78,9 +74,7 @@ const LessThanOrEqual = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left <= right;
   }
-  const l = typeof left === "string" ? Number(left) : format(left, "number");
-  const r = typeof right === "string" ? Number(right) : format(right, "number");
-  return l <= r;
+  return format(left, "number") <= format(right, "number");
 };
 
 /**
@@ -93,9 +87,7 @@ const GreaterThanOrEqual = (left: unknown, right: unknown) => {
   if (typeof left === "string" && typeof right === "string") {
     return left >= right;
   }
-  const l = typeof left === "string" ? Number(left) : format(left, "number");
-  const r = typeof right === "string" ? Number(right) : format(right, "number");
-  return l >= r;
+  return format(left, "number") >= format(right, "number");
 };
 
 /**
