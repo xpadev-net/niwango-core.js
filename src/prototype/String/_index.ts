@@ -11,10 +11,9 @@ const processIndex: PrototypeStringFunction = (
 ) => {
   const index = execute(script.arguments[0], scopes, trace);
   const raw = format(index, "number");
+  if (!Number.isFinite(raw)) return null;
   if (object.length === 0) return raw === 0 ? "" : null;
   const idx = ((raw % object.length) + object.length) % object.length;
-  if (idx > object.length) return null;
-  if (idx === object.length) return "";
   return object.charAt(idx);
 };
 

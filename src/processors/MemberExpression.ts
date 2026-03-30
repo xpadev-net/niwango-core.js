@@ -51,10 +51,9 @@ const processMemberExpression = (
     return execute(left.body, [{ "@0": right }, ...left.scopes], trace);
   }
   if (typeof left === "string" && typeof right === "number") {
+    if (!Number.isFinite(right)) return null;
     if (left.length === 0) return right === 0 ? "" : null;
     const idx = ((right % left.length) + left.length) % left.length;
-    if (idx > left.length) return null;
-    if (idx === left.length) return "";
     return left.charAt(idx);
   }
   try {
