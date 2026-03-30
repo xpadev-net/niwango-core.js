@@ -48,6 +48,8 @@ describe("String.prototype", () => {
     expect(run(`'0777'.toASNumber`)).toBe(777);
     expect(run(`'0.777'.toASNumber`)).toBe(0.777);
     expect(run(`'aiueo'.toASNumber`)).toBe(0);
+    expect(run(`''.toASNumber`)).toBe(0);
+    expect(run(`'0xFF'.toASNumber`)).toBe(255);
   });
 
   test("toASString", () => {
@@ -65,5 +67,8 @@ describe("String.prototype", () => {
     expect(run(`'0777'.toInteger`)).toBe(511);
     expect(run(`'0.777'.toInteger`)).toBe(0);
     expect(run(`'aiueo'.toInteger`)).toBe(NaN);
+    expect(run(`'0xFF'.toInteger`)).toBe(255);
+    expect(run(`'0'.toInteger`)).toBe(0);
+    expect(run(`'08'.toInteger`)).toBe(8);
   });
 });
