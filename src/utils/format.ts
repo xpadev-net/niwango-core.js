@@ -19,7 +19,7 @@ const format = <T extends "boolean" | "number" | "string">(
   to: T,
 ): Map[T] => {
   const formatFunc = resolvePrototype(getType(value), funcMap[to]);
-  if (!formatFunc) throw new Error();
+  if (!formatFunc) throw new Error(`Cannot convert ${getType(value)} to ${to}`);
   return formatFunc({} as A_CallExpression, [], value, []) as Map[T];
 };
 
