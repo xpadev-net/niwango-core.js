@@ -9,10 +9,10 @@ const processHasSlot: PrototypeValueFunction = (
   object,
   trace: A_ANY[],
 ) => {
-  const name = execute(script.arguments[0], scopes, trace);
-  if (name === null || name === undefined) return true;
   if (object === null || object === undefined || typeof object !== "object")
     return false;
+  const name = execute(script.arguments[0], scopes, trace);
+  if (name === null || name === undefined) return true;
   return format(name, "string") in (object as Record<string, unknown>);
 };
 

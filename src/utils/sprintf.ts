@@ -6,10 +6,11 @@ const sprintf = (template: string, args: unknown[]): string => {
     if (specifier === "%") return "%";
     if (argIndex >= args.length) return match;
     const arg = args[argIndex++];
+    if (specifier === "s") {
+      return format(arg, "string");
+    }
     const num = format(arg, "number");
     switch (specifier) {
-      case "s":
-        return format(arg, "string");
       case "d":
         return Number.isFinite(num) ? String(Math.trunc(num)) : "0";
       case "f":
