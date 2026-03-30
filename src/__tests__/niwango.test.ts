@@ -36,6 +36,30 @@ test("assignment operators", () => {
   expect(run("i=0;lhs=1;lhs??=(i=1);i")).toBe(0);
 });
 
+test("loose equality", () => {
+  expect(run("1 == '1'")).toBe(true);
+  expect(run("1 != '2'")).toBe(true);
+  expect(run("1 == 1")).toBe(true);
+  expect(run("1 != 1")).toBe(false);
+  expect(run("'abc' == 'abc'")).toBe(true);
+  expect(run("'abc' != 'def'")).toBe(true);
+  expect(run("1 === '1'")).toBe(false);
+  expect(run("1 !== '1'")).toBe(true);
+  expect(run("0 == false")).toBe(true);
+  expect(run("1 == true")).toBe(true);
+  expect(run("nil == nil")).toBe(true);
+  expect(run("nil != 0")).toBe(true);
+  expect(run("nil != false")).toBe(true);
+});
+
+test("string repeat edge cases", () => {
+  expect(run("'abc' * -1")).toBe("");
+  expect(run("'abc' * 0")).toBe("");
+  expect(run("'abc' * 2")).toBe("abcabc");
+  expect(run("'abc' * 2.9")).toBe("abcabc");
+  expect(run("'abc' * (1/0)")).toBe("");
+});
+
 test("logical short-circuit", () => {
   expect(run("i=0;false&&(i=1);i")).toBe(0);
   expect(run("i=0;true||(i=1);i")).toBe(0);

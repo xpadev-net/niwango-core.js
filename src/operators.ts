@@ -8,7 +8,9 @@ import { format } from "@/utils/format";
  */
 const Multiplication = (left: unknown, right: unknown) => {
   if (typeof left === "string") {
-    return left.repeat(format(right, "number"));
+    const n = format(right, "number");
+    if (!n || n < 0 || !Number.isFinite(n)) return "";
+    return left.repeat(Math.floor(n));
   }
   return format(left, "number") * format(right, "number");
 };
@@ -19,15 +21,7 @@ const Multiplication = (left: unknown, right: unknown) => {
  * @param right
  */
 const Subtraction = (left: unknown, right: unknown) => {
-  const rightNum = format(right, "number");
-  if (
-    rightNum === 0 &&
-    typeof left === "string" &&
-    left.match(/^(0|0x)?[0-9]+(\.[0-9]+)?$/)
-  ) {
-    return Number(left);
-  }
-  return format(left, "number") - rightNum;
+  return format(left, "number") - format(right, "number");
 };
 
 /**
@@ -242,6 +236,20 @@ const Equality = (left: unknown, right: unknown) => {
   return left === right;
 };
 
+const LooseEquality = (left: unknown, right: unknown): boolean => {
+  if (left == null || right == null) return left == null && right == null;
+  let l: unknown = left;
+  let r: unknown = right;
+  if (typeof l === "boolean") l = l ? 1 : 0;
+  if (typeof r === "boolean") r = r ? 1 : 0;
+  if (typeof l === typeof r) return l === r;
+  if (typeof l === "number" || typeof r === "number")
+    return format(l, "number") === format(r, "number");
+  if (typeof l === "string" || typeof r === "string")
+    return format(l, "string") === format(r, "string");
+  return l === r;
+};
+
 export {
   Addition,
   BitwiseAND,
@@ -258,6 +266,7 @@ export {
   LessThan,
   LessThanOrEqual,
   LogicalNot,
+  LooseEquality,
   Multiplication,
   Remainder,
   RightShift,

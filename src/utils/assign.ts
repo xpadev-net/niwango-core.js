@@ -1,5 +1,6 @@
 import type { A_ANY, T_scope } from "@/@types/ast";
 import { execute, getName, setAssign } from "@/context";
+import { TooMuchRecursionError } from "@/errors/TooMuchRecursionError";
 import typeGuard from "@/typeGuard";
 
 /**
@@ -48,6 +49,7 @@ const assign = (
       left[key] = value;
     }
   } catch (e) {
+    if (e instanceof TooMuchRecursionError) throw e;
     if (e instanceof Error) {
       console.error(
         `[assign] ${e.name}: ${e.message}`,

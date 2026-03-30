@@ -32,6 +32,7 @@ const processMemberExpression = (
   ) as string | number;
   if (typeGuard.object(left) && typeGuard.definedFunction(left[right])) {
     const func = left[right] as definedFunction;
+    if (!func.script.arguments[1]) return undefined;
     return execute(
       func.script.arguments[1],
       [{ self: left }, ...scopes],
