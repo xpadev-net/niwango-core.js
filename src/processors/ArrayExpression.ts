@@ -15,4 +15,5 @@ const processArrayExpression = (
     execute(element, scopes, trace),
   ]);
 };
+
 export { processArrayExpression };

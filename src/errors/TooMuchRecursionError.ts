@@ -19,4 +19,5 @@ class TooMuchRecursionError extends Error {
   }
 }
 TooMuchRecursionError.prototype.name = "TooMuchRecursionError";
+
 export { TooMuchRecursionError };

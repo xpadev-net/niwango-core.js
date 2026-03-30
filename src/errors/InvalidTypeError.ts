@@ -22,4 +22,5 @@ class InvalidTypeError extends Error {
   }
 }
 InvalidTypeError.prototype.name = "InvalidTypeError";
+
 export { InvalidTypeError };
