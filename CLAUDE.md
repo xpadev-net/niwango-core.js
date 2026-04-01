@@ -9,21 +9,21 @@ This is a TypeScript library that parses and executes "Niwango" (ニワン語) -
 ## Development Commands
 
 ### Building
-- `npm run build` - Complete build (removes dist/, builds TS and DTS files)
-- `npm run build:ts` - Build TypeScript using Rollup
-- `npm run build:dts` - Build type definitions and resolve path aliases
-- `npm run watch` - Development build with file watching
+- `pnpm run build` - Complete build (removes dist/, builds TS and DTS files)
+- `pnpm run build:ts` - Build TypeScript using Rolldown
+- `pnpm run build:dts` - Build type definitions using rolldown-plugin-dts
+- `pnpm run watch` - Development build with file watching
 
 ### Code Quality
-- `npm run lint` - Run ESLint and TypeScript type checking
-- `npm run lint:fix` - Auto-fix formatting, ESLint issues, and run type check
-- `npm run check-types` - TypeScript type checking only
-- `npm run eslint` - ESLint only
-- `npm run eslint:fix` - Auto-fix ESLint issues
-- `npm run format` - Format code with Prettier
+- `pnpm run lint` - Run Biome check
+- `pnpm run lint:fix` - Auto-fix formatting and lint issues
+- `pnpm run check-types` - TypeScript type checking only
+- `pnpm run eslint` - Biome lint only
+- `pnpm run eslint:fix` - Auto-fix Biome lint issues
+- `pnpm run format` - Format code with Biome
 
 ### Testing
-- `npm test` - Run Jest tests (uses jsdom environment)
+- `pnpm test` - Run Vitest tests (uses jsdom environment)
 
 ### Parser Generation
 - `npm run pegjs` - Generate parser.js from niwango.pegjs grammar using Peggy
@@ -64,7 +64,7 @@ This is a TypeScript library that parses and executes "Niwango" (ニワン語) -
 
 ### Key Patterns
 
-- **Path Aliases**: Uses `@/*` for `src/*` - configured in tsconfig.json and Jest
+- **Path Aliases**: Uses `@/*` for `src/*` - configured in tsconfig.json and Vitest
 - **Type Definitions**: Comprehensive TypeScript types in `src/@types/`
 - **Processor Pattern**: Each AST node type has dedicated processor function
 - **Prototype System**: Object-oriented method dispatch similar to JavaScript prototypes
@@ -78,10 +78,8 @@ This is a TypeScript library that parses and executes "Niwango" (ニワン語) -
 
 ### Build System
 
-- **Rollup** for bundling with UMD output format
-- **TypeScript compilation** with declaration file generation
-- **Path alias resolution** custom utility for proper d.ts file paths
-- **Babel** for additional JS transforms
+- **Rolldown** for bundling with UMD output format (built-in TypeScript, JSON, CommonJS, node-resolve support)
+- **rolldown-plugin-dts** for declaration file generation and bundling
 - **Peggy** for parser generation from grammar
 
 The codebase implements a complete interpreter for the Niwango language with proper AST processing, type system, and extensible architecture for adding new language features.

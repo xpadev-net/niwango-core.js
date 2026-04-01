@@ -25,4 +25,5 @@ const processVariableDeclaration = (
   }
   return lastItem;
 };
+
 export { processVariableDeclaration };

@@ -33,4 +33,5 @@ const run = (niwango: string) => {
   const ast = parseScript(niwango, "jest");
   return execute(ast, [globalScope, environmentScope, prototypeScope], [ast]);
 };
+
 export { run };
