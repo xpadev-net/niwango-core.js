@@ -3,7 +3,11 @@ import { processToASString } from "@/prototype/Array/toASString";
 
 import { processIndex } from "./_index";
 import { processAdd } from "./add";
+import { processAssign } from "./assign";
+import { processAt } from "./at";
 import { processFind } from "./find";
+import { processFold } from "./fold";
+import { processForEachEntry } from "./forEachEntry";
 import { processJoin } from "./join";
 import { processPop } from "./pop";
 import { processProduct } from "./product";
@@ -32,6 +36,10 @@ const prototypeArrayFunctions: PrototypeFunctions<Array<unknown>> = {
   add: processAdd,
   find: processFind,
   toASString: processToASString,
+  at: processAt,
+  assign: processAssign,
+  fold: processFold,
+  forEachEntry: processForEachEntry,
 };
 
 export { prototypeArrayFunctions };
