@@ -102,6 +102,8 @@ describe("Array.prototype", () => {
     expect(run(`a=[1,2,3];a.assign(1,5)`)).toBe(true);
     expect(run(`a=[1,2,3];a.assign(5,99);a[5]`)).toBe(99);
     expect(run(`a=[1,2,3];a.assign(1.9,5);a[1]`)).toBe(5);
+    expect(run(`a=[1,2,3];a.assign(0/0,5)`)).toBe(false);
+    expect(run(`a=[1,2,3];a.assign(1/0,5)`)).toBe(false);
   });
 
   test("forEachEntry", () => {
