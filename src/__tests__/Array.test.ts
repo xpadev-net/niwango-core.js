@@ -127,3 +127,119 @@ describe("Array.prototype", () => {
     expect(run(`a=[1,2];b=[3,4];a.add(b);a.size`)).toBe(2);
   });
 });
+
+/**
+ * SWF (IrArray) 互換性テスト
+ * latest_nicoscript.as lines 7046-7557 の動作を保証する
+ */
+describe("SWF compatibility", () => {
+  // SWF: push/unshift return this (chainable)
+  test("push returns the array (this)", () => {
+    expect(run(`[1,2].push(3).size`)).toBe(3);
+    expect(run(`[1].push(2).push(3).size`)).toBe(3);
+  });
+
+  test("unshift returns the array (this)", () => {
+    expect(run(`[1,2].unshift(0).size`)).toBe(3);
+    expect(run(`[3].unshift(2).unshift(1).size`)).toBe(3);
+  });
+
+  // SWF: pop/shift return null for empty arrays
+  test("pop returns null on empty array", () => {
+    expect(run(`[].pop`)).toBe(null);
+  });
+
+  test("shift returns null on empty array", () => {
+    expect(run(`[].shift`)).toBe(null);
+  });
+
+  // SWF: sort returns new array, does not mutate original
+  test("sort is non-destructive", () => {
+    expect(run(`a=[3,1,2];b=a.sort;a[0]`)).toBe(3);
+    expect(run(`a=[3,1,2];b=a.sort;b[0]`)).toBe(1);
+    expect(run(`a=[3,1,2];a.sort;a[0]`)).toBe(3);
+  });
+
+  // SWF: walk returns this (chainable), forEachEntry returns void
+  test("walk returns the array (this)", () => {
+    expect(run(`[1,2,3].walk(\\(@0)).size`)).toBe(3);
+    expect(run(`i=0;a=[1,2,3];a.walk(\\(i+=@0));a.size`)).toBe(3);
+  });
+
+  // SWF: at supports negative index, -1 = last
+  test("at with negative index", () => {
+    expect(run(`["A","B","C"].at(-1)`)).toBe("C");
+    expect(run(`["A","B","C"].at(-3)`)).toBe("A");
+  });
+
+  // SWF: assign returns boolean, mutates array
+  test("assign mutates and returns success", () => {
+    expect(run(`a=[1,2,3];a.assign(0,10);a[0]`)).toBe(10);
+    expect(run(`a=[1,2,3];a.assign(-1,99);a[2]`)).toBe(99);
+  });
+
+  // SWF: find returns index, -1 if not found
+  test("find returns correct index", () => {
+    expect(run(`[10,20,30,20].find(20)`)).toBe(1);
+    expect(run(`[10,20,30].find(40)`)).toBe(-1);
+  });
+
+  test("find with lambda predicate", () => {
+    expect(run(`[1,2,3,4,5].find(\\(@0>=4))`)).toBe(3);
+    expect(run(`[1,2,3].find(\\(@0>100))`)).toBe(-1);
+  });
+
+  // SWF: find lambda uses toASBoolean (Niwango truthiness: 0 is truthy)
+  test("find lambda treats 0 as truthy (Niwango semantics)", () => {
+    expect(run(`[1,2,3].find(\\(0))`)).toBe(0);
+  });
+
+  // SWF: add returns new array, originals unchanged
+  test("add does not mutate originals", () => {
+    expect(run(`a=[1];b=[2];c=a.add(b);a.size`)).toBe(1);
+    expect(run(`a=[1];b=[2];c=a.add(b);b.size`)).toBe(1);
+    expect(run(`a=[1];b=[2];c=a.add(b);c.size`)).toBe(2);
+  });
+
+  test("add with non-array returns null", () => {
+    expect(run(`[1,2].add(3)`)).toBe(null);
+    expect(run(`[1,2].add("x")`)).toBe(null);
+  });
+
+  // SWF: fold accumulates with @0=acc, @1=elem
+  test("fold with string accumulator", () => {
+    expect(run(`["A","B","C"].fold("",\\(@0+@1))`)).toBe("ABC");
+  });
+
+  test("fold on empty array returns initial value", () => {
+    expect(run(`[].fold(42,\\(@0+@1))`)).toBe(42);
+  });
+
+  // SWF: toASString format <[elem,elem,...]>
+  test("toASString format", () => {
+    expect(run(`[1,2,3].toASString`)).toBe("<[1,2,3]>");
+    expect(run(`["A","B"].toASString`)).toBe("<[A,B]>");
+    expect(run(`[].toASString`)).toBe("<[]>");
+  });
+
+  // SWF: size returns element count
+  test("size after mutations", () => {
+    expect(run(`a=[1,2,3];a.pop;a.size`)).toBe(2);
+    expect(run(`a=[1,2,3];a.shift;a.size`)).toBe(2);
+    expect(run(`a=[1,2,3];a.push(4);a.size`)).toBe(4);
+    expect(run(`a=[];a.size`)).toBe(0);
+  });
+
+  // SWF: combined operations
+  test("chained push and walk", () => {
+    expect(run(`i=0;[1,2].push(3).walk(\\(i+=@0));i`)).toBe(6);
+  });
+
+  test("sort then join", () => {
+    expect(run(`[3,1,2].sort.join("-")`)).toBe("1-2-3");
+  });
+
+  test("add then sort", () => {
+    expect(run(`[3,1].add([4,2]).sort.join(",")`)).toBe("1,2,3,4");
+  });
+});
