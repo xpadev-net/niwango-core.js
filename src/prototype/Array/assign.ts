@@ -10,8 +10,10 @@ const processAssign: PrototypeArrayFunction = (
   trace: A_ANY[],
 ) => {
   const rawIndex = execute(script.arguments[0], scopes, trace);
-  let index =
+  const num =
     typeof rawIndex === "number" ? rawIndex : format(rawIndex, "number");
+  if (!Number.isFinite(num)) return false;
+  let index = Math.trunc(num);
   const value = execute(script.arguments[1], scopes, trace);
 
   if (index < 0) {

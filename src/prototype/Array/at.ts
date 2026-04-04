@@ -10,11 +10,14 @@ const processAt: PrototypeArrayFunction = (
   trace: A_ANY[],
 ) => {
   const rawIndex = execute(script.arguments[0], scopes, trace);
-  let index =
+  const num =
     typeof rawIndex === "number" ? rawIndex : format(rawIndex, "number");
+  if (!Number.isFinite(num)) return undefined;
+  let index = Math.trunc(num);
   if (index < 0) {
     index = object.length + index;
   }
+  if (index < 0 || index >= object.length) return undefined;
   return object[index];
 };
 

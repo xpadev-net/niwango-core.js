@@ -91,16 +91,21 @@ describe("Array.prototype", () => {
     expect(run(`[10,20,30].at(2)`)).toBe(30);
     expect(run(`[10,20,30].at(-1)`)).toBe(30);
     expect(run(`[10,20,30].at(-2)`)).toBe(20);
+    expect(run(`[10,20,30].at(1.9)`)).toBe(20);
+    expect(run(`[10,20,30].at(5)`)).toBe(undefined);
+    expect(run(`[10,20,30].at(-4)`)).toBe(undefined);
   });
 
   test("assign", () => {
     expect(run(`a=[1,2,3];a.assign(1,5);a[1]`)).toBe(5);
     expect(run(`a=[1,2,3];a.assign(1,5)`)).toBe(true);
     expect(run(`a=[1,2,3];a.assign(5,99);a[5]`)).toBe(99);
+    expect(run(`a=[1,2,3];a.assign(1.9,5);a[1]`)).toBe(5);
   });
 
   test("forEachEntry", () => {
     expect(run(`i=0;a=[1,2,3];a.forEachEntry(\\(i+=@0));i`)).toBe(6);
+    expect(run(`[1,2,3].forEachEntry(\\(@0)).size`)).toBe(3);
   });
 
   test("fold", () => {

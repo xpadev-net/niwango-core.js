@@ -3,6 +3,7 @@ import { execute } from "@/context";
 import { LooseEquality } from "@/operators";
 import type { PrototypeArrayFunction } from "@/prototype/Array/index";
 import typeGuard from "@/typeGuard";
+import { isTruthy } from "@/utils/isTruthy";
 
 const processFind: PrototypeArrayFunction = (
   script,
@@ -18,7 +19,7 @@ const processFind: PrototypeArrayFunction = (
         [{ "@0": object[i] }, ...scopes],
         trace,
       );
-      if (result) return i;
+      if (isTruthy(result)) return i;
     }
     return -1;
   }
