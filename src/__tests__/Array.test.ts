@@ -85,4 +85,40 @@ describe("Array.prototype", () => {
     expect(run(`i=0;[0,1,2,3].walk(\\(i+=@0));i`)).toBe(6);
     expect(run(`[1,2,3].walk(\\(@0)).size`)).toBe(3);
   });
+
+  test("at", () => {
+    expect(run(`[10,20,30].at(0)`)).toBe(10);
+    expect(run(`[10,20,30].at(2)`)).toBe(30);
+    expect(run(`[10,20,30].at(-1)`)).toBe(30);
+    expect(run(`[10,20,30].at(-2)`)).toBe(20);
+  });
+
+  test("assign", () => {
+    expect(run(`a=[1,2,3];a.assign(1,5);a[1]`)).toBe(5);
+    expect(run(`a=[1,2,3];a.assign(1,5)`)).toBe(true);
+    expect(run(`a=[1,2,3];a.assign(5,99);a[5]`)).toBe(99);
+  });
+
+  test("forEachEntry", () => {
+    expect(run(`i=0;a=[1,2,3];a.forEachEntry(\\(i+=@0));i`)).toBe(6);
+  });
+
+  test("fold", () => {
+    expect(run(`[1,2,3,4].fold(0,\\(@0+@1))`)).toBe(10);
+    expect(run(`[1,2,3,4].fold(10,\\(@0+@1))`)).toBe(20);
+    expect(run(`[1,2,3,4].fold(1,\\(@0*@1))`)).toBe(24);
+  });
+
+  test("find", () => {
+    expect(run(`[10,20,30].find(20)`)).toBe(1);
+    expect(run(`[10,20,30].find(99)`)).toBe(-1);
+    expect(run(`[1,2,3,4,5].find(\\(@0>3))`)).toBe(3);
+    expect(run(`[1,2,3].find(\\(@0>10))`)).toBe(-1);
+  });
+
+  test("add", () => {
+    expect(run(`a=[1,2];b=[3,4];c=a.add(b);c.join(',')`)).toBe("1,2,3,4");
+    expect(run(`[1,2].add([3,4]).size`)).toBe(4);
+    expect(run(`a=[1,2];b=[3,4];a.add(b);a.size`)).toBe(2);
+  });
 });
