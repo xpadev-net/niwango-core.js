@@ -95,6 +95,9 @@ describe("Array.prototype", () => {
     expect(run(`[10,20,30].at(1.9)`)).toBe(20);
     expect(run(`[10,20,30].at(5)`)).toBe(undefined);
     expect(run(`[10,20,30].at(-4)`)).toBe(undefined);
+    expect(run(`[10,20,30].at(0/0)`)).toBe(undefined);
+    expect(run(`[10,20,30].at(1/0)`)).toBe(undefined);
+    expect(run(`[10,20,30].at(-1/0)`)).toBe(undefined);
   });
 
   test("assign", () => {
@@ -104,6 +107,7 @@ describe("Array.prototype", () => {
     expect(run(`a=[1,2,3];a.assign(1.9,5);a[1]`)).toBe(5);
     expect(run(`a=[1,2,3];a.assign(0/0,5)`)).toBe(false);
     expect(run(`a=[1,2,3];a.assign(1/0,5)`)).toBe(false);
+    expect(run(`a=[1,2,3];a.assign(-10,5)`)).toBe(false);
   });
 
   test("forEachEntry", () => {
