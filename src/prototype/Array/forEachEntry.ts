@@ -15,7 +15,6 @@ const processForEachEntry: PrototypeArrayFunction = (
       execute(processor.body, [{ "@0": item }, ...scopes], trace);
     }
   }
-  return object;
 };
 
 export { processForEachEntry };

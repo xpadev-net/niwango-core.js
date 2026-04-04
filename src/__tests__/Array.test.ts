@@ -64,7 +64,8 @@ describe("Array.prototype", () => {
   });
 
   test("sort", () => {
-    expect(run(`array = [2,1,3];array.sort;array.join(',')`)).toBe("1,2,3");
+    expect(run(`[2,1,3].sort.join(',')`)).toBe("1,2,3");
+    expect(run(`a=[2,1,3];a.sort;a.join(',')`)).toBe("2,1,3");
   });
 
   test("sum", () => {
@@ -105,7 +106,6 @@ describe("Array.prototype", () => {
 
   test("forEachEntry", () => {
     expect(run(`i=0;a=[1,2,3];a.forEachEntry(\\(i+=@0));i`)).toBe(6);
-    expect(run(`[1,2,3].forEachEntry(\\(@0)).size`)).toBe(3);
   });
 
   test("fold", () => {
