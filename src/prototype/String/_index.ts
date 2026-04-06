@@ -4,12 +4,8 @@ import type { PrototypeStringFunction } from "@/prototype/String/index";
 import { format } from "@/utils/format";
 
 const normalizeStringIndex = (index: number, length: number): number => {
-  if (!Number.isFinite(index) || length <= 0) return index;
-  let normalized = index;
-  while (normalized < 0) {
-    normalized += length;
-  }
-  return normalized;
+  if (!Number.isFinite(index) || length <= 0 || index >= 0) return index;
+  return ((index % length) + length) % length;
 };
 
 const processIndex: PrototypeStringFunction = (

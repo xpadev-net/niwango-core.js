@@ -4,6 +4,12 @@ import { normalizeStringIndex } from "@/prototype/String/_index";
 import type { PrototypeStringFunction } from "@/prototype/String/index";
 import { format } from "@/utils/format";
 
+const toIntegerOrInfinity = (value: number): number => {
+  if (Number.isNaN(value) || value === 0) return 0;
+  if (!Number.isFinite(value)) return value;
+  return Math.trunc(value);
+};
+
 const processSlice: PrototypeStringFunction = (
   script,
   scopes,
@@ -17,10 +23,14 @@ const processSlice: PrototypeStringFunction = (
     object.length,
   );
   if (start >= object.length) return "";
+  const normalizedStart =
+    Number.isNaN(start) || start === Number.NEGATIVE_INFINITY ? 0 : start;
   if (typeof length !== "undefined") {
-    return object.substr(start, format(length, "number"));
+    const normalizedLength = toIntegerOrInfinity(format(length, "number"));
+    if (normalizedLength <= 0) return "";
+    return object.slice(normalizedStart, normalizedStart + normalizedLength);
   }
-  return object.substr(start);
+  return object.slice(normalizedStart);
 };
 
 export { processSlice };

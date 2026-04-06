@@ -23,6 +23,7 @@ describe("String.prototype", () => {
     expect(run(`str='ニコニコ動画'; str.index(6)`)).toBe("");
     expect(run(`str='ニコニコ動画'; str.index(7)`)).toBe(null);
     expect(run(`str='ABCDEF'; str.index(-8)`)).toBe("E");
+    expect(run(`str='ABCDEF'; str.index(-1000000000000)`)).toBe("C");
     expect(run(`str='ABCDEF'; str.index(0/0)`)).toBe(null);
     expect(run(`str='ニコニコ動画'; str[4]`)).toBe("動");
   });
@@ -30,6 +31,7 @@ describe("String.prototype", () => {
   test("indexOf", () => {
     expect(run(`'abcdef'.indexOf('d')`)).toBe(3);
     expect(run(`'abcdef'.indexOf('a', -10)`)).toBe(-1);
+    expect(run(`'abcdef'.indexOf('a', -1000000000000)`)).toBe(-1);
     expect(run(`'abcdef'.indexOf('f', -1)`)).toBe(5);
     expect(run(`t1='abcdef';t2='d';check=(t1.indexOf(t2)>=0); check`)).toBe(
       true,
@@ -51,8 +53,12 @@ describe("String.prototype", () => {
   test("slice", () => {
     expect(run(`'ABCDEF'.slice(2,2)`)).toBe("CD");
     expect(run(`'ABCDEF'.slice(-4)`)).toBe("CDEF");
+    expect(run(`'ABCDEF'.slice(-1000000000000)`)).toBe("CDEF");
     expect(run(`'ABCDEF'.slice(-8)`)).toBe("EF");
     expect(run(`'ABCDEF'.slice(-8,2)`)).toBe("EF");
+    expect(run(`'ABCDEF'.slice(2,-1)`)).toBe("");
+    expect(run(`'ABCDEF'.slice(0/0)`)).toBe("ABCDEF");
+    expect(run(`'ABCDEF'.slice(0/0,2)`)).toBe("AB");
     expect(run(`'ABCDEF'.slice(6)`)).toBe("");
   });
 
