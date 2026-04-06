@@ -12,6 +12,7 @@ import { processForEachSlot } from "@/prototype/Value/forEachSlot";
 import { processGreaterThan } from "@/prototype/Value/greaterThan";
 import { processHashCode } from "@/prototype/Value/hashCode";
 import { processHasSlot } from "@/prototype/Value/hasSlot";
+import { processIdentity } from "@/prototype/Value/identity";
 import { processLessThan } from "@/prototype/Value/lessThan";
 import { processMax } from "@/prototype/Value/max";
 import { processMin } from "@/prototype/Value/min";
@@ -36,13 +37,14 @@ const prototypeValueFunctions: PrototypeFunctions<unknown> = {
   hasSlot: processHasSlot,
   equals: processEquals,
   compare: processCompare,
+  hashCode: processHashCode,
   hashCore: processHashCode,
   forEachSlot: processForEachSlot,
   call: processCall,
   sendMessage: processCall,
   raw: processRaw,
-  increase: processRaw,
-  decrease: processRaw,
+  increase: processIdentity,
+  decrease: processIdentity,
   toASNumber: processToASNumber,
   toASString: processToASString,
   toASBoolean: processToASBoolean,

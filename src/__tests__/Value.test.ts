@@ -25,6 +25,19 @@ describe("Value.prototype", () => {
     expect(run(`10.equals(10)`)).toBe(true);
     expect(run(`10.equals(5)`)).toBe(false);
   });
+
+  test("hashCode and hashCore", () => {
+    expect(run(`true.hashCode`)).toBe(0);
+    expect(run(`true.hashCore`)).toBe(0);
+    expect(run(`true.hashCode == true.hashCore`)).toBe(true);
+  });
+
+  test("increase/decrease fallback returns receiver", () => {
+    expect(run(`text="hello";text.increase`)).toBe("hello");
+    expect(run(`text="hello";text.decrease`)).toBe("hello");
+    expect(run(`obj={count:1};inc=obj.increase;inc.count=2;obj.count`)).toBe(2);
+    expect(run(`arr=[1,2,3];dec=arr.decrease;dec[0]=9;arr[0]`)).toBe(9);
+  });
   test("minus", () => {
     expect(run(`10.minus`)).toBe(-10);
     expect(run(`-5.minus`)).toBe(5);

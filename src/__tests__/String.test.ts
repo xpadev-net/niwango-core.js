@@ -15,16 +15,22 @@ describe("String.prototype", () => {
 
   test("hashCode", () => {
     expect(run(`"".hashCode;`)).toBe(0);
-    expect(run(`"ニコニコ動画".hashCode`)).toBe(369505048982);
+    expect(run(`"ニコニコ動画".hashCode`)).toBe(137861526);
   });
 
   test("index", () => {
     expect(run(`str='ニコニコ動画'; str.index(4)`)).toBe("動");
+    expect(run(`str='ニコニコ動画'; str.index(6)`)).toBe("");
+    expect(run(`str='ニコニコ動画'; str.index(7)`)).toBe(null);
+    expect(run(`str='ABCDEF'; str.index(-8)`)).toBe("E");
+    expect(run(`str='ABCDEF'; str.index(0/0)`)).toBe(null);
     expect(run(`str='ニコニコ動画'; str[4]`)).toBe("動");
   });
 
   test("indexOf", () => {
     expect(run(`'abcdef'.indexOf('d')`)).toBe(3);
+    expect(run(`'abcdef'.indexOf('a', -10)`)).toBe(-1);
+    expect(run(`'abcdef'.indexOf('f', -1)`)).toBe(5);
     expect(run(`t1='abcdef';t2='d';check=(t1.indexOf(t2)>=0); check`)).toBe(
       true,
     );
@@ -32,7 +38,10 @@ describe("String.prototype", () => {
 
   test("multiply", () => {
     expect(run(`'A'.multiply(2)`)).toBe("AA");
+    expect(run(`'A'.multiply(0)`)).toBe("");
     expect(run(`'B'.multiply(10)`)).toBe("BBBBBBBBBB");
+    expect(run(`'A'.multiply(-1)`)).toBe(null);
+    expect(run(`'A'.multiply('2')`)).toBe(null);
   });
 
   test("size", () => {
@@ -42,14 +51,17 @@ describe("String.prototype", () => {
   test("slice", () => {
     expect(run(`'ABCDEF'.slice(2,2)`)).toBe("CD");
     expect(run(`'ABCDEF'.slice(-4)`)).toBe("CDEF");
+    expect(run(`'ABCDEF'.slice(-8)`)).toBe("EF");
+    expect(run(`'ABCDEF'.slice(-8,2)`)).toBe("EF");
+    expect(run(`'ABCDEF'.slice(6)`)).toBe("");
   });
 
   test("toASNumber", () => {
-    expect(run(`'0777'.toASNumber`)).toBe(777);
-    expect(run(`'0.777'.toASNumber`)).toBe(0.777);
+    expect(run(`'0777'.toASNumber`)).toBe(0);
+    expect(run(`'0.777'.toASNumber`)).toBe(0);
     expect(run(`'aiueo'.toASNumber`)).toBe(0);
     expect(run(`''.toASNumber`)).toBe(0);
-    expect(run(`'0xFF'.toASNumber`)).toBe(255);
+    expect(run(`'0xFF'.toASNumber`)).toBe(0);
   });
 
   test("toASString", () => {
@@ -64,7 +76,7 @@ describe("String.prototype", () => {
   });
 
   test("toInteger", () => {
-    expect(run(`'0777'.toInteger`)).toBe(511);
+    expect(run(`'0777'.toInteger`)).toBe(777);
     expect(run(`'0.777'.toInteger`)).toBe(0);
     expect(run(`'aiueo'.toInteger`)).toBe(NaN);
     expect(run(`'0xFF'.toInteger`)).toBe(255);

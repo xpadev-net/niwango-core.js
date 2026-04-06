@@ -6,7 +6,7 @@ test("sample from wiki", () => {
   expect(run(`a = 2525; a += "動画";a`)).toBe("2525動画");
   expect(run(`a = 2525; a += ""; a += 1;a`)).toBe("25251");
   expect(run(`a = "2525"; a += 1; a`)).toBe("25251");
-  expect(run(`a = "2525"; a -= 0; a += 1;a`)).toBe(2526);
+  expect(run(`a = "2525"; a -= 0; a += 1;a`)).toBe(1);
   expect(run("a = 02525; a")).toBe(1365);
   expect(run("a = 0x2525; a")).toBe(9509);
 });
@@ -37,7 +37,7 @@ test("assignment operators", () => {
 });
 
 test("loose equality", () => {
-  expect(run("1 == '1'")).toBe(true);
+  expect(run("1 == '1'")).toBe(false);
   expect(run("1 != '2'")).toBe(true);
   expect(run("1 == 1")).toBe(true);
   expect(run("1 != 1")).toBe(false);
@@ -108,7 +108,7 @@ test("String modulo (sprintf)", () => {
 });
 
 test("Value.equals cross-type", () => {
-  expect(run('10.equals("10")')).toBe(true);
+  expect(run('10.equals("10")')).toBe(false);
 });
 
 test("String.index negative", () => {

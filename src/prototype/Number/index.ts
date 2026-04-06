@@ -4,6 +4,7 @@ import { processAbs } from "./abs";
 import { processCos } from "./cos";
 import { processDecrease } from "./decrease";
 import { processFloor } from "./floor";
+import { processHashCode } from "./hashCode";
 import { processIncrease } from "./increase";
 import { processPow } from "./pow";
 import { processRaw } from "./raw";
@@ -21,7 +22,7 @@ const prototypeNumberFunctions: PrototypeFunctions<number> = {
   abs: processAbs,
   times: processTimes,
   raw: processRaw,
-  hashCode: processRaw,
+  hashCode: processHashCode,
   toASNumber: processRaw,
   toASString: processToASString,
   increase: processIncrease,

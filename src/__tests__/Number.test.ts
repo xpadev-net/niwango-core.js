@@ -17,6 +17,11 @@ describe("Number.prototype", () => {
     expect(run("10.floor")).toBe(10);
   });
 
+  test("hashCode", () => {
+    expect(run("1.hashCode")).toBe(1);
+    expect(run("(-1).hashCode")).toBe(4294967295);
+  });
+
   test("pow", () => {
     expect(run("2.pow(10)")).toBe(1024);
     expect(run("3.pow(4)")).toBe(81);
@@ -30,6 +35,14 @@ describe("Number.prototype", () => {
   test("times", () => {
     expect(run("i=0;100.times(i++);i")).toBe(100);
     expect(run("j=100;i=0;j.times(i++);i")).toBe(100);
+    expect(run("i=0;3.times(\\(i+=@0));i")).toBe(3);
+    expect(run("i=0;lmd=\\(i+=@0);3.times(lmd);i")).toBe(3);
+  });
+
+  test("times returns null for missing/non-callable and zero iterations", () => {
+    expect(run("3.times()")).toBe(null);
+    expect(run("3.times(1)")).toBe(null);
+    expect(run("0.times(i++)")).toBe(null);
   });
 
   test("toASString", () => {

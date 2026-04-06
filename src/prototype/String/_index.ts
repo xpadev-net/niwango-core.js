@@ -3,6 +3,15 @@ import { execute } from "@/context";
 import type { PrototypeStringFunction } from "@/prototype/String/index";
 import { format } from "@/utils/format";
 
+const normalizeStringIndex = (index: number, length: number): number => {
+  if (!Number.isFinite(index) || length <= 0) return index;
+  let normalized = index;
+  while (normalized < 0) {
+    normalized += length;
+  }
+  return normalized;
+};
+
 const processIndex: PrototypeStringFunction = (
   script,
   scopes,
@@ -13,8 +22,10 @@ const processIndex: PrototypeStringFunction = (
   const raw = format(index, "number");
   if (!Number.isFinite(raw)) return null;
   if (object.length === 0) return raw === 0 ? "" : null;
-  const idx = ((raw % object.length) + object.length) % object.length;
+  const idx = normalizeStringIndex(raw, object.length);
+  if (object.length < idx) return null;
+  if (object.length === idx) return "";
   return object.charAt(idx);
 };
 
-export { processIndex };
+export { normalizeStringIndex, processIndex };
