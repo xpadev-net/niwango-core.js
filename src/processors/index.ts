@@ -5,6 +5,7 @@ import { processAssignmentExpression } from "@/processors/AssignmentExpression";
 import { processBinaryExpression } from "@/processors/BinaryExpression";
 import { processBlockStatement } from "@/processors/BlockStatement";
 import { processCallExpression } from "@/processors/CallExpression";
+import { processConditionalExpression } from "@/processors/ConditionalExpression";
 import { processExpressionStatement } from "@/processors/ExpressionStatement";
 import { processIdentifier } from "@/processors/Identifier";
 import { processLambdaExpression } from "@/processors/LambdaExpression";
@@ -29,6 +30,7 @@ export const processors: {
   BinaryExpression: processBinaryExpression,
   BlockStatement: processBlockStatement,
   CallExpression: processCallExpression,
+  ConditionalExpression: processConditionalExpression,
   EmptyStatement: () => undefined,
   ExpressionStatement: processExpressionStatement,
   Identifier: processIdentifier,
