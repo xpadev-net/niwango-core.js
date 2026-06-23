@@ -20,6 +20,8 @@ test("parseScript character deletion recovery is opt-in", () => {
     expect(
       parseScript("1@+2", "parser.test", { recoverSyntaxErrors: true }),
     ).toEqual(parse("1+2", { grammarSource: "parser.test" }));
+    // Removing the trailing + leaves a bare numeric literal, which is still not
+    // a complete Niwango statement, so recovery should rethrow the first error.
     expect(() =>
       parseScript("1+", "parser.test", { recoverSyntaxErrors: true }),
     ).toThrow(PeggySyntaxError);

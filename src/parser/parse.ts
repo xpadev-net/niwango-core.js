@@ -3,6 +3,7 @@ import type { A_ANY } from "@/@types/ast";
 import { SyntaxError as PeggySyntaxError, parse } from "./parser";
 
 interface ParseScriptOptions {
+  /** Re-enable the legacy Peggy syntax-error character deletion loop. */
   recoverSyntaxErrors?: boolean;
 }
 
