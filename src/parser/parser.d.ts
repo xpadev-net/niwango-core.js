@@ -1,5 +1,11 @@
 import { A_ANY } from "@/@types/ast";
 
+type ParserLocation = {
+  start: { offset: number; line: number; column: number };
+  end: { offset: number; line: number; column: number };
+  source: string;
+};
+
 /**
  * ニワン語をASTに変換するパーサー
  * @param script
@@ -15,20 +21,19 @@ export function parse(
  * パースエラーが発生した際に投げられるエラー?
  * 多分型はあってるはず
  */
-export class NiwangoSyntaxError extends Error {
+declare class PeggySyntaxError extends Error {
   constructor(
     message: string,
-    expected: string,
-    found: string,
-    location: string,
+    expected: unknown,
+    found: string | null,
+    location: ParserLocation,
   );
-  expected: string;
-  found: string;
-  location: {
-    start: { offset: number; line: number; column: number };
-    end: { offset: number; line: number; column: number };
-    source: string;
-  };
+  expected: unknown;
+  found: string | null;
+  location: ParserLocation;
   name: "SyntaxError";
   format: (sources: { source: string; text: string }[]) => string;
+  static buildMessage: (expected: unknown, found: string | null) => string;
 }
+
+export { PeggySyntaxError as SyntaxError };
