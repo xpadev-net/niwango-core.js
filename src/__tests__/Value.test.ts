@@ -29,4 +29,13 @@ describe("Value.prototype", () => {
     expect(run(`10.minus`)).toBe(-10);
     expect(run(`-5.minus`)).toBe(5);
   });
+  test("dynamic call", () => {
+    expect(run(`def(f(a,b),a+b); 0.call("f",1,2)`)).toBe(3);
+    expect(run(`def(f(a,b),(a+":"+b)); 0.call("f",b:"B",a:"A")`)).toBe("A:B");
+    expect(run(`def(f(),"ok"); 0.call("f")`)).toBe("ok");
+    expect(run(`def(f(a,b),a+b); 0.sendMessage("f",1,2)`)).toBe(3);
+    expect(run(`def(f(a,b),(a+":"+b)); 0.sendMessage("f",b:"B",a:"A")`)).toBe(
+      "A:B",
+    );
+  });
 });

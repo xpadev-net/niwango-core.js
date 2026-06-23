@@ -26,7 +26,7 @@ const processCall: PrototypeValueFunction = (
       type: "Raw",
       value: functionName,
     },
-    arguments: script.arguments[1] ? [script.arguments[1]] : [],
+    arguments: script.arguments.slice(1),
   };
   return execute(newScript, scopes, trace);
 };
