@@ -13,7 +13,6 @@
     "watch": "rollup -c rollup.config.mjs -w",
     "typedoc": "typedoc --entryPointStrategy Expand --out ./docs/type/ ./src/",
     "prepack": "npm run build",
-    "prepublishOnly": "npm run build",
     "check-types": "npx tsc --noEmit --jsx react",
     "eslint": "biome lint src",
     "eslint:fix": "biome lint --write src",
@@ -21,7 +20,7 @@
     "format:fix": "biome format --write src",
     "lint": "biome check src",
     "lint:fix": "biome check --write --unsafe src",
-    "prepare": "node -e \"const{existsSync}=require('fs');const{spawnSync}=require('child_process');if(process.env.CI||!existsSync('.git')||(!existsSync('node_modules/.bin/lefthook')&&!existsSync('node_modules/.bin/lefthook.cmd')))process.exit(0);const cmd=process.platform==='win32'?'lefthook.cmd':'lefthook';process.exit(spawnSync(cmd,['install'],{stdio:'inherit',shell:process.platform==='win32'}).status??1)\"",
+    "prepare": "node -e \"process.exit(process.env.CI?0:1)\" || lefthook install || node -e \"process.exit(0)\"",
     "test": "vitest"
   },
   "files": [
