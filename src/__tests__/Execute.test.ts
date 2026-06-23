@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
+import type { A_ANY } from "@/@types/ast";
 import { config } from "@/config";
 import { appendResultHook, initResultHook, prototypeScope } from "@/context";
 import { InvalidTypeError, NotImplementedError } from "@/errors";
@@ -57,6 +58,14 @@ describe("execute runtime error propagation", () => {
 
   test("allows public execute to opt into strict propagation", () => {
     expect(() => runPublic("missing()", {})).toThrow(NotImplementedError);
+  });
+
+  test("throws NotImplementedError for unsupported AST node types", () => {
+    const ast = { type: "UnsupportedExpression" } as unknown as A_ANY;
+
+    expect(() =>
+      NiwangoCore.execute(ast, [{}, {}, prototypeScope], [ast], {}),
+    ).toThrow(NotImplementedError);
   });
 
   test("throws InvalidTypeError by default", () => {
