@@ -12,6 +12,7 @@
     "pegjs": "peggy --cache -o ./src/parser/parser.js --format umd --export-var parser ./src/grammar/niwango.pegjs",
     "watch": "rollup -c rollup.config.mjs -w",
     "typedoc": "typedoc --entryPointStrategy Expand --out ./docs/type/ ./src/",
+    "prepack": "npm run build",
     "prepublishOnly": "npm run build",
     "check-types": "npx tsc --noEmit --jsx react",
     "eslint": "biome lint src",
@@ -20,7 +21,7 @@
     "format:fix": "biome format --write src",
     "lint": "biome check src",
     "lint:fix": "biome check --write --unsafe src",
-    "prepare": "lefthook install",
+    "prepare": "node -e \"const{existsSync}=require('fs');const{spawnSync}=require('child_process');if(process.env.CI||!existsSync('.git')||(!existsSync('node_modules/.bin/lefthook')&&!existsSync('node_modules/.bin/lefthook.cmd')))process.exit(0);const cmd=process.platform==='win32'?'lefthook.cmd':'lefthook';process.exit(spawnSync(cmd,['install'],{stdio:'inherit',shell:process.platform==='win32'}).status??1)\"",
     "test": "vitest"
   },
   "files": [
@@ -52,11 +53,5 @@
     "typedoc-plugin-missing-exports": "^4.1.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lefthook"
-    ]
   }
 }
