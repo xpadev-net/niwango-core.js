@@ -12,7 +12,7 @@
     "pegjs": "peggy --cache -o ./src/parser/parser.js --format umd --export-var parser ./src/grammar/niwango.pegjs",
     "watch": "rollup -c rollup.config.mjs -w",
     "typedoc": "typedoc --entryPointStrategy Expand --out ./docs/type/ ./src/",
-    "prepublishOnly": "npm run build",
+    "prepack": "npm run build",
     "check-types": "npx tsc --noEmit --jsx react",
     "eslint": "biome lint src",
     "eslint:fix": "biome lint --write src",
@@ -20,7 +20,7 @@
     "format:fix": "biome format --write src",
     "lint": "biome check src",
     "lint:fix": "biome check --write --unsafe src",
-    "prepare": "lefthook install",
+    "prepare": "node -e \"process.exit(process.env.CI?0:1)\" || lefthook install || node -e \"process.exit(0)\"",
     "test": "vitest"
   },
   "files": [
@@ -52,11 +52,5 @@
     "typedoc-plugin-missing-exports": "^4.1.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lefthook"
-    ]
   }
 }
