@@ -1,3 +1,4 @@
+import type { Execute } from "@/@types/execute";
 import {
   appendDefinedFunctions,
   appendResultHook,
@@ -25,8 +26,15 @@ const utils = {
   resolvePrototype,
 };
 
+const executePublic: Execute = (
+  script,
+  scopes,
+  trace,
+  options = { catch: true },
+) => execute(script, scopes, trace, options);
+
 class NiwangoCore {
-  static execute = execute;
+  static execute = executePublic;
   static utils = utils;
   static resetCore = resetCore;
   static parseScript = parseScript;
