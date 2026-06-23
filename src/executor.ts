@@ -2,7 +2,6 @@ import type { A_ANY, T_scope } from "@/@types/ast";
 import type { Execute } from "@/@types/execute";
 import { config } from "@/config";
 import { resultHook, setExecute } from "@/context";
-import type { NotImplementedError } from "@/errors/NotImplementedError";
 import { TooMuchRecursionError } from "@/errors/TooMuchRecursionError";
 import { processors } from "@/processors";
 import typeGuard from "@/typeGuard";
@@ -18,7 +17,7 @@ const execute: Execute = (
   script: unknown,
   scopes: T_scope[],
   trace: A_ANY[],
-  options: Partial<{ catch: boolean }> = { catch: true },
+  options: Partial<{ catch: boolean }> = {},
 ): unknown => {
   if (!script || !typeGuard.AST(script)) return;
   if (config.recursionLimit && trace.length > config.recursionLimit) {
@@ -33,8 +32,7 @@ const execute: Execute = (
     }
   } catch (e) {
     if (!options.catch) throw e;
-    const n = e as NotImplementedError;
-    console.log(n, n.ast, n.scopes);
+    console.log(e);
     console.log("trace", trace);
   }
   for (const hook of resultHook) {

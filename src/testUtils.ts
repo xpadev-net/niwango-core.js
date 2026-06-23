@@ -1,3 +1,4 @@
+import type { Execute } from "@/@types/execute";
 import { execute, prototypeScope } from "@/context";
 import { initCore } from "@/init";
 import { parseScript } from "@/parser/parse";
@@ -14,7 +15,7 @@ if (!globalThis.structuredClone) {
  * テスト用サンドボックス
  * @param niwango
  */
-const run = (niwango: string) => {
+const run = (niwango: string, options?: Parameters<Execute>[3]) => {
   const globalScope = {};
   const environmentScope = {
     chat: undefined,
@@ -31,6 +32,11 @@ const run = (niwango: string) => {
     lastVideo: "sm1", //sm1
   };
   const ast = parseScript(niwango, "jest");
-  return execute(ast, [globalScope, environmentScope, prototypeScope], [ast]);
+  return execute(
+    ast,
+    [globalScope, environmentScope, prototypeScope],
+    [ast],
+    options,
+  );
 };
 export { run };
