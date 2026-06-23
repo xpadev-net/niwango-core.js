@@ -32,7 +32,8 @@ const execute: Execute = (
     }
   } catch (e) {
     if (!options.catch) throw e;
-    console.log(e);
+    const err = e as Record<string, unknown>;
+    console.log(e, err.ast, err.scopes);
     console.log("trace", trace);
   }
   for (const hook of resultHook) {

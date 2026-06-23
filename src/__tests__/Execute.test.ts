@@ -1,9 +1,19 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { config } from "@/config";
-import { appendResultHook, initResultHook } from "@/context";
+import { appendResultHook, initResultHook, prototypeScope } from "@/context";
 import { InvalidTypeError, NotImplementedError } from "@/errors";
 import { TooMuchRecursionError } from "@/errors/TooMuchRecursionError";
+import NiwangoCore from "@/main";
+import { parseScript } from "@/parser/parse";
 import { run } from "@/testUtils";
+
+const runPublic = (
+  niwango: string,
+  options?: Parameters<typeof NiwangoCore.execute>[3],
+) => {
+  const ast = parseScript(niwango, "jest");
+  return NiwangoCore.execute(ast, [{}, {}, prototypeScope], [ast], options);
+};
 
 describe("execute runtime error propagation", () => {
   afterEach(() => {
@@ -36,6 +46,17 @@ describe("execute runtime error propagation", () => {
     appendResultHook(() => "caught");
 
     expect(run("missing()", { catch: true })).toBe("caught");
+  });
+
+  test("keeps public execute lenient by default", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+    expect(runPublic("missing()")).toBeUndefined();
+    expect(log).toHaveBeenCalled();
+  });
+
+  test("allows public execute to opt into strict propagation", () => {
+    expect(() => runPublic("missing()", {})).toThrow(NotImplementedError);
   });
 
   test("throws InvalidTypeError by default", () => {
