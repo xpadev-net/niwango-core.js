@@ -14,7 +14,7 @@ import { initCore, resetCore } from "@/init";
 import { parseScript } from "@/parser/parse";
 import { format } from "@/utils/format";
 
-import { NiwangoSyntaxError as PeggySyntaxError, parse } from "./parser/parser";
+import { SyntaxError as PeggySyntaxError, parse } from "./parser/parser";
 
 initCore();
 
