@@ -8,6 +8,7 @@ export type A_ANY =
   | A_BinaryExpression
   | A_BlockStatement
   | A_CallExpression
+  | A_ConditionalExpression
   | A_IfStatement
   | A_Lambda
   | A_LambdaExpression
@@ -102,6 +103,12 @@ export type A_CallExpression = {
   callee: A_ANY;
   arguments: Argument<A_ANY>[];
   NIWANGO_Identifier?: A_ANY;
+};
+export type A_ConditionalExpression = {
+  type: "ConditionalExpression";
+  test: A_ANY;
+  consequent: A_ANY;
+  alternate: A_ANY;
 };
 export type A_IfStatement = {
   type: "IfStatement";

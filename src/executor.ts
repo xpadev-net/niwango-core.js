@@ -2,6 +2,7 @@ import type { A_ANY, T_scope } from "@/@types/ast";
 import type { Execute } from "@/@types/execute";
 import { config } from "@/config";
 import { resultHook, setExecute } from "@/context";
+import { NotImplementedError } from "@/errors/NotImplementedError";
 import { TooMuchRecursionError } from "@/errors/TooMuchRecursionError";
 import { processors } from "@/processors";
 import typeGuard from "@/typeGuard";
@@ -27,9 +28,8 @@ const execute: Execute = (
   trace = [...trace, script];
   try {
     const processor = processors[script.type];
-    if (processor) {
-      result = processor(script, scopes, trace);
-    }
+    if (!processor) throw new NotImplementedError(script, scopes);
+    result = processor(script, scopes, trace);
   } catch (e) {
     if (!options.catch) throw e;
     const err = e as Record<string, unknown>;
