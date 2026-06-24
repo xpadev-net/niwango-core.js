@@ -1,6 +1,7 @@
 import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
+import { normalizeSlotKey, setOwnSlot } from "@/utils/slot";
 
 import type { PrototypeObjectFunction } from "./index";
 
@@ -26,7 +27,9 @@ const processSetSlot: PrototypeObjectFunction = (
     );
   }
   const value = execute(script.arguments[1], scopes, trace);
-  object[key] = value;
+  if (!setOwnSlot(object, normalizeSlotKey(key), value)) {
+    return;
+  }
   return value;
 };
 

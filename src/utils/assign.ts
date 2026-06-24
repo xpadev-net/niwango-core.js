@@ -1,6 +1,7 @@
 import type { A_ANY, T_scope } from "@/@types/ast";
 import { execute, getName, setAssign } from "@/context";
 import typeGuard from "@/typeGuard";
+import { getOwnSlot, normalizeSlotKey, setOwnSlot } from "@/utils/slot";
 
 /**
  * 変数に代入する関数
@@ -19,14 +20,18 @@ const assign = (
   }
   try {
     if (typeGuard.Identifier(target)) {
+      const key = normalizeSlotKey(target.name);
+      if (key === undefined) {
+        return;
+      }
       for (const scope of scopes) {
-        if (scope[target.name] !== undefined) {
-          scope[target.name] = value;
+        if (getOwnSlot(scope, key) !== undefined) {
+          setOwnSlot(scope, key, value);
           return;
         }
       }
       if (scopes[0]) {
-        scopes[0][target.name] = value;
+        setOwnSlot(scopes[0], key, value);
       }
     } else if (typeGuard.MemberExpression(target)) {
       const left = execute(target.object, scopes, trace);
@@ -40,12 +45,12 @@ const assign = (
         );
         return;
       }
-      const key = (
+      const key = normalizeSlotKey(
         target.computed
           ? execute(target.property, scopes, trace)
-          : getName(target.property, scopes, trace)
-      ) as string;
-      left[key] = value;
+          : getName(target.property, scopes, trace),
+      );
+      setOwnSlot(left, key, value);
     }
   } catch (e) {
     if (e instanceof Error) {

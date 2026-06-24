@@ -2,6 +2,7 @@ import type { A_ANY } from "@/@types";
 import type { definedFunction } from "@/@types/function";
 import { execute } from "@/context";
 import type { PrototypeObjectFunction } from "@/prototype/Object/index";
+import { normalizeSlotKey, setOwnSlot } from "@/utils/slot";
 
 /**
  * @関数
@@ -23,11 +24,11 @@ const processDefKari: PrototypeObjectFunction = (
   if (typeof functionName !== "string") {
     return;
   }
-  object[functionName] = {
+  setOwnSlot(object, normalizeSlotKey(functionName), {
     type: "definedFunction",
     isKari: true,
     script,
-  } as definedFunction;
+  } as definedFunction);
 };
 
 export { processDefKari };

@@ -1,6 +1,7 @@
 import type { A_ANY, T_scope } from "@/@types/ast";
 import { resultHook } from "@/context";
 import typeGuard from "@/typeGuard";
+import { getOwnSlot, normalizeSlotKey, setOwnSlot } from "@/utils/slot";
 
 /**
  * 変数の参照を取得する関数
@@ -11,9 +12,13 @@ import typeGuard from "@/typeGuard";
 const resolve = (script: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
   try {
     if (typeGuard.Identifier(script)) {
+      const key = normalizeSlotKey(script.name);
+      if (key === undefined || typeof key !== "string") {
+        return undefined;
+      }
       for (const scope of scopes) {
-        if (scope[script.name] !== undefined) {
-          return processResolveHook(scope, script.name);
+        if (getOwnSlot(scope, key) !== undefined) {
+          return processResolveHook(scope, key);
         }
       }
     }
@@ -26,11 +31,11 @@ const resolve = (script: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
 };
 
 const processResolveHook = (scope: T_scope, name: string) => {
-  let value = scope[name];
+  let value = getOwnSlot(scope, name);
   for (const hook of resultHook) {
     value = hook(value);
   }
-  scope[name] = value;
+  setOwnSlot(scope, name, value);
   return value;
 };
 

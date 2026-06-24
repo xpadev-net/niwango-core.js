@@ -3,6 +3,12 @@ import type { definedFunction } from "@/@types/function";
 import { execute, getName } from "@/context";
 import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";
+import {
+  createSlotStore,
+  getOwnSlot,
+  normalizeSlotKey,
+  setOwnSlot,
+} from "@/utils/slot";
 
 /**
  * 配列やオブジェクトを処理する
@@ -24,29 +30,37 @@ const processMemberExpression = (
     );
     return;
   }
-  const right = (
+  const right = normalizeSlotKey(
     script.computed
       ? execute(script.property, scopes, trace)
-      : getName(script.property, scopes, trace)
-  ) as string | number;
-  if (typeGuard.object(left) && typeGuard.definedFunction(left[right])) {
-    const func = left[right] as definedFunction;
+      : getName(script.property, scopes, trace),
+  );
+  if (right === undefined) {
+    return;
+  }
+  const leftSlot = getOwnSlot(left, right);
+  if (typeGuard.object(left) && typeGuard.definedFunction(leftSlot)) {
+    const func = leftSlot as definedFunction;
     return execute(
       func.script.arguments[1],
-      [{ self: left }, ...scopes],
+      [createSelfScope(left), ...scopes],
       trace,
     );
   }
   if (typeGuard.LambdaExpression(left)) {
     if (typeGuard.SequenceExpression(script.property)) {
-      const args: { [key: string]: unknown } = {};
+      const args = createSlotStore();
       let index = 0;
       for (const arg of script.property.expressions) {
-        args[`@${index++}`] = execute(arg, scopes, trace);
+        setOwnSlot(args, `@${index++}`, execute(arg, scopes, trace));
       }
       return execute(left.body, [args, ...left.scopes], trace);
     }
-    return execute(left.body, [{ "@0": right }, ...left.scopes], trace);
+    return execute(
+      left.body,
+      [createSlotScope("@0", right), ...left.scopes],
+      trace,
+    );
   }
   try {
     return processCallExpression(
@@ -66,12 +80,22 @@ const processMemberExpression = (
         },
         arguments: [],
       },
-      [{ self: left }, ...scopes],
+      [createSelfScope(left), ...scopes],
       trace,
     );
   } catch (_e) {
-    return (left as { [key: string]: unknown })[right];
+    return getOwnSlot(left, right);
   }
+};
+
+const createSelfScope = (self: unknown) => {
+  return createSlotScope("self", self);
+};
+
+const createSlotScope = (key: string | number, value: unknown) => {
+  const scope = createSlotStore();
+  setOwnSlot(scope, key, value);
+  return scope;
 };
 
 export { processMemberExpression };

@@ -3,6 +3,7 @@ import type { definedFunction } from "@/@types/function";
 import { getName } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
 import typeGuard from "@/typeGuard";
+import { normalizeSlotKey, setOwnSlot } from "@/utils/slot";
 
 import type { PrototypeObjectFunction } from "./index";
 
@@ -35,11 +36,11 @@ const processDef: PrototypeObjectFunction = (
   if (typeof functionName !== "string") {
     throw new InvalidTypeError("function name must be string", script, scopes);
   }
-  object[functionName] = {
+  setOwnSlot(object, normalizeSlotKey(functionName), {
     type: "definedFunction",
     isKari: false,
     script,
-  } as definedFunction;
+  } as definedFunction);
 };
 
 export { processDef };
