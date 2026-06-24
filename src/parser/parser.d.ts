@@ -17,6 +17,8 @@ export function parse(
   options?: Partial<{ grammarSource: string }>,
 ): A_ANY;
 
+export const StartRules: ["Start"];
+
 /**
  * パースエラーが発生した際に投げられるエラー?
  * 多分型はあってるはず
