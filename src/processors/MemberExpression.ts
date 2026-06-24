@@ -3,6 +3,7 @@ import type { definedFunction } from "@/@types/function";
 import { execute, getName } from "@/context";
 import { processCallExpression } from "@/processors/CallExpression";
 import typeGuard from "@/typeGuard";
+import { getOwnSlot, normalizeSlotKey } from "@/utils/slot";
 
 /**
  * 配列やオブジェクトを処理する
@@ -24,13 +25,17 @@ const processMemberExpression = (
     );
     return;
   }
-  const right = (
+  const right = normalizeSlotKey(
     script.computed
       ? execute(script.property, scopes, trace)
-      : getName(script.property, scopes, trace)
-  ) as string | number;
-  if (typeGuard.object(left) && typeGuard.definedFunction(left[right])) {
-    const func = left[right] as definedFunction;
+      : getName(script.property, scopes, trace),
+  );
+  if (right === undefined) {
+    return;
+  }
+  const leftSlot = getOwnSlot(left, right);
+  if (typeGuard.object(left) && typeGuard.definedFunction(leftSlot)) {
+    const func = leftSlot as definedFunction;
     return execute(
       func.script.arguments[1],
       [{ self: left }, ...scopes],
@@ -70,7 +75,7 @@ const processMemberExpression = (
       trace,
     );
   } catch (_e) {
-    return (left as { [key: string]: unknown })[right];
+    return getOwnSlot(left, right);
   }
 };
 

@@ -1,6 +1,7 @@
 import type { A_ANY } from "@/@types";
 import { execute } from "@/context";
 import { InvalidTypeError } from "@/errors/InvalidTypeError";
+import { getOwnSlot, normalizeSlotKey } from "@/utils/slot";
 
 import type { PrototypeObjectFunction } from "./index";
 
@@ -25,7 +26,7 @@ const processGetSlot: PrototypeObjectFunction = (
       scopes,
     );
   }
-  return object[key];
+  return getOwnSlot(object, normalizeSlotKey(key));
 };
 
 export { processGetSlot };

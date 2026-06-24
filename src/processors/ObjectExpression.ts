@@ -1,5 +1,6 @@
 import type { A_ANY, A_ObjectExpression, T_scope } from "@/@types/ast";
 import { execute, getName } from "@/context";
+import { createSlotStore, normalizeSlotKey, setOwnSlot } from "@/utils/slot";
 
 /**
  * オブジェクトを作成する
@@ -11,13 +12,11 @@ const processObjectExpression = (
   scopes: T_scope[],
   trace: A_ANY[],
 ) => {
-  const object: { [key: string | number | symbol]: unknown } = {};
+  const object = createSlotStore();
   for (const item of script.properties) {
-    object[getName(item.key, scopes, trace) as string] = execute(
-      item.value,
-      scopes,
-      trace,
-    );
+    const key = normalizeSlotKey(getName(item.key, scopes, trace));
+    const value = execute(item.value, scopes, trace);
+    setOwnSlot(object, key, value);
   }
   return object;
 };
