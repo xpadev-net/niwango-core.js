@@ -15,7 +15,7 @@ const processVariableDeclaration = (
   let lastItem: unknown;
   for (const item of script.declarations) {
     if (item.init === null) {
-      return execute(item.id, scopes, trace);
+      lastItem = execute(item.id, scopes, trace);
     } else {
       if (scopes[0]) {
         lastItem = scopes[0][getName(item.id, scopes, trace) as string] =
