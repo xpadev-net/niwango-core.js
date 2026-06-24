@@ -15,12 +15,14 @@
     "typedoc": "typedoc --entryPointStrategy Expand --out ./docs/type/ ./src/",
     "prepack": "npm run build",
     "check-types": "npx tsc --noEmit --jsx react",
+    "check:workflows": "node ./util/check-workflows.mjs",
     "eslint": "biome lint src",
     "eslint:fix": "biome lint --write src",
     "format": "biome format src",
     "format:fix": "biome format --write src",
-    "lint": "biome check src",
-    "lint:fix": "biome check --write --unsafe src",
+    "lint": "npm run check:workflows && biome check src .babelrc.js biome.json package.json pnpm-workspace.yaml tsconfig.json tsconfig.build-dts.json tsconfig.eslint.json vitest.config.ts rollup.config.mjs rollup.config.dts.mjs util/check-workflows.mjs util/package-smoke.mjs && npm run check-types && npm run check:parser && npm run build && npm run smoke:package",
+    "lint:fix": "biome check --write --unsafe src .babelrc.js biome.json package.json pnpm-workspace.yaml tsconfig.json tsconfig.build-dts.json tsconfig.eslint.json vitest.config.ts rollup.config.mjs rollup.config.dts.mjs util/check-workflows.mjs util/package-smoke.mjs",
+    "smoke:package": "node ./util/package-smoke.mjs",
     "prepare": "node -e \"process.exit(process.env.CI?0:1)\" || lefthook install || node -e \"process.exit(0)\"",
     "test": "vitest"
   },
@@ -52,6 +54,7 @@
     "typedoc": "^0.28.10",
     "typedoc-plugin-missing-exports": "^4.1.0",
     "typescript": "^5.9.2",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "yaml": "^2.9.0"
   }
 }

@@ -1,17 +1,47 @@
-name: Typescript Jest
+name: Quality
 
 on:
   push:
     paths:
       - "src/**"
+      - "util/check-workflows.mjs"
+      - "util/generate-parser.js"
+      - "util/package-smoke.mjs"
+      - "util/resolve-path-alias.js"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "biome.json"
+      - "tsconfig*.json"
+      - "rollup.config*.mjs"
+      - "vitest.config.ts"
+      - ".babelrc.js"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [ develop ]
+    paths:
+      - "src/**"
+      - "util/check-workflows.mjs"
+      - "util/generate-parser.js"
+      - "util/package-smoke.mjs"
+      - "util/resolve-path-alias.js"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "biome.json"
+      - "tsconfig*.json"
+      - "rollup.config*.mjs"
+      - "vitest.config.ts"
+      - ".babelrc.js"
+      - ".github/workflows/**"
 
 defaults:
   run:
     shell: bash
 
 jobs:
-  typescript-jest:
-    name: Typescript Jest
+  quality:
+    name: Quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,5 +56,8 @@ jobs:
           npm install -g pnpm
           pnpm install
 
+      - name: Run quality checks
+        run: pnpm lint
+
       - name: Run tests
-        run: pnpm test
+        run: pnpm test --run
