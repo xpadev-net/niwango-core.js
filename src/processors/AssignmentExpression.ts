@@ -51,9 +51,18 @@ const processAssignmentExpression = (
 ): unknown => {
   const reference = resolveReference(script.left, scopes, trace);
   const left = script.operator === "=" ? undefined : reference?.get();
-  const right = execute(script.right, scopes, trace);
   const processor = processors[script.operator];
   if (!processor) throw new NotImplementedError(script, scopes);
+  if (script.operator === "&&=" && !left) {
+    return left;
+  }
+  if (script.operator === "||=" && left) {
+    return left;
+  }
+  if (script.operator === "??=" && left !== null && left !== undefined) {
+    return left;
+  }
+  const right = execute(script.right, scopes, trace);
   const result = processor(left, right);
   reference?.set(result);
   return result;

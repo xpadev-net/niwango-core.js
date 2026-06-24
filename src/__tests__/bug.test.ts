@@ -1,5 +1,18 @@
 import { expect, test } from "vitest";
+import type { A_ANY } from "@/@types/ast";
+import { execute, prototypeScope } from "@/context";
 import { run } from "@/testUtils";
+
+const runAst = (body: A_ANY[], globalScope: Record<string, unknown>) => {
+  return execute(
+    {
+      type: "Program",
+      body,
+    },
+    [globalScope, {}, prototypeScope],
+    body,
+  );
+};
 
 test("bug:sm13570088", () => {
   expect(
@@ -44,4 +57,39 @@ test("compound member assignment reads defined function value once", () => {
       "obj={};calls=0;obj.def(value(),calls++;1);obj.value+=4;calls+':'+obj.value",
     ),
   ).toBe("1:5");
+});
+
+test("logical assignment short-circuits the right side", () => {
+  for (const [operator, value] of [
+    ["&&=", 0],
+    ["||=", 1],
+    ["??=", 1],
+  ] as const) {
+    const globalScope = { hit: 0, value };
+    expect(
+      runAst(
+        [
+          {
+            type: "AssignmentExpression",
+            operator,
+            left: {
+              type: "Identifier",
+              name: "value",
+            },
+            right: {
+              type: "UpdateExpression",
+              operator: "++",
+              argument: {
+                type: "Identifier",
+                name: "hit",
+              },
+              prefix: false,
+            },
+          },
+        ],
+        globalScope,
+      ),
+    ).toBe(value);
+    expect(globalScope).toEqual({ hit: 0, value });
+  }
 });
