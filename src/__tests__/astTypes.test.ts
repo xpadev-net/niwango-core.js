@@ -96,4 +96,17 @@ describe("parser AST shapes covered by declarations", () => {
       expect.objectContaining({ type: "Literal", value: 2 }),
     ]);
   });
+
+  test("parses conditional expressions as general AST nodes", () => {
+    const ast = parse("true ? 1 : 2") as A_Program;
+    const statement = ast.body[0];
+
+    expect(statement?.type).toBe("ExpressionStatement");
+    if (statement?.type !== "ExpressionStatement") {
+      throw new Error("expected expression statement");
+    }
+
+    expect(statement.expression.type).toBe("ConditionalExpression");
+    expect(asAst(statement.expression)).toBe(statement.expression);
+  });
 });
