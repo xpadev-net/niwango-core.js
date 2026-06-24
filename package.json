@@ -20,8 +20,8 @@
     "eslint:fix": "biome lint --write src",
     "format": "biome format src",
     "format:fix": "biome format --write src",
-    "lint": "npm run check:workflows && biome check src .babelrc.js biome.json package.json pnpm-workspace.yaml tsconfig.json tsconfig.build-dts.json tsconfig.eslint.json vitest.config.ts rollup.config.mjs rollup.config.dts.mjs util/check-workflows.mjs util/package-smoke.mjs && npm run check-types && npm run check:parser && npm run build && npm run smoke:package",
-    "lint:fix": "biome check --write --unsafe src .babelrc.js biome.json package.json pnpm-workspace.yaml tsconfig.json tsconfig.build-dts.json tsconfig.eslint.json vitest.config.ts rollup.config.mjs rollup.config.dts.mjs util/check-workflows.mjs util/package-smoke.mjs",
+    "lint": "node \"$npm_execpath\" run check:workflows && biome check src .babelrc.js biome.json package.json pnpm-workspace.yaml tsconfig.json tsconfig.build-dts.json tsconfig.eslint.json vitest.config.ts rollup.config.mjs rollup.config.dts.mjs util/check-workflows.mjs util/generate-parser.js util/package-smoke.mjs util/resolve-path-alias.js && node \"$npm_execpath\" run check-types && node \"$npm_execpath\" run check:parser && node \"$npm_execpath\" run build && node \"$npm_execpath\" run smoke:package",
+    "lint:fix": "biome check --write --unsafe src .babelrc.js biome.json package.json pnpm-workspace.yaml tsconfig.json tsconfig.build-dts.json tsconfig.eslint.json vitest.config.ts rollup.config.mjs rollup.config.dts.mjs util/check-workflows.mjs util/generate-parser.js util/package-smoke.mjs util/resolve-path-alias.js",
     "smoke:package": "node ./util/package-smoke.mjs",
     "prepare": "node -e \"process.exit(process.env.CI?0:1)\" || lefthook install || node -e \"process.exit(0)\"",
     "test": "vitest"
