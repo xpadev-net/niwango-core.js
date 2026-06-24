@@ -37,11 +37,40 @@ const setResolvePrototype = (val: ResolvePrototype) => {
   resolvePrototype = val;
 };
 
-let prototypeScope: {
-  [key in "Array" | "Bool" | "Number" | "Object" | "String" | "Value"]: {
+type PrototypeScopeKey =
+  | "Array"
+  | "Bool"
+  | "Number"
+  | "Object"
+  | "String"
+  | "Value";
+
+type PrototypeScope = {
+  [key in PrototypeScopeKey]: {
     [key: string]: unknown;
   };
-} = {
+};
+
+const prototypeScopeKeys: PrototypeScopeKey[] = [
+  "Array",
+  "Bool",
+  "Number",
+  "Object",
+  "String",
+  "Value",
+];
+
+const clearMutableObject = (object: { [key: string]: unknown }) => {
+  for (const key of Object.keys(object)) {
+    delete object[key];
+  }
+};
+
+const isPrototypeScopeKey = (key: string): key is PrototypeScopeKey => {
+  return prototypeScopeKeys.includes(key as PrototypeScopeKey);
+};
+
+const prototypeScope: PrototypeScope = {
   Array: {},
   Bool: {},
   Number: {},
@@ -51,20 +80,21 @@ let prototypeScope: {
 };
 
 const initPrototypeScope = () => {
-  prototypeScope = {
-    Array: {},
-    Bool: {},
-    Number: {},
-    Object: {},
-    String: {},
-    Value: {},
-  };
+  const prototypeScopeRecord = prototypeScope as Record<string, unknown>;
+  for (const key of Object.keys(prototypeScopeRecord)) {
+    if (!isPrototypeScopeKey(key)) {
+      delete prototypeScopeRecord[key];
+    }
+  }
+  for (const key of prototypeScopeKeys) {
+    clearMutableObject(prototypeScope[key]);
+  }
 };
 
-let definedFunctions: { [key: string]: IrFunction } = {};
+const definedFunctions: { [key: string]: IrFunction } = {};
 
 const initDefinedFunctions = () => {
-  definedFunctions = {};
+  clearMutableObject(definedFunctions);
 };
 
 const appendDefinedFunctions = (name: string, func: IrFunction) => {
@@ -77,14 +107,14 @@ const setIsWide = (val: boolean) => {
   isWide = val;
 };
 
-let resultHook: ((input: unknown) => unknown)[] = [];
+const resultHook: ((input: unknown) => unknown)[] = [];
 
 const appendResultHook = (func: (input: unknown) => unknown) => {
   resultHook.push(func);
 };
 
 const initResultHook = () => {
-  resultHook = [];
+  resultHook.length = 0;
 };
 
 export {
