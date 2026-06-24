@@ -93,3 +93,27 @@ test("logical assignment short-circuits the right side", () => {
     expect(globalScope).toEqual({ hit: 0, value });
   }
 });
+
+test("logical assignment parses and executes from source", () => {
+  expect(run("value=0;hit=0;value ||= (hit=2);hit+':'+value")).toBe("2:2");
+  expect(run("value=1;hit=0;value ||= (hit=2);hit+':'+value")).toBe("0:1");
+
+  expect(run("value=1;hit=0;value &&= (hit=2);hit+':'+value")).toBe("2:2");
+  expect(run("value=0;hit=0;value &&= (hit=2);hit+':'+value")).toBe("0:0");
+
+  expect(run("value=nil;hit=0;value ??= (hit=2);hit+':'+value")).toBe("2:2");
+  expect(run("value=1;hit=0;value ??= (hit=2);hit+':'+value")).toBe("0:1");
+});
+
+test("logical assignment keeps computed member targets single-pass", () => {
+  for (const [script, expected] of [
+    ["i=0;hit=0;a=[1];a[i++] ||= (hit=2);i+':'+hit+':'+a[0]", "1:0:1"],
+    ["i=0;hit=0;a=[0];a[i++] ||= (hit=2);i+':'+hit+':'+a[0]", "1:2:2"],
+    ["i=0;hit=0;a=[0];a[i++] &&= (hit=2);i+':'+hit+':'+a[0]", "1:0:0"],
+    ["i=0;hit=0;a=[1];a[i++] &&= (hit=2);i+':'+hit+':'+a[0]", "1:2:2"],
+    ["i=0;hit=0;a=[1];a[i++] ??= (hit=2);i+':'+hit+':'+a[0]", "1:0:1"],
+    ["i=0;hit=0;a=[nil];a[i++] ??= (hit=2);i+':'+hit+':'+a[0]", "1:2:2"],
+  ] as const) {
+    expect(run(script)).toBe(expected);
+  }
+});
