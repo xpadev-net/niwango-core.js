@@ -1,5 +1,6 @@
 import type { A_ANY, A_CallExpression, T_scope } from "@/@types/ast";
 import type { IrFunction } from "@/@types/functions";
+import { assertResourceLimit } from "@/config";
 import { execute } from "@/context";
 
 /**
@@ -20,8 +21,16 @@ const processWhileKari: IrFunction = (
     return;
   }
   let loopCount = 0;
-  while (execute(script.arguments[0], scopes, trace) && loopCount++ <= 10000) {
+  while (execute(script.arguments[0], scopes, trace)) {
+    assertResourceLimit(
+      "loopIterations",
+      loopCount + 1,
+      script,
+      scopes,
+      "while_kari iterations",
+    );
     execute(script.arguments[1], scopes, trace);
+    loopCount++;
   }
 };
 
