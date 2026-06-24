@@ -28,7 +28,7 @@ const initConfig = () => {
 
 const getResourceLimit = (limitName: ResourceLimitKey) => {
   if (limitName === "recursionDepth" && config.recursionLimit !== undefined) {
-    return config.recursionLimit;
+    return config.recursionLimit || Number.POSITIVE_INFINITY;
   }
   return config.resourceLimits[limitName];
 };

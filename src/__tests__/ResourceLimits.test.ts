@@ -72,4 +72,10 @@ describe("resource limits", () => {
       TooMuchRecursionError,
     );
   });
+
+  test("legacy recursionLimit zero keeps recursion checking disabled", () => {
+    config.recursionLimit = 0;
+
+    expect(run("def(f(), 1); f()")).toBe(1);
+  });
 });
