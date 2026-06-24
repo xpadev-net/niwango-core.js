@@ -1,3 +1,4 @@
+import { assertResourceLimit } from "@/config";
 import { format } from "@/utils/format";
 
 /**
@@ -8,9 +9,31 @@ import { format } from "@/utils/format";
  */
 const Multiplication = (left: unknown, right: unknown) => {
   if (typeof left === "string") {
-    return left.repeat(format(right, "number"));
+    const repeatCount = format(right, "number");
+    assertStringRepeatResourceLimit(left, repeatCount);
+    return left.repeat(repeatCount);
   }
   return format(left, "number") * format(right, "number");
+};
+
+const assertStringRepeatResourceLimit = (value: string, repeat: number) => {
+  const repeatCount = Math.trunc(repeat);
+  if (Number.isNaN(repeatCount) || repeatCount <= 0) return;
+
+  assertResourceLimit(
+    "stringRepeatCount",
+    repeatCount,
+    undefined,
+    undefined,
+    "string repeat count",
+  );
+  assertResourceLimit(
+    "stringRepeatLength",
+    value.length * repeatCount,
+    undefined,
+    undefined,
+    "string repeat length",
+  );
 };
 
 /**
