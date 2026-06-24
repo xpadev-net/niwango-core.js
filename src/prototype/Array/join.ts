@@ -9,11 +9,13 @@ const processJoin: PrototypeArrayFunction = (
   object,
   trace: A_ANY[],
 ) => {
-  const separator = execute(script.arguments[0], scopes, trace);
-  if (typeof separator !== "undefined") {
-    return object.join(format(separator, "string"));
+  if (script.arguments.length > 0) {
+    const separator = execute(script.arguments[0], scopes, trace);
+    if (typeof separator !== "undefined") {
+      return object.join(format(separator, "string"));
+    }
   }
-  return object.join("");
+  return object.join(",");
 };
 
 export { processJoin };

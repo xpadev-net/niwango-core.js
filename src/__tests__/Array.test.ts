@@ -25,6 +25,7 @@ describe("Array.prototype", () => {
   });
 
   test("join", () => {
+    expect(run(`array=['A','B','C'];array.join()`)).toBe("A,B,C");
     expect(run(`array=['A','B','C'];array.join('-')`)).toBe("A-B-C");
     expect(run(`array=[1,2,3];array.join('')`)).toBe("123");
   });
@@ -45,6 +46,11 @@ describe("Array.prototype", () => {
 
   test("push", () => {
     expect(run(`array = ["A","B","C"];array.push("D")`)).toBe(4);
+    expect(
+      run(
+        `i = 0;array = ["A"];result = array.push(i += 1,i += 1);result + ":" + array.join("-")`,
+      ),
+    ).toBe("3:A-1-2");
     expect(
       run(
         `array = ["A","B","C"];array.push("D");array.size + ":" + array[array.size-1]`,
@@ -73,6 +79,11 @@ describe("Array.prototype", () => {
 
   test("unshift", () => {
     expect(run(`array = ["A","B","C"];array.unshift("D")`)).toBe(4);
+    expect(
+      run(
+        `i = 0;array = ["A"];result = array.unshift(i += 1,i += 1);result + ":" + array.join("-")`,
+      ),
+    ).toBe("3:1-2-A");
     expect(
       run(
         `array = ["A","B","C"];array.unshift("D");array.size + ":" + array[0]`,
