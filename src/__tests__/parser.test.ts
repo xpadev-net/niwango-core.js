@@ -14,7 +14,7 @@ test("parseScript rejects oversized script input before parsing", () => {
   ).toThrow(ParserInputLimitError);
 });
 
-test("parseScript parses valid input below the configured size limit", () => {
+test("parseScript parses valid input at the configured size limit", () => {
   const script = "1+2";
 
   expect(
@@ -44,6 +44,22 @@ test("parseScript recovery stops at the configured recovery count", () => {
       }),
     ).toThrow(ParserRecoveryLimitError);
     expect(info).toHaveBeenCalledTimes(1);
+  } finally {
+    info.mockRestore();
+  }
+});
+
+test("parseScript recovery with zero attempts surfaces syntax errors", () => {
+  const info = vi.spyOn(console, "info").mockImplementation(() => {});
+
+  try {
+    expect(() =>
+      parseScript("1@+2", "parser.test", {
+        recoverSyntaxErrors: true,
+        maxRecoveryAttempts: 0,
+      }),
+    ).toThrow(PeggySyntaxError);
+    expect(info).not.toHaveBeenCalled();
   } finally {
     info.mockRestore();
   }

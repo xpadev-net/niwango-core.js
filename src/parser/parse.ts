@@ -86,7 +86,7 @@ const parseScript = (
     script = script.slice(1);
   }
   assertParserInputLength(script, maxInputLength);
-  if (!options.recoverSyntaxErrors) {
+  if (!options.recoverSyntaxErrors || maxRecoveryAttempts === 0) {
     return parse(script, { grammarSource: name });
   }
   let firstError: unknown;
