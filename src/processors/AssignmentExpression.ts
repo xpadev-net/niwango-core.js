@@ -1,5 +1,5 @@
 import type { A_ANY, A_AssignmentExpression, T_scope } from "@/@types/ast";
-import { assign, execute } from "@/context";
+import { execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import {
   Addition,
@@ -15,6 +15,7 @@ import {
   Subtraction,
   UnsignedRightShift,
 } from "@/operators";
+import { resolveReference } from "@/utils/reference";
 
 /**
  * 演算子と処理の対応表
@@ -48,12 +49,22 @@ const processAssignmentExpression = (
   scopes: T_scope[],
   trace: A_ANY[],
 ): unknown => {
-  const left = execute(script.left, scopes, trace);
-  const right = execute(script.right, scopes, trace);
+  const reference = resolveReference(script.left, scopes, trace);
+  const left = script.operator === "=" ? undefined : reference?.get();
   const processor = processors[script.operator];
   if (!processor) throw new NotImplementedError(script, scopes);
+  if (script.operator === "&&=" && !left) {
+    return left;
+  }
+  if (script.operator === "||=" && left) {
+    return left;
+  }
+  if (script.operator === "??=" && left !== null && left !== undefined) {
+    return left;
+  }
+  const right = execute(script.right, scopes, trace);
   const result = processor(left, right);
-  assign(script.left, result, scopes, trace);
+  reference?.set(result);
   return result;
 };
 
