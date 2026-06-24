@@ -14,3 +14,11 @@ test("bug:sm13570088", () => {
 test("bug:sm11605742", () => {
   expect(run(`return = "test";return`)).toBe("test");
 });
+
+test("local nil argument shadows outer slot", () => {
+  expect(run(`x="outer";def(read(x),x);read(nil)`)).toBeUndefined();
+});
+
+test("assignment targets local nil argument instead of outer slot", () => {
+  expect(run(`x="outer";def(write(x),(x="inner"));write(nil);x`)).toBe("outer");
+});

@@ -1,7 +1,7 @@
 import type { A_ANY, T_scope } from "@/@types/ast";
 import { execute, getName, setAssign } from "@/context";
 import typeGuard from "@/typeGuard";
-import { getOwnSlot, normalizeSlotKey, setOwnSlot } from "@/utils/slot";
+import { hasOwnSlot, normalizeSlotKey, setOwnSlot } from "@/utils/slot";
 
 /**
  * 変数に代入する関数
@@ -25,7 +25,7 @@ const assign = (
         return;
       }
       for (const scope of scopes) {
-        if (getOwnSlot(scope, key) !== undefined) {
+        if (hasOwnSlot(scope, key)) {
           setOwnSlot(scope, key, value);
           return;
         }

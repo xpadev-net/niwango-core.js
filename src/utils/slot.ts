@@ -52,6 +52,14 @@ const getOwnSlot = (target: unknown, key: SlotKey | undefined): unknown => {
   return slotStore[key];
 };
 
+const hasOwnSlot = (target: unknown, key: SlotKey | undefined): boolean => {
+  const slotStore = getReadableSlotStore(target);
+  if (key === undefined || !slotStore) {
+    return false;
+  }
+  return Object.hasOwn(slotStore, key);
+};
+
 const setOwnSlot = (
   target: unknown,
   key: SlotKey | undefined,
@@ -67,5 +75,11 @@ const setOwnSlot = (
   return true;
 };
 
-export { createSlotStore, getOwnSlot, normalizeSlotKey, setOwnSlot };
+export {
+  createSlotStore,
+  getOwnSlot,
+  hasOwnSlot,
+  normalizeSlotKey,
+  setOwnSlot,
+};
 export type { SlotKey, SlotStore };
