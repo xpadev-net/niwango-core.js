@@ -60,6 +60,9 @@ const setOwnSlot = (
   if (key === undefined || !isSlotStore(target)) {
     return false;
   }
+  if (typeof key === "string" && dangerousSlotNames.has(key)) {
+    return false;
+  }
   target[key] = value;
   return true;
 };

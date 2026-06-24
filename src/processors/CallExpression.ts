@@ -31,6 +31,11 @@ import {
   setOwnSlot,
 } from "@/utils/slot";
 
+type DefinedFunctionParameter = {
+  name: string;
+  slotKey: SlotKey | undefined;
+};
+
 const processCallExpression = (
   script: A_CallExpression,
   scopes: T_scope[],
@@ -138,13 +143,22 @@ const processDefinedNormalFunction = (
   func: definedNormalFunction,
   object?: { [k: string]: unknown },
 ) => {
-  const argNames = func.script.arguments[0].arguments
-    .map((arg) => getName(arg, scopes, trace) as string)
-    .filter((argName) => typeof argName === "string");
+  const parameters = func.script.arguments[0].arguments
+    .map((arg): DefinedFunctionParameter | undefined => {
+      const name = getName(arg, scopes, trace);
+      if (typeof name !== "string") {
+        return undefined;
+      }
+      return {
+        name,
+        slotKey: normalizeSlotKey(name),
+      };
+    })
+    .filter((argName) => argName !== undefined);
   const scopeValues = parseDefinedFunctionArguments(
     script.arguments,
     scopes,
-    argNames,
+    parameters,
     trace,
   );
   const scope = object
@@ -156,7 +170,7 @@ const processDefinedNormalFunction = (
 const parseDefinedFunctionArguments = (
   inputs: Argument<A_ANY>[],
   scopes: T_scope[],
-  keys: string[],
+  parameters: DefinedFunctionParameter[],
   trace: A_ANY[],
 ): SlotStore => {
   const result = createSlotStore();
@@ -166,21 +180,24 @@ const parseDefinedFunctionArguments = (
   for (const item of inputs) {
     if (item.NIWANGO_Identifier) {
       const key = getName(item.NIWANGO_Identifier, scopes, trace);
-      if (typeof key === "string" && keys.includes(key)) {
-        assignedKeys.add(key);
-        setOwnSlot(result, normalizeSlotKey(key), execute(item, scopes, trace));
-        continue;
+      if (typeof key === "string") {
+        const parameter = parameters.find((param) => param.name === key);
+        if (parameter) {
+          assignedKeys.add(key);
+          setOwnSlot(result, parameter.slotKey, execute(item, scopes, trace));
+          continue;
+        }
       }
     }
     nonKeyValues.push(item);
   }
 
   let i = 0;
-  for (const key of keys) {
+  for (const parameter of parameters) {
     const value = nonKeyValues[i];
-    if (!assignedKeys.has(key) && value) {
-      assignedKeys.add(key);
-      setOwnSlot(result, normalizeSlotKey(key), execute(value, scopes, trace));
+    if (!assignedKeys.has(parameter.name) && value) {
+      assignedKeys.add(parameter.name);
+      setOwnSlot(result, parameter.slotKey, execute(value, scopes, trace));
       i++;
     }
   }
