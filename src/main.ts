@@ -12,7 +12,11 @@ import {
 } from "@/context";
 import * as Errors from "@/errors";
 import { initCore, resetCore } from "@/init";
-import { parseScript } from "@/parser/parse";
+import {
+  ParserInputLimitError,
+  ParserRecoveryLimitError,
+  parseScript,
+} from "@/parser/parse";
 import { format } from "@/utils/format";
 
 import { SyntaxError as PeggySyntaxError, parse } from "./parser/parser";
@@ -40,6 +44,8 @@ class NiwangoCore {
   static parseScript = parseScript;
   static parse = parse;
   static PeggySyntaxError = PeggySyntaxError;
+  static ParserInputLimitError = ParserInputLimitError;
+  static ParserRecoveryLimitError = ParserRecoveryLimitError;
   static appendDefinedFunctions = appendDefinedFunctions;
   static appendResultHook = appendResultHook;
   static setIsWide = setIsWide;
