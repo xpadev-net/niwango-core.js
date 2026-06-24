@@ -126,7 +126,7 @@ describe("generated parser contract", () => {
     ).toContain('"@"');
   });
 
-  test.each(["", null, 0, false])(
+  test.each(["", null, 0, false, undefined])(
     "preserves startRule validation for %s",
     (startRule) => {
       expect(() => generatedParser.parse("1+2", { startRule })).toThrow(

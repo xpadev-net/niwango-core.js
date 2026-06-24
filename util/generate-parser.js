@@ -34,5 +34,5 @@ if (!generated.includes(startRuleTruthinessCheck)) {
 
 writeFileSync(
   parserPath,
-  generated.replace(startRuleTruthinessCheck, startRulePresenceCheck),
+  generated.replaceAll(startRuleTruthinessCheck, startRulePresenceCheck),
 );
