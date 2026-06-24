@@ -1,6 +1,26 @@
 import { expect, test, vi } from "vitest";
-import { parseScript } from "@/parser/parse";
+import {
+  ParserInputLimitError,
+  ParserRecoveryLimitError,
+  parseScript,
+} from "@/parser/parse";
 import { SyntaxError as PeggySyntaxError, parse } from "@/parser/parser";
+
+test("parseScript rejects oversized script input before parsing", () => {
+  const script = "1+2";
+
+  expect(() =>
+    parseScript(script, "parser.test", { maxInputLength: script.length - 1 }),
+  ).toThrow(ParserInputLimitError);
+});
+
+test("parseScript parses valid input below the configured size limit", () => {
+  const script = "1+2";
+
+  expect(
+    parseScript(script, "parser.test", { maxInputLength: script.length }),
+  ).toEqual(parse(script, { grammarSource: "parser.test" }));
+});
 
 test("parseScript surfaces syntax errors by default", () => {
   const info = vi.spyOn(console, "info").mockImplementation(() => {});
@@ -8,6 +28,22 @@ test("parseScript surfaces syntax errors by default", () => {
   try {
     expect(() => parseScript("1@+2", "parser.test")).toThrow(PeggySyntaxError);
     expect(info).not.toHaveBeenCalled();
+  } finally {
+    info.mockRestore();
+  }
+});
+
+test("parseScript recovery stops at the configured recovery count", () => {
+  const info = vi.spyOn(console, "info").mockImplementation(() => {});
+
+  try {
+    expect(() =>
+      parseScript("1@@+2", "parser.test", {
+        recoverSyntaxErrors: true,
+        maxRecoveryAttempts: 1,
+      }),
+    ).toThrow(ParserRecoveryLimitError);
+    expect(info).toHaveBeenCalledTimes(1);
   } finally {
     info.mockRestore();
   }
