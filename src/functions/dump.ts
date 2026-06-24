@@ -17,11 +17,9 @@ const processDump: IrFunction = (
   _object,
   trace: A_ANY[],
 ) => {
-  const arr = [];
   for (const argument of script.arguments) {
-    arr.push(structuredClone(execute(argument, scopes, trace)));
+    execute(argument, scopes, trace);
   }
-  console.debug("%cdump", "background:green;", ...arr, trace);
 };
 
 export { processDump };

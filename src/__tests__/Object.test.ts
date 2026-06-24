@@ -51,6 +51,34 @@ describe("Object.prototype", () => {
     expect(run("hoge={test:256};hoge.test")).toBe(256);
   });
 
+  test("forEachSlot iterates object slots with key and value", () => {
+    expect(
+      run(
+        `result="";hoge={a:1,b:2};hoge.forEachSlot(\\(result+=@0+":"+@1+";"));result`,
+      ),
+    ).toBe("a:1;b:2;");
+  });
+
+  test("forEachSlot iterates array slots with numeric key and value", () => {
+    expect(
+      run(
+        `result="";hoge=["A","B"];hoge.forEachSlot(\\(result+=@0+":"+@1+";"));result`,
+      ),
+    ).toBe("0:A;1:B;");
+  });
+
+  test("forEachSlot preserves named array slot keys", () => {
+    expect(
+      run(
+        `result="";hoge=[];hoge.setSlot("name","N");hoge.forEachSlot(\\(result+=@0+":"+@1+";"));result`,
+      ),
+    ).toBe("name:N;");
+  });
+
+  test("forEachSlot leaves empty object untouched", () => {
+    expect(run(`i=0;hoge={};hoge.forEachSlot(\\(i++));i`)).toBe(0);
+  });
+
   test("clone", () => {
     expect(
       run("hoge={test:256};huga=hoge.clone;huga.test=1024;hoge.test"),

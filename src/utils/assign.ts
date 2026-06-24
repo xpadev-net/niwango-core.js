@@ -21,13 +21,7 @@ const assign = (
     resolveReference(target, scopes, trace)?.set(value);
   } catch (e) {
     if (e instanceof Error) {
-      console.error(
-        `[assign] ${e.name}: ${e.message}`,
-        target,
-        value,
-        scopes,
-        trace,
-      );
+      console.error(`[assign] ${e.name}: ${e.message} for ${target.type}`);
     }
   }
 };

@@ -11,6 +11,7 @@ export type A_ANY =
   | A_ConditionalExpression
   | A_IfStatement
   | A_Lambda
+  | A_ParsedLambdaExpression
   | A_LambdaExpression
   | A_MemberExpression
   | A_LogicalExpression
@@ -30,7 +31,7 @@ export type A_Identifier = {
 };
 export type A_Literal = {
   type: "Literal";
-  value: null | boolean | number | string;
+  value: undefined | null | boolean | number | string;
 };
 export type A_ExpressionStatement = {
   type: "ExpressionStatement";
@@ -61,7 +62,7 @@ export type AssignmentExpressionOperator =
   | "??=";
 export type A_ArrayExpression = {
   type: "ArrayExpression";
-  elements: A_ANY[];
+  elements: (A_ANY | null)[];
 };
 export type A_ArrowFunctionExpression = {
   type: "ArrowFunctionExpression";
@@ -123,6 +124,11 @@ export type A_LambdaExpression = {
   type: "LambdaExpression";
   body: A_BlockStatement;
   scopes: T_scope[];
+};
+export type A_ParsedLambdaExpression = {
+  type: "LambdaExpression";
+  body: A_BlockStatement;
+  scopes?: undefined;
 };
 export type A_MemberExpression = {
   type: "MemberExpression";

@@ -14,7 +14,7 @@ import {
  * @param scopes
  * @param trace
  */
-const resolve = (script: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
+const resolve = (script: A_ANY, scopes: T_scope[], _trace: A_ANY[]) => {
   try {
     if (typeGuard.Identifier(script)) {
       const key = normalizeSlotKey(script.name);
@@ -29,7 +29,7 @@ const resolve = (script: A_ANY, scopes: T_scope[], trace: A_ANY[]) => {
     }
   } catch (e) {
     if (e instanceof Error) {
-      console.error(`[resolve] ${e.name}: ${e.message}`, script, scopes, trace);
+      console.error(`[resolve] ${e.name}: ${e.message} for ${script.type}`);
     }
   }
   return undefined;

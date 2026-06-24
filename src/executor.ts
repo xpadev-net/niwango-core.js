@@ -8,6 +8,13 @@ import { TooMuchRecursionError } from "@/errors/TooMuchRecursionError";
 import { processors } from "@/processors";
 import typeGuard from "@/typeGuard";
 
+const formatRuntimeDiagnostic = (error: unknown, traceLength: number) => {
+  if (error instanceof Error) {
+    return `[execute] ${error.name || "Error"} at trace depth ${traceLength}`;
+  }
+  return `[execute] Unknown error at trace depth ${traceLength}`;
+};
+
 /**
  * ASTを実行する関数
  * @param script
@@ -40,9 +47,7 @@ const execute: Execute = (
   } catch (e) {
     if (e instanceof ResourceLimitError) throw e;
     if (!options.catch) throw e;
-    const err = e as Record<string, unknown>;
-    console.log(e, err.ast, err.scopes);
-    console.log("trace", trace);
+    console.log(formatRuntimeDiagnostic(e, trace.length));
   }
   for (const hook of resultHook) {
     result = hook(result);
