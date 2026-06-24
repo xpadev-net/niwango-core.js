@@ -21,6 +21,9 @@ test("string subtraction numeric conversion", () => {
 
 test("variable declaration", () => {
   expect(run("i=0;i")).toBe(0);
+  expect(run("i=1;i")).toBe(1);
+  expect(run("a,b:=2;b")).toBe(2);
+  expect(run("a,b:=2,c:=3;c")).toBe(3);
 });
 test("calculation declaration", () => {
   expect(run("1+1")).toBe(2);
