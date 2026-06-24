@@ -36,6 +36,7 @@ const prototypeValueFunctions: PrototypeFunctions<unknown> = {
   hasSlot: processHasSlot,
   equals: processEquals,
   compare: processCompare,
+  hashCode: processHashCode,
   hashCore: processHashCode,
   forEachSlot: processForEachSlot,
   call: processCall,
