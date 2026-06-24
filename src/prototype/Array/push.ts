@@ -8,8 +8,10 @@ const processPush: PrototypeArrayFunction = (
   object,
   trace: A_ANY[],
 ) => {
-  const value = execute(script.arguments[0], scopes, trace);
-  return object.push(value);
+  const values = script.arguments.map((argument) =>
+    execute(argument, scopes, trace),
+  );
+  return object.push(...values);
 };
 
 export { processPush };
