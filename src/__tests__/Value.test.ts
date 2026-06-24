@@ -25,6 +25,14 @@ describe("Value.prototype", () => {
     expect(run(`10.equals(10)`)).toBe(true);
     expect(run(`10.equals(5)`)).toBe(false);
   });
+  test("fallback hashCode", () => {
+    expect(run(`({}).hashCode()`)).toBe(0);
+    expect(run(`true.hashCode`)).toBe(0);
+  });
+  test("legacy hashCore alias", () => {
+    expect(run(`({}).hashCore()`)).toBe(0);
+    expect(run(`false.hashCore`)).toBe(0);
+  });
   test("minus", () => {
     expect(run(`10.minus`)).toBe(-10);
     expect(run(`-5.minus`)).toBe(5);
