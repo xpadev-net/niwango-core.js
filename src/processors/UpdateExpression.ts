@@ -1,7 +1,7 @@
 import type { A_ANY, A_UpdateExpression, T_scope } from "@/@types/ast";
-import { assign, execute } from "@/context";
 import { NotImplementedError } from "@/errors/NotImplementedError";
 import { Addition, Subtraction } from "@/operators";
+import { resolveReference } from "@/utils/reference";
 
 /**
  * 更新式を実行する
@@ -13,10 +13,11 @@ const processUpdateExpression = (
   scopes: T_scope[],
   trace: A_ANY[],
 ) => {
-  const value = execute(script.argument, scopes, trace);
+  const reference = resolveReference(script.argument, scopes, trace);
+  const value = reference?.get();
   if (script.operator === "--") {
     const result = Subtraction(value, 1);
-    assign(script.argument, result, scopes, trace);
+    reference?.set(result);
     if (script.prefix) {
       return result;
     } else {
@@ -24,7 +25,7 @@ const processUpdateExpression = (
     }
   } else if (script.operator === "++") {
     const result = Addition(value, 1);
-    assign(script.argument, result, scopes, trace);
+    reference?.set(result);
     if (script.prefix) {
       return result;
     } else {
