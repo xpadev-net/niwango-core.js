@@ -18,7 +18,7 @@ const processDump: IrFunction = (
   trace: A_ANY[],
 ) => {
   for (const argument of script.arguments) {
-    structuredClone(execute(argument, scopes, trace));
+    execute(argument, scopes, trace);
   }
 };
 

@@ -29,7 +29,7 @@ const resolve = (script: A_ANY, scopes: T_scope[], _trace: A_ANY[]) => {
     }
   } catch (e) {
     if (e instanceof Error) {
-      console.error(`[resolve] ${e.name} for ${script.type}`);
+      console.error(`[resolve] ${e.name}: ${e.message} for ${script.type}`);
     }
   }
   return undefined;
