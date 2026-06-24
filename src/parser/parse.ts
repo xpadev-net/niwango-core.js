@@ -66,6 +66,14 @@ const assertParserInputLength = (script: string, maxInputLength: number) => {
   }
 };
 
+const formatSyntaxRecoveryDiagnostic = (
+  error: PeggySyntaxError,
+  source: string,
+) => {
+  const location = error.location.start;
+  return `[parse] ${error.name} in ${source}:${location.line}:${location.column}`;
+};
+
 const parseScript = (
   content: string,
   name: string,
@@ -102,7 +110,7 @@ const parseScript = (
       if (recoveryAttempts >= maxRecoveryAttempts) {
         throw new ParserRecoveryLimitError(maxRecoveryAttempts, e);
       }
-      console.info(e.format([{ source: name, text: script }]));
+      console.info(formatSyntaxRecoveryDiagnostic(e, name));
       const removed =
         script.slice(0, e.location.start.offset) +
         script.slice(e.location.start.offset + 1);

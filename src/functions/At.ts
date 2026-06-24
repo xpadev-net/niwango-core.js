@@ -5,7 +5,7 @@ import { resolve } from "@/utils";
 
 const processAt: IrFunction = (script, scopes, _, trace: A_ANY[]) => {
   if (!script.arguments[0]) {
-    console.error("[call expression] @: at least 1 argument required", trace);
+    console.error("[call expression] @: at least 1 argument required");
     return;
   }
   assign(
