@@ -11,6 +11,14 @@ test("sample from wiki", () => {
   expect(run("a = 0x2525; a")).toBe(9509);
 });
 
+test("string subtraction numeric conversion", () => {
+  expect(run(`"2525" - 0`)).toBe(2525);
+  expect(run(`"0x10" - 0`)).toBe(16);
+  expect(run(`"0xA" - 0`)).toBe(10);
+  expect(run(`"0xa" - 0`)).toBe(10);
+  expect(run(`"0xG" - 0`)).toBe(0);
+});
+
 test("variable declaration", () => {
   expect(run("i=0;i")).toBe(0);
 });

@@ -43,12 +43,13 @@ const assertStringRepeatResourceLimit = (value: string, repeat: number) => {
  */
 const Subtraction = (left: unknown, right: unknown) => {
   const rightNum = format(right, "number");
-  if (
-    rightNum === 0 &&
-    typeof left === "string" &&
-    left.match(/^(0|0x)?[0-9]+(\.[0-9]+)?$/)
-  ) {
-    return Number(left);
+  if (rightNum === 0 && typeof left === "string") {
+    if (left.match(/^0x[0-9a-f]+$/i)) {
+      return parseInt(left.slice(2), 16);
+    }
+    if (left.match(/^(0|0x)?[0-9]+(\.[0-9]+)?$/)) {
+      return Number(left);
+    }
   }
   return format(left, "number") - rightNum;
 };
