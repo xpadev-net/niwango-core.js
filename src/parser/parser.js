@@ -243,6 +243,9 @@ function peg$parse(input, options) {
   const peg$c68 = "&=";
   const peg$c69 = "^=";
   const peg$c70 = "|=";
+  const peg$c71 = "&&=";
+  const peg$c72 = "||=";
+  const peg$c73 = "??=";
 
   const peg$r0 = /^[\t\v-\f \xA0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]/;
   const peg$r1 = /^[\n\r\u2028\u2029]/;
@@ -375,6 +378,9 @@ function peg$parse(input, options) {
   const peg$e102 = peg$literalExpectation("&=", false);
   const peg$e103 = peg$literalExpectation("^=", false);
   const peg$e104 = peg$literalExpectation("|=", false);
+  const peg$e105 = peg$literalExpectation("&&=", false);
+  const peg$e106 = peg$literalExpectation("||=", false);
+  const peg$e107 = peg$literalExpectation("??=", false);
 
   function peg$f0(program) {    return program;  }
   function peg$f1(name) {    return name;  }
@@ -7128,6 +7134,33 @@ function peg$parse(input, options) {
                         } else {
                           s0 = peg$FAILED;
                           if (peg$silentFails === 0) { peg$fail(peg$e104); }
+                        }
+                        if (s0 === peg$FAILED) {
+                          if (input.substr(peg$currPos, 3) === peg$c71) {
+                            s0 = peg$c71;
+                            peg$currPos += 3;
+                          } else {
+                            s0 = peg$FAILED;
+                            if (peg$silentFails === 0) { peg$fail(peg$e105); }
+                          }
+                          if (s0 === peg$FAILED) {
+                            if (input.substr(peg$currPos, 3) === peg$c72) {
+                              s0 = peg$c72;
+                              peg$currPos += 3;
+                            } else {
+                              s0 = peg$FAILED;
+                              if (peg$silentFails === 0) { peg$fail(peg$e106); }
+                            }
+                            if (s0 === peg$FAILED) {
+                              if (input.substr(peg$currPos, 3) === peg$c73) {
+                                s0 = peg$c73;
+                                peg$currPos += 3;
+                              } else {
+                                s0 = peg$FAILED;
+                                if (peg$silentFails === 0) { peg$fail(peg$e107); }
+                              }
+                            }
+                          }
                         }
                       }
                     }

@@ -890,6 +890,9 @@ AssignmentOperator
   / "&="
   / "^="
   / "|="
+  / "&&="
+  / "||="
+  / "??="
 
 Expression
   = head:AssignmentExpression tail:(__ "," __ AssignmentExpression)* {
