@@ -6,14 +6,14 @@
   "types": "dist/niwango-core.d.ts",
   "private": false,
   "scripts": {
-    "build": "npx rimraf dist&&npm run build:ts&&npm run build:dts",
+    "build": "npx rimraf dist&&node \"$npm_execpath\" run build:ts&&node \"$npm_execpath\" run build:dts",
     "build:ts": "rollup -c rollup.config.mjs",
     "build:dts": "npx copyfiles -u 2 src/@types/*.d.ts dist/dts/@types/&&npx copyfiles -u 2 src/parser/*.d.ts dist/dts/parser/&&node ./util/resolve-path-alias.js&&rollup -c rollup.config.dts.mjs",
     "pegjs": "node ./util/generate-parser.js",
-    "check:parser": "npm run pegjs && git diff --exit-code -- src/parser/parser.js src/parser/parser.d.ts && vitest run src/__tests__/parserGeneratedContract.test.ts",
+    "check:parser": "node \"$npm_execpath\" run pegjs && git diff --exit-code -- src/parser/parser.js src/parser/parser.d.ts && vitest run src/__tests__/parserGeneratedContract.test.ts",
     "watch": "rollup -c rollup.config.mjs -w",
     "typedoc": "typedoc --entryPointStrategy Expand --out ./docs/type/ ./src/",
-    "prepack": "npm run build",
+    "prepack": "node \"$npm_execpath\" run build",
     "check-types": "npx tsc --noEmit --jsx react",
     "check:workflows": "node ./util/check-workflows.mjs",
     "eslint": "biome lint src",
@@ -54,7 +54,6 @@
     "typedoc": "^0.28.10",
     "typedoc-plugin-missing-exports": "^4.1.0",
     "typescript": "^5.9.2",
-    "vitest": "^3.2.4",
-    "yaml": "^2.9.0"
+    "vitest": "^3.2.4"
   }
 }

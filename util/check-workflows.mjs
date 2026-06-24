@@ -1,7 +1,7 @@
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseDocument } from "yaml";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -20,17 +20,7 @@ if (workflowFiles.length === 0) {
 
 for (const file of workflowFiles) {
   const filePath = path.join(workflowsDir, file);
-  const source = fs.readFileSync(filePath, "utf8");
-  const document = parseDocument(source, { prettyErrors: true });
-
-  if (document.errors.length > 0) {
-    const errors = document.errors
-      .map((error) => `${file}: ${error.message}`)
-      .join("\n");
-    throw new Error(errors);
-  }
-
-  const workflow = document.toJSON();
+  const workflow = parseWorkflow(filePath, file);
 
   if (!workflow || typeof workflow !== "object") {
     throw new Error(`${file}: workflow must be a YAML mapping`);
@@ -40,7 +30,7 @@ for (const file of workflowFiles) {
     throw new Error(`${file}: workflow must declare a non-empty name`);
   }
 
-  if (!("on" in workflow)) {
+  if (!("on" in workflow) && !("true" in workflow)) {
     throw new Error(`${file}: workflow must declare triggers`);
   }
 
@@ -50,5 +40,30 @@ for (const file of workflowFiles) {
     Array.isArray(workflow.jobs)
   ) {
     throw new Error(`${file}: workflow must declare jobs as a mapping`);
+  }
+}
+
+function parseWorkflow(filePath, file) {
+  try {
+    const output = execFileSync(
+      "ruby",
+      [
+        "-ryaml",
+        "-rjson",
+        "-e",
+        "data = YAML.load_file(ARGV.fetch(0)); puts JSON.generate(data)",
+        filePath,
+      ],
+      {
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "pipe"],
+      },
+    );
+
+    return JSON.parse(output);
+  } catch (error) {
+    const message =
+      error.stderr?.toString().trim() || error.message || "unknown error";
+    throw new Error(`${file}: ${message}`);
   }
 }
